@@ -1,47 +1,45 @@
 <template>
-  <details class="winui-collapse">
-    <summary>
-      <slot v-if="$slots.title" name="title" />
-      <template v-else>{{ titleState }}</template>
-    </summary>
+  <details
+    ref="collapse"
+    class="winui-collapse"
+  >
+    <slot name="title">
+      <summary>
+        {{ smartTitle }}
+      </summary>
+    </slot>
     <slot />
   </details>
 </template>
+<script setup>
+import { computed } from '@vue/reactivity';
+import { ref, onBeforeMount, onBeforeUnmount } from '@vue/runtime-core';
 
-<script>
-export default {
-  name: "WinuiCollapse",
-  props: {
-    title: { type: String },
-  },
-  data() {
-    return {
-      titleState: this.title || this.getDefaultTitle(),
-    };
-  },
-  watch: {
-    title(newTitle) {
-      this.titleState = newTitle;
-    },
-  },
-  mounted() {
-    this.$el.addEventListener("toggle", this.handleToggle);
-  },
-  beforeDestroy() {
-    this.$el.removeEventListener("toggle", this.handleToggle);
-  },
-  methods: {
-    handleToggle() {
-      this.$emit("toggle", this.$el.open);
-      if (!this.title) {
-        this.titleState = this.getDefaultTitle();
-      }
-    },
-    getDefaultTitle() {
-      return this.$el?.open ? "Hide" : "Show";
-    },
-  },
-};
+const emit = defineEmits(["toggle"]);
+const props = defineProps({
+  title: { type: String },
+});
+
+const collapse = ref(null);
+const smartTitle = computed(() => {
+  if (props.title) return props.title;
+
+  // @TODO: test if collapse.value works as expected.
+  return collapse.value.open ? "Hide" : "Show";
+});
+
+function handleToggle() {
+  // @TODO: test if collapse.value works as expected.
+  emit("toggle", collapse.value.open);
+}
+
+onBeforeMount(() => {
+  collapse.value.addEventListener("toggle", handleToggle);
+});
+
+onBeforeUnmount(() => {
+  collapse.value.removeEventListener("toggle", handleToggle);
+});
 </script>
 
 <style scoped src="7.css/dist/gui/collapse.css"></style>

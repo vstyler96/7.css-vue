@@ -1,4 +1,4 @@
 import { Plugin } from "@/utils/component";
 import Treeview from "./Treeview.vue";
 
-export default Plugin(Treeview);
+export default Plugin('WinTreeview', Treeview);

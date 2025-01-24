@@ -1,4 +1,4 @@
 import { Plugin } from "@/utils/component";
 import Progress from "./Progress.vue";
 
-export default Plugin(Progress);
+export default Plugin('WinProgress', Progress);

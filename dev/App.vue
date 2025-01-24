@@ -1,42 +1,42 @@
 <template>
   <div>
-    <winui-button class="default">default button</winui-button>
-    <winui-button>Click me</winui-button>
-    <winui-link text="link" icon="https://abs.twimg.com/favicons/twitter.ico" />
-    <winui-link text="button" @click="handleLinkClick" />
-    <winui-tabs :tabs="tabs">
+    <win-button class="default">default button</win-button>
+    <win-button>Click me</win-button>
+    <win-link text="link" icon="https://abs.twimg.com/favicons/twitter.ico" />
+    <win-link text="button" @click="handleLinkClick" />
+    <win-tabs :tabs="tabs">
       <template #apps> apps </template>
       <template #games> games </template>
       <template #softs> softs </template>
-    </winui-tabs>
-    <winui-progress progress="50%" class="error" />
-    <winui-groupbox label="Radio buttons">
-      <winui-radio id="theme-light" value="light" name="theme" checked>
+    </win-tabs>
+    <win-progress progress="50%" class="error" />
+    <win-groupbox label="Radio buttons">
+      <win-radio id="theme-light" value="light" name="theme" checked>
         Light
-      </winui-radio>
-      <winui-radio id="theme-dark" value="dark" name="theme">Dark</winui-radio>
-      <winui-radio id="theme-auto" value="auto" name="theme" disabled>
+      </win-radio>
+      <win-radio id="theme-dark" value="dark" name="theme">Dark</win-radio>
+      <win-radio id="theme-auto" value="auto" name="theme" disabled>
         Auto
-      </winui-radio>
-    </winui-groupbox>
-    <winui-checkbox id="check1" name="check" v-model="isChecked">
+      </win-radio>
+    </win-groupbox>
+    <win-checkbox id="check1" name="check" v-model="isChecked">
       I am checked
-    </winui-checkbox>
-    <winui-checkbox id="check2" name="check">I am free</winui-checkbox>
-    <winui-checkbox id="check3" name="check" disabled>
+    </win-checkbox>
+    <win-checkbox id="check2" name="check">I am free</win-checkbox>
+    <win-checkbox id="check3" name="check" disabled>
       I am disabled
-    </winui-checkbox>
-    <winui-balloon> ABC </winui-balloon>
-    <winui-dropdown :options="options" v-model="dropdownValue" />
-    <winui-treeview class="has-collapse-button">
-      <winui-collapse open title="Javascript">
+    </win-checkbox>
+    <win-balloon> ABC </win-balloon>
+    <win-dropdown :options="options" v-model="dropdownValue" />
+    <win-treeview class="has-collapse-button">
+      <win-collapse open title="Javascript">
         <ul>
           <li>Avoid at all costs</li>
           <li>
-            <winui-collapse>
+            <win-collapse>
               <template #title>
                 <span class="collapse-title">
-                  <winui-icon
+                  <win-icon
                     src="https://img.icons8.com/color/16/000000/monitor--v1.png"
                     size="16"
                   />
@@ -46,68 +46,68 @@
               <ul>
                 <li>Avoid</li>
                 <li>
-                  <winui-collapse title="At">
+                  <win-collapse title="At">
                     <ul>
                       <li>Avoid</li>
                       <li>At</li>
                       <li>All</li>
                       <li>Cost</li>
                     </ul>
-                  </winui-collapse>
+                  </win-collapse>
                 </li>
                 <li>All</li>
                 <li>Cost</li>
               </ul>
-            </winui-collapse>
+            </win-collapse>
           </li>
         </ul>
-      </winui-collapse>
-    </winui-treeview>
-    <winui-listbox
+      </win-collapse>
+    </win-treeview>
+    <win-listbox
       class="has-hover"
       :items="options"
       v-model="listboxValue"
-    ></winui-listbox>
-    <winui-slider max="10" min="1" v-model="sliderValue" />
-    <winui-menubar class="can-hover">
-      <winui-menuitem>
+    ></win-listbox>
+    <win-slider max="10" min="1" v-model="sliderValue" />
+    <win-menubar class="can-hover">
+      <win-menuitem>
         File
-        <winui-menu>
-          <winui-menuitem><button>Open</button></winui-menuitem>
-          <winui-menuitem><button>Save</button></winui-menuitem>
-          <winui-menuitem><button>Exit</button></winui-menuitem>
-        </winui-menu>
-      </winui-menuitem>
-      <winui-menuitem>Edit</winui-menuitem>
-      <winui-menuitem>View</winui-menuitem>
-      <winui-menuitem>Help</winui-menuitem>
-    </winui-menubar>
-    <winui-menu class="can-hover" style="width: 300px">
-      <winui-menuitem>
+        <win-menu>
+          <win-menuitem><button>Open</button></win-menuitem>
+          <win-menuitem><button>Save</button></win-menuitem>
+          <win-menuitem><button>Exit</button></win-menuitem>
+        </win-menu>
+      </win-menuitem>
+      <win-menuitem>Edit</win-menuitem>
+      <win-menuitem>View</win-menuitem>
+      <win-menuitem>Help</win-menuitem>
+    </win-menubar>
+    <win-menu class="can-hover" style="width: 300px">
+      <win-menuitem>
         View
-        <winui-menu>
-          <winui-menuitem :option="menuOption('lg')" v-model="menuOptionValue"
-            >Large icons</winui-menuitem
+        <win-menu>
+          <win-menuitem :option="menuOption('lg')" v-model="menuOptionValue"
+            >Large icons</win-menuitem
           >
-          <winui-menuitem :option="menuOption('md')" v-model="menuOptionValue"
-            >Medium icons</winui-menuitem
+          <win-menuitem :option="menuOption('md')" v-model="menuOptionValue"
+            >Medium icons</win-menuitem
           >
-          <winui-menuitem :option="menuOption('sm')" v-model="menuOptionValue"
-            >Small icons</winui-menuitem
+          <win-menuitem :option="menuOption('sm')" v-model="menuOptionValue"
+            >Small icons</win-menuitem
           >
           <hr />
-          <winui-menuitem :option="{ as: 'checkbox', id: 'arrange-icons' }"
-            >Auto arrange icons</winui-menuitem
+          <win-menuitem :option="{ as: 'checkbox', id: 'arrange-icons' }"
+            >Auto arrange icons</win-menuitem
           >
-        </winui-menu>
-      </winui-menuitem>
+        </win-menu>
+      </win-menuitem>
       <hr />
-      <winui-menuitem><button>Sort by</button></winui-menuitem>
-      <winui-menuitem><button>Refresh</button></winui-menuitem>
-      <winui-menuitem><button>Display</button></winui-menuitem>
-    </winui-menu>
-    <winui-searchbox placeholder="Search" @search="handleSearch" />
-    <winui-searchbox placeholder="Search" instant />
+      <win-menuitem><button>Sort by</button></win-menuitem>
+      <win-menuitem><button>Refresh</button></win-menuitem>
+      <win-menuitem><button>Display</button></win-menuitem>
+    </win-menu>
+    <win-searchbox placeholder="Search" @search="handleSearch" />
+    <win-searchbox placeholder="Search" instant />
   </div>
 </template>
 

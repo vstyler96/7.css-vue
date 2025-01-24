@@ -1,9 +1,10 @@
 {
-  "name": "win7-ui",
-  "version": "1.1.0",
-  "description": "Vue2 component library for recreating Windows 7 UI",
+  "type": "module",
+  "name": "7.css-vue",
+  "version": "1.0.0",
+  "description": "Vue3 component library for recreating Windows 7 UI",
   "license": "MIT",
-  "homepage": "https://win7ui.visnalize.com",
+  "homepage": "https://win7ui.kingbeencent.dev",
   "main": "./lib/index.umd.js",
   "module": "./lib/index.mjs",
   "types": "./types/index.d.ts",
@@ -18,14 +19,15 @@
     "vue",
     "vuejs",
     "js",
-    "components"
+    "components",
+    "vue3"
   ],
   "files": [
     "lib",
     "types"
   ],
   "repository": {
-    "url": "https://github.com/Visnalize/win7-ui"
+    "url": "https://github.com/vstyler96/7.css-vue"
   },
   "scripts": {
     "dev": "vite",
@@ -41,21 +43,20 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
   "devDependencies": {
-    "7.css": "^0.16.0",
-    "@rushstack/eslint-patch": "^1.1.0",
-    "@vitejs/plugin-legacy": "^2.0.0",
-    "@vitejs/plugin-vue2": "^1.1.2",
-    "@vue/eslint-config-prettier": "^7.0.0",
-    "cypress": "^10.3.0",
-    "eslint": "^8.5.0",
-    "eslint-plugin-cypress": "^2.12.1",
-    "eslint-plugin-vue": "^9.0.0",
-    "gh-pages": "^5.0.0",
-    "prettier": "^2.5.1",
-    "sass": "^1.55.0",
-    "start-server-and-test": "^1.14.0",
-    "terser": "^5.14.2",
-    "vite": "^3.0.2",
-    "vue": "^2.7.7"
+    "@vitejs/plugin-vue": "^5.2.1",
+    "@vue/composition-api": "^1.7.2",
+    "@vue/reactivity": "^3.5.13",
+    "@vue/runtime-core": "^3.5.13",
+    "eslint": "^8.57.1",
+    "eslint-plugin-vue": "^9.32.0",
+    "sass": "^1.83.0",
+    "vite": "^6.0.10",
+    "vite-plugin-eslint": "^1.8.1",
+    "vue-eslint-parser": "^9.4.3"
+  },
+  "dependencies": {
+    "7.css": "^0.17.0",
+    "lodash": "^4.17.21",
+    "vue": "^3.5.13"
   }
 }

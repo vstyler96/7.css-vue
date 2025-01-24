@@ -1,17 +1,12 @@
 <template>
-  <button class="winui-button" v-on="$listeners">
+  <button class="winui-button" v-bind="$attrs">
     <slot />
   </button>
 </template>
-
-<script>
-export default {
-  name: "WinuiButton",
-};
+<script setup>
+//
 </script>
-
 <style scoped src="7.css/dist/gui/button.css"></style>
-
 <style lang="scss" scoped>
 .winui-button {
   color: #222;

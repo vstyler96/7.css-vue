@@ -1,53 +1,51 @@
 <template>
-  <select class="winui-dropdown" v-model="computedValue">
-    <option v-if="placeholder" :value="undefined" disabled selected>
-      {{ placeholder }}
-    </option>
-    <template v-if="options">
+  <select
+    v-model="model"
+    class="winui-dropdown"
+  >
+    <slot name="placeholder">
+      <option
+        v-if="placeholder"
+        :value="undefined"
+        disabled
+        selected
+      >
+        {{ placeholder }}
+      </option>
+    </slot>
+    <slot name="options">
       <option
         v-for="option in options"
-        :key="option.value"
-        :value="option.value"
-        :selected="selected === option.value"
+        :key="option[itemValue]"
+        :value="option[itemValue]"
+        :disabled="option.disabled"
+        :selected="selected === option[itemValue]"
       >
-        {{ option.label }}
+        {{ option[itemTitle] }}
       </option>
-    </template>
-    <slot v-else />
+    </slot>
   </select>
 </template>
+<script setup>
+import { computed } from "vue";
 
-<script>
-export default {
-  name: "WinuiDropdown",
-  alias: "WinuiSelect",
-  props: {
-    value: [Number, String],
-    options: Array,
-    placeholder: String,
+const emit = defineEmits(["update:model-value"]);
+
+const props = defineProps({
+  modelValue: { type: [Number, String] },
+  options: { type: Array },
+  placeholder: { type: String },
+  itemValue: { type: String, default: "id" },
+  itemTitle: { type: String, default: "name" },
+});
+
+const model = computed({
+  get() {
+    return props.modelValue;
   },
-  computed: {
-    computedValue: {
-      get() {
-        return this.selected;
-      },
-      set(value) {
-        this.selected = value;
-        this.$emit("input", value);
-      },
-    },
+  set(value) {
+    emit("update:model-value", value);
   },
-  data() {
-    return {
-      selected: this.value,
-    };
-  },
-  watch: {
-    value(value) {
-      this.selected = value;
-    },
-  },
-};
+});
 </script>
-
 <style scoped src="7.css/dist/gui/dropdown.css"></style>

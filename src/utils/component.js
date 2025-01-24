@@ -1,10 +1,7 @@
-export function Plugin(component) {
+export function Plugin(name, component) {
   return {
-    install(Vue) {
-      Vue.component(component.name, component);
-      if (component.alias) {
-        Vue.component(component.alias, component);
-      }
+    install(app) {
+      app.component(name, component);
     },
   };
 }

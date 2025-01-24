@@ -4,15 +4,9 @@
     <slot />
   </fieldset>
 </template>
-
-<script>
-export default {
-  name: "WinuiGroupbox",
-  alias: "WinuiFieldset",
-  props: {
-    label: String,
-  },
-};
+<script setup>
+defineProps({
+  label: { type: String },
+});
 </script>
-
 <style scoped src="7.css/dist/gui/groupbox.css"></style>

@@ -1,9 +1,9 @@
-import Vue from "vue";
-import App from "./App.vue";
-import Winui from "../src/index";
+import { createApp } from 'vue';
+import Win from '../src/index';
+import App from './App.vue';
 
-Vue.use(Winui);
+const app = createApp(App);
 
-new Vue({
-  render: (h) => h(App),
-}).$mount("#app");
+app.use(Win);
+
+app.mount('#app');

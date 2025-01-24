@@ -1,11 +1,11 @@
 import * as components from "./components";
 
-const Winui = {
-  install(Vue) {
-    for (let componentName in components) {
-      Vue.use(components[componentName]);
+const winVue = {
+  install(app) {
+    for (let cmp in components) {
+      app.use(cmp);
     }
   },
 };
 
-export default Winui;
+export default winVue;

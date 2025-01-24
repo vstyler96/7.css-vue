@@ -3,12 +3,7 @@
     <slot />
   </div>
 </template>
-
-<script>
-export default {
-  name: "WinuiBalloon",
-  props: {},
-};
+<script setup>
+//
 </script>
-
 <style scoped src="7.css/dist/gui/balloon.css"></style>

@@ -1,47 +1,35 @@
 <template>
   <div class="winui-checkbox">
     <input
-      v-model="computedValue"
+      v-model="model"
       :id="id"
       :name="name"
       :disabled="disabled"
       type="checkbox"
     />
-    <label :for="id"><slot /></label>
+    <label :for="id">
+      <slot name="label">
+        {{ label }}
+      </slot>
+    </label>
   </div>
 </template>
+<script setup>
+import { uniqueId } from 'lodash';
+import { computed } from '@vue/reactivity';
 
-<script>
-export default {
-  name: "WinuiCheckbox",
-  props: {
-    id: { type: String, required: true },
-    name: String,
-    value: [Number, String, Boolean],
-    disabled: Boolean,
-  },
-  computed: {
-    computedValue: {
-      get() {
-        return this.input;
-      },
-      set(value) {
-        this.input = value;
-        this.$emit("input", value);
-      },
-    },
-  },
-  data() {
-    return {
-      input: this.value,
-    };
-  },
-  watch: {
-    value(value) {
-      this.input = value;
-    },
-  },
-};
+const emit = defineEmits(['update:model-value']);
+const props = defineProps({
+  id: { type: String, default: () => `input-${uniqueId()}` },
+  name: {  type: String },
+  label: {  type: String },
+  modelValue: { type: [Number, String, Boolean] },
+  disabled: { type: Boolean, default: false },
+});
+
+const model = computed({
+  get() { return props.modelValue; },
+  set(value) { emit('update:model-value', value); },
+});
 </script>
-
 <style scoped src="7.css/dist/gui/checkbox.css"></style>

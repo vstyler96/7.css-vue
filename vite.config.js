@@ -1,31 +1,29 @@
-import { fileURLToPath, URL } from "node:url";
-
-import vue2 from "@vitejs/plugin-vue2";
+import vue from '@vitejs/plugin-vue';
+import eslint from 'vite-plugin-eslint';
 import { defineConfig } from "vite";
 
 // https://vitejs.dev/config/
-export default defineConfig(() => {
-  let plugins = [];
-
-  return {
-    build: {
-      lib: {
-        entry: "./src/index.js",
-        name: "WinUI",
-        fileName: "index",
-      },
-      rollupOptions: {
-        external: ["vue"],
-        output: {
-          dir: "lib",
-        },
+export default defineConfig({
+  build: {
+    lib: {
+      entry: "./src/index.js",
+      name: "7.csss-vue",
+      fileName: "index",
+    },
+    rollupOptions: {
+      external: ["vue"],
+      output: {
+        dir: "lib",
       },
     },
-    plugins: [vue2(), ...plugins],
-    resolve: {
-      alias: {
-        "@": fileURLToPath(new URL("./src", import.meta.url)),
-      },
+  },
+  plugins: [
+    eslint(),
+    vue(),
+  ],
+  resolve: {
+    alias: {
+      "@": `${__dirname}/src`,
     },
-  };
+  },
 });
