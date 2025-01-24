@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  name: "WinuiListbox",
+  name: "WinListbox",
   props: {
     value: [Number, String],
     items: { type: Array, required: true },
@@ -31,10 +31,9 @@ export default {
   },
 };
 </script>
-
-<style scoped src="7.css/dist/gui/listbox.css"></style>
-
 <style lang="scss" scoped>
+// @import"7.css/dist/gui/listbox.css";
+
 .winui-listbox {
   list-style: none;
   padding: 0;

@@ -1,5 +1,6 @@
 <template>
   <details
+    :id="id"
     ref="collapse"
     class="winui-collapse"
   >
@@ -13,33 +14,40 @@
 </template>
 <script setup>
 import { computed } from '@vue/reactivity';
-import { ref, onBeforeMount, onBeforeUnmount } from '@vue/runtime-core';
+import { ref, onMounted, onBeforeUnmount } from '@vue/runtime-core';
+import { uniqueId } from 'lodash';
+
+const id = `winui-collapse-${uniqueId()}`;
 
 const emit = defineEmits(["toggle"]);
 const props = defineProps({
   title: { type: String },
 });
 
-const collapse = ref(null);
+const el = ref(null);
 const smartTitle = computed(() => {
   if (props.title) return props.title;
 
-  // @TODO: test if collapse.value works as expected.
-  return collapse.value.open ? "Hide" : "Show";
+  // @TODO: test if el.value works as expected.
+  return el.value.open ? "Hide" : "Show";
 });
 
 function handleToggle() {
-  // @TODO: test if collapse.value works as expected.
-  emit("toggle", collapse.value.open);
+  // @TODO: test if el.value works as expected.
+  emit("toggle", el.value.open);
 }
 
-onBeforeMount(() => {
-  collapse.value.addEventListener("toggle", handleToggle);
+onMounted(() => {
+  el.value = document.getElementById(id);
+  el.value.addEventListener("toggle", handleToggle);
 });
 
 onBeforeUnmount(() => {
-  collapse.value.removeEventListener("toggle", handleToggle);
+  el.value.removeEventListener("toggle", handleToggle);
+  el.value = null;
 });
 </script>
 
-<style scoped src="7.css/dist/gui/collapse.css"></style>
+<style scoped lang="scss">
+// @import"7.css/dist/gui/collapse.css";
+</style>

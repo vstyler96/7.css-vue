@@ -1,7 +1,7 @@
 <template>
-  <winui-groupbox>
-    <winui-checkbox id="check_mode" disabled>Dark mode</winui-checkbox>
-    <winui-checkbox id="check_save" value="true">Autosave</winui-checkbox>
-    <winui-checkbox id="check_wrap">Word wrap</winui-checkbox>
-  </winui-groupbox>
+  <win-groupbox>
+    <win-checkbox id="check_mode" disabled>Dark mode</win-checkbox>
+    <win-checkbox id="check_save" value="true">Autosave</win-checkbox>
+    <win-checkbox id="check_wrap">Word wrap</win-checkbox>
+  </win-groupbox>
 </template>

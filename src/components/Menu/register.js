@@ -1,8 +1,8 @@
 import { Plugin } from "@/utils/component";
-import _Menu from "./Menu.vue";
-import _MenuBar from "./MenuBar.vue";
-import _MenuItem from "./MenuItem.vue";
+import MenuCmp from "./Menu.vue";
+import MenuBarCmp from "./MenuBar.vue";
+import MenuItemCmp from "./MenuItem.vue";
 
-export const Menu = Plugin(_Menu);
-export const MenuBar = Plugin(_MenuBar);
-export const MenuItem = Plugin(_MenuItem);
+export const Menu = Plugin('win-menu', MenuCmp);
+export const MenuBar = Plugin('win-menubar', MenuBarCmp);
+export const MenuItem = Plugin('win-menuitem', MenuItemCmp);

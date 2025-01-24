@@ -1,3 +1,3 @@
 <template>
-  <winui-button class="default">Default button</winui-button>
+  <win-button class="default">Default button</win-button>
 </template>

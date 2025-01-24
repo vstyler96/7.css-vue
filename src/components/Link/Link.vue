@@ -1,22 +1,21 @@
 <template>
   <a v-if="href" :href="href" class="winui-link">
-    <winui-icon v-if="icon" :src="icon" :alt="text" :size="16" />
+    <win-icon v-if="icon" :src="icon" :alt="text" :size="16" />
     <span v-if="text">{{ text }}</span>
     <slot v-else />
   </a>
-  <button v-else class="winui-link" v-on="$listeners">
-    <winui-icon v-if="icon" :src="icon" :alt="text" :size="16" />
+  <button v-else class="winui-link" v-bind="$attrs">
+    <win-icon v-if="icon" :src="icon" :alt="text" :size="16" />
     <span v-if="text">{{ text }}</span>
     <slot v-else />
   </button>
 </template>
-
 <script>
-import WinuiIcon from "../Icon/Icon.vue";
+import WinIcon from "../Icon/Icon.vue";
 
 export default {
-  components: { WinuiIcon },
-  name: "WinuiLink",
+  components: { WinIcon },
+  name: "WinLink",
   props: {
     icon: String,
     href: String,

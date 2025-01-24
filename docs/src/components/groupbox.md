@@ -5,7 +5,7 @@
 <Misc-Ad />
 
 ::: tip Alias: "Fieldset"
-`<winui-groupbox>` and `<winui-fieldset>` can be used interchangeably.
+`<win-groupbox>` and `<win-fieldset>` can be used interchangeably.
 :::
 
 ## Usage

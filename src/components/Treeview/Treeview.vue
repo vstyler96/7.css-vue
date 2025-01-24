@@ -1,12 +1,12 @@
 <template>
-  <ul class="tree-view winui-treeview">
+  <ul class="tree-view win-treeview">
     <slot />
   </ul>
 </template>
 
 <script>
 export default {
-  name: "WinuiTreeview",
+  name: "WinTreeview",
 };
 </script>
 

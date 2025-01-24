@@ -5,7 +5,7 @@
 <Misc-Ad />
 
 ::: tip Alias: "Select"
-`<winui-dropdown>` and `<winui-select>` can be used interchangeably.
+`<win-dropdown>` and `<win-select>` can be used interchangeably.
 :::
 
 ## Usage

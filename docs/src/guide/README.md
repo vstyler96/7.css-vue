@@ -21,18 +21,18 @@ yarn add win7-ui
 In your `main.js` or `index.js`, add the following:
 
 ```js
-import Winui from "win7-ui";
+import Win from "win7-ui";
 import "win7-ui/lib/style.css";
 ...
-Vue.use(Winui);
+Vue.use(Win);
 ...
 ```
 
-The components will then be available globally in your project with the prefix __`winui-`__, an example usage as below:
+The components will then be available globally in your project with the prefix __`win-`__, an example usage as below:
 
 ```vue{2}
 <template>
-  <winui-button @click="doSomething">Hello world!</winui-button>
+  <win-button @click="doSomething">Hello world!</win-button>
 </template>
 
 <script>

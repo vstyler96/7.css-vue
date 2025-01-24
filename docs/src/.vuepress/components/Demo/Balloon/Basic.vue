@@ -1,3 +1,3 @@
 <template>
-  <winui-balloon>This is a balloon!</winui-balloon>
+  <win-balloon>This is a balloon!</win-balloon>
 </template>

@@ -1,7 +1,7 @@
 <template>
   <div class="winui-tabs">
     <menu role="tablist" :class="{ justified }">
-      <winui-button
+      <win-button
         v-for="(name, tab) in tabs"
         :key="tab"
         :aria-selected="activeTab === tab"
@@ -9,7 +9,7 @@
         @click="change(tab)"
       >
         {{ name }}
-      </winui-button>
+      </win-button>
     </menu>
     <article
       v-for="(_, tab) in tabs"
@@ -24,7 +24,7 @@
 
 <script>
 export default {
-  name: "WinuiTabs",
+  name: "WinTabs",
   props: {
     tabs: { type: Object, required: true },
     justified: Boolean,
@@ -40,10 +40,9 @@ export default {
   },
 };
 </script>
-
-<style scoped src="7.css/dist/gui/tabs.css"></style>
-
 <style lang="scss" scoped>
+// @import"7.css/dist/gui/tabs.css";
+
 [role="tabpanel"] {
   height: 100%;
   font-size: 85%;

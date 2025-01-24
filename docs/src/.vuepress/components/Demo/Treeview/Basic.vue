@@ -1,5 +1,5 @@
 <template>
-  <winui-treeview>
+  <win-treeview>
     <li>
       Root
       <ul>
@@ -13,5 +13,5 @@
         <li>Node 2</li>
       </ul>
     </li>
-  </winui-treeview>
+  </win-treeview>
 </template>

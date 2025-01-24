@@ -1,3 +1,3 @@
 <template>
-  <winui-progress progress="50" />
+  <win-progress progress="50" />
 </template>

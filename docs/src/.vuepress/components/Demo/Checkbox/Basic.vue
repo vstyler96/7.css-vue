@@ -1,3 +1,3 @@
 <template>
-  <winui-checkbox id="check_demo">Tick me!</winui-checkbox>
+  <win-checkbox id="check_demo">Tick me!</win-checkbox>
 </template>

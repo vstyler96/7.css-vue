@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: "WinuiMenu",
+  name: "WinMenu",
 };
 </script>
 

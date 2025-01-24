@@ -1,5 +1,5 @@
 <template>
-  <winui-collapse>
+  <win-collapse>
     <template #title>
       <h4>📝 To-do list</h4>
     </template>
@@ -8,5 +8,5 @@
       <li>Get dressed</li>
       <li>Walk the dog</li>
     </ul>
-  </winui-collapse>
+  </win-collapse>
 </template>

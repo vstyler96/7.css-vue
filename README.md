@@ -17,10 +17,10 @@ yarn add win7-ui
 ```js
 // main.js or index.js
 import Vue from "vue";
-import Winui from "win7-ui";
+import Win from "win7-ui";
 import "win7-ui/lib/style.css";
 ...
-Vue.use(Winui);
+Vue.use(Win);
 
 new Vue({
   ...
@@ -29,7 +29,7 @@ new Vue({
 
 ```html
 <template>
-  <winui-button @click="doSomething">Hello world!</winui-button>
+  <win-button @click="doSomething">Hello world!</win-button>
 </template>
 
 <script>

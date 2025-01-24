@@ -1,9 +1,9 @@
 <template>
-  <winui-collapse open>
+  <win-collapse open>
     <ul>
       <li>🐷</li>
       <li>🐔</li>
       <li>🐮</li>
     </ul>
-  </winui-collapse>
+  </win-collapse>
 </template>

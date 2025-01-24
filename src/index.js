@@ -1,10 +1,8 @@
-import * as components from "./components";
+import components from "./components/index.js";
 
 const winVue = {
   install(app) {
-    for (let cmp in components) {
-      app.use(cmp);
-    }
+    Object.entries(components).forEach(([name, cmp]) => app.component(name, cmp));
   },
 };
 

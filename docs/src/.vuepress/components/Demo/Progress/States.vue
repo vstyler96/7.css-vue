@@ -1,10 +1,10 @@
 <template>
   <div>
     <!-- #region snippet -->
-    <winui-progress progress="70" />
-    <winui-progress progress="50" class="paused" />
-    <winui-progress progress="30" class="error" />
-    <winui-progress progress="indeterminate" />
+    <win-progress progress="70" />
+    <win-progress progress="50" class="paused" />
+    <win-progress progress="30" class="error" />
+    <win-progress progress="indeterminate" />
     <!-- #endregion snippet -->
   </div>
 </template>

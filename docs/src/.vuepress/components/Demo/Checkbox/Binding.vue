@@ -1,7 +1,7 @@
 <template>
-  <winui-checkbox id="check_binding" v-model="isChecked">
+  <win-checkbox id="check_binding" v-model="isChecked">
     This check box is {{ isChecked ? "checked" : "unchecked" }}
-  </winui-checkbox>
+  </win-checkbox>
 </template>
 
 <script>

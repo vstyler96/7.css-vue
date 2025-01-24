@@ -37,7 +37,7 @@ _Not available._
 - Use the class name `.winui-menu` to override/customize the __Menu__ component's styles.
 - Use the class name `.winui-menubar` to override/customize the __Menubar__ component's styles.
 
-By default, the nesting menus are only shown when the associated option is focused/clicked. To trigger it on hover, add the `can-hover` class to the root `<winui-menu>`/`<winui-menubar>` element.
+By default, the nesting menus are only shown when the associated option is focused/clicked. To trigger it on hover, add the `can-hover` class to the root `<win-menu>`/`<win-menubar>` element.
 
 ## Examples
 

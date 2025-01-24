@@ -3,7 +3,7 @@
     <div style="margin-bottom: 12px">
       Active tab: <code>{{ activeTab }}</code>
     </div>
-    <winui-tabs :tabs="tabs" @change="handleChange">
+    <win-tabs :tabs="tabs" @change="handleChange">
       <template #tab1>
         <p>Content of the first tab</p>
       </template>
@@ -16,10 +16,10 @@
       <template #tab4>
         <p>Content of the fourth tab</p>
       </template>
-    </winui-tabs>
+    </win-tabs>
   </div>
 </template>
-  
+
   <script>
 export default {
   data() {

@@ -6,4 +6,6 @@
 <script setup>
 //
 </script>
-<style scoped src="7.css/dist/gui/balloon.css"></style>
+<style lang="scss" scoped>
+// @import"7.css/dist/gui/balloon.css";
+</style>

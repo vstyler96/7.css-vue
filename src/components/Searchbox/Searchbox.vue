@@ -6,9 +6,9 @@
     :placeholder="placeholder"
     @input="search"
     v-model="searchValue"
-    v-on="$listeners"
+    v-bind="$attrs"
   />
-  <div v-else class="searchbox winui-searchbox">
+  <div v-else class="searchbox win-searchbox">
     <input
       type="search"
       v-model="searchValue"
@@ -21,7 +21,7 @@
 
 <script>
 export default {
-  name: "WinuiSearchbox",
+  name: "WinSearchbox",
   props: {
     instant: Boolean,
     placeholder: { type: String, default: "Search" },
@@ -38,11 +38,10 @@ export default {
   },
 };
 </script>
-
-<style scoped src="7.css/dist/gui/button.css"></style>
-<style scoped src="7.css/dist/gui/searchbox.css"></style>
-
 <style lang="scss" scoped>
+// @import"7.css/dist/gui/button.css";
+// @import"7.css/dist/gui/searchbox.css";
+
 [type="search"] {
   min-width: auto;
 }

@@ -1,5 +1,5 @@
 <template>
-  <winui-dropdown value="milk" :options="options" />
+  <win-dropdown value="milk" :options="options" />
 </template>
 
 <script>

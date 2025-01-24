@@ -19,7 +19,7 @@
         :key="option[itemValue]"
         :value="option[itemValue]"
         :disabled="option.disabled"
-        :selected="selected === option[itemValue]"
+        :selected="model === option[itemValue]"
       >
         {{ option[itemTitle] }}
       </option>
@@ -48,4 +48,6 @@ const model = computed({
   },
 });
 </script>
-<style scoped src="7.css/dist/gui/dropdown.css"></style>
+<style scoped lang="scss">
+// @import"7.css/dist/gui/dropdown.css";
+</style>

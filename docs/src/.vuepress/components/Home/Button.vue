@@ -1,7 +1,7 @@
 <template>
-  <winui-button @click="click">
+  <win-button @click="click">
     <slot />
-  </winui-button>
+  </win-button>
 </template>
 
 <script>

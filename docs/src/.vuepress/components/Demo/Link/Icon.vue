@@ -1,5 +1,5 @@
 <template>
-  <winui-link
+  <win-link
     text="Visnalize"
     icon="https://visnalize.com/assets/favicon.png"
   />

@@ -1,5 +1,5 @@
 <template>
-  <winui-checkbox id="check_disabled" disabled>
+  <win-checkbox id="check_disabled" disabled>
     Disabled checkbox
-  </winui-checkbox>
+  </win-checkbox>
 </template>

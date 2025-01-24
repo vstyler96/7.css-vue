@@ -1,6 +1,6 @@
 <template>
   <div>
-    <winui-progress :progress="progress" :transition="transition" />
+    <win-progress :progress="progress" :transition="transition" />
   </div>
 </template>
 

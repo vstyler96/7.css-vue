@@ -10,14 +10,17 @@
 
 <script>
 export default {
-  name: "WinuiProgress",
+  name: "WinProgress",
   props: {
     transition: [Number, String],
     progress: {
       type: [Number, String],
       default: 0,
-      validator: (value) =>
-        value === "indeterminate" || (value >= 0 && value <= 100),
+      validator(value) {
+        if (isNaN(value)) return value === "indeterminate" || value?.endsWith("%");
+
+        return (value >= 0 && value <= 100);
+      },
     },
   },
   computed: {
@@ -45,10 +48,9 @@ export default {
   },
 };
 </script>
-
-<style scoped src="7.css/dist/gui/progressbar.css"></style>
-
 <style lang="scss" scoped>
+// @import'7.css/dist/gui/progressbar.css';
+
 .winui-progress > div {
   width: var(--progress);
   transition: width var(--transition) linear;

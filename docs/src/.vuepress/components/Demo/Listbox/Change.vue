@@ -1,6 +1,6 @@
 <template>
   <div>
-    <winui-listbox :items="items" @change="handleChange" />
+    <win-listbox :items="items" @change="handleChange" />
     <div>My spirit animal is: {{ animal }}</div>
   </div>
 </template>

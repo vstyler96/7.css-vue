@@ -1,7 +1,7 @@
 <template>
-  <winui-dropdown value="burger">
+  <win-dropdown value="burger">
     <option value="burger">🍔 Burger</option>
     <option value="fries">🍟 Fries</option>
     <option value="pizza">🍕 Pizza</option>
-  </winui-dropdown>
+  </win-dropdown>
 </template>

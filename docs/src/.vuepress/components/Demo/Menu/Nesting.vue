@@ -1,38 +1,38 @@
 <template>
-  <winui-menu class="can-hover">
-    <winui-menuitem><button>Option 1</button></winui-menuitem>
-    <winui-menuitem><button>Option 2</button></winui-menuitem>
-    <winui-menuitem>
+  <win-menu class="can-hover">
+    <win-menuitem><button>Option 1</button></win-menuitem>
+    <win-menuitem><button>Option 2</button></win-menuitem>
+    <win-menuitem>
       Option 3
-      <winui-menu>
-        <winui-menuitem><button>Option 3.1</button></winui-menuitem>
-        <winui-menuitem><button>Option 3.2</button></winui-menuitem>
-        <winui-menuitem><button>Option 3.3</button></winui-menuitem>
-        <winui-menuitem><button>Option 3.4</button></winui-menuitem>
-      </winui-menu>
-    </winui-menuitem>
+      <win-menu>
+        <win-menuitem><button>Option 3.1</button></win-menuitem>
+        <win-menuitem><button>Option 3.2</button></win-menuitem>
+        <win-menuitem><button>Option 3.3</button></win-menuitem>
+        <win-menuitem><button>Option 3.4</button></win-menuitem>
+      </win-menu>
+    </win-menuitem>
     <hr />
-    <winui-menuitem><button>Option 4</button></winui-menuitem>
-    <winui-menuitem><button>Option 5</button></winui-menuitem>
+    <win-menuitem><button>Option 4</button></win-menuitem>
+    <win-menuitem><button>Option 5</button></win-menuitem>
     <hr />
-    <winui-menuitem>
+    <win-menuitem>
       Option 6
-      <winui-menu>
-        <winui-menuitem>
+      <win-menu>
+        <win-menuitem>
           Option 6.1
-          <winui-menu>
-            <winui-menuitem><button>Option 6.1.1</button></winui-menuitem>
-            <winui-menuitem><button>Option 6.1.2</button></winui-menuitem>
+          <win-menu>
+            <win-menuitem><button>Option 6.1.1</button></win-menuitem>
+            <win-menuitem><button>Option 6.1.2</button></win-menuitem>
             <hr />
-            <winui-menuitem><button>Option 6.1.3</button></winui-menuitem>
-            <winui-menuitem><button>Option 6.1.4</button></winui-menuitem>
-          </winui-menu>
-        </winui-menuitem>
-        <winui-menuitem><button>Option 6.2</button></winui-menuitem>
-        <winui-menuitem><button>Option 6.3</button></winui-menuitem>
-      </winui-menu>
-    </winui-menuitem>
-  </winui-menu>
+            <win-menuitem><button>Option 6.1.3</button></win-menuitem>
+            <win-menuitem><button>Option 6.1.4</button></win-menuitem>
+          </win-menu>
+        </win-menuitem>
+        <win-menuitem><button>Option 6.2</button></win-menuitem>
+        <win-menuitem><button>Option 6.3</button></win-menuitem>
+      </win-menu>
+    </win-menuitem>
+  </win-menu>
 </template>
 
 <style lang="stylus" scoped>

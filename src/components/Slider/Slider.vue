@@ -4,26 +4,29 @@
     class="winui-slider"
     :value="value"
     @input="$emit('input', $event.target.value)"
-    v-on="listeners"
+    v-bind="$attrs"
   />
 </template>
 
 <script>
 export default {
-  name: "WinuiSlider",
-  alias: "WinuiRange",
+  name: "WinSlider",
+  alias: "WinRange",
   props: {
     value: [String, Number],
   },
   computed: {
-    listeners() {
-      // excluding the `input` listener for v-model
-      const listeners = this.$listeners;
-      delete listeners.input;
-      return listeners;
-    },
+    // @TODO: Implement listeners
+    // listeners() {
+    //   // excluding the `input` listener for v-model
+    //   const listeners = this.$listeners;
+    //   delete listeners.input;
+    //   return listeners;
+    // },
   },
 };
 </script>
 
-<style scoped src="7.css/dist/gui/slider.css"></style>
+<style scoped lang="scss">
+// @import"7.css/dist/gui/slider.css";
+</style>

@@ -1,5 +1,5 @@
 <template>
-  <winui-listbox :items="items" />
+  <win-listbox :items="items" />
 </template>
 
 <script>

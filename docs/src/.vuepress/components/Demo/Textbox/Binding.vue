@@ -1,6 +1,6 @@
 <template>
   <div>
-    <winui-textbox
+    <win-textbox
       type="email"
       placeholder="Enter email address"
       v-model="email"

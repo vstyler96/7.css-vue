@@ -9,4 +9,6 @@ defineProps({
   label: { type: String },
 });
 </script>
-<style scoped src="7.css/dist/gui/groupbox.css"></style>
+<style scoped lang="scss">
+// @import"7.css/dist/gui/groupbox.css";
+</style>

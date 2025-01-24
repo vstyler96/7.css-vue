@@ -1,4 +1,4 @@
 import { Plugin } from "@/utils/component";
 import Radio from "./Radio.vue";
 
-export default Plugin('WinRadio', Radio);
+export default Plugin('win-radio', Radio);

@@ -1,7 +1,7 @@
 <template>
   <div>
-    <winui-searchbox placeholder="Instant" @search="handleSearch" instant />
-    <winui-searchbox placeholder="Regular" @search="handleSearch" />
+    <win-searchbox placeholder="Instant" @search="handleSearch" instant />
+    <win-searchbox placeholder="Regular" @search="handleSearch" />
     <div>
       Showing search results for: <strong>{{ searchValue }}</strong>
     </div>

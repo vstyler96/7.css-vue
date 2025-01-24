@@ -16,16 +16,16 @@
 
 <script>
 export default {
-  name: "WinuiMenuitem",
+  name: "WinMenuitem",
   props: {
     option: Object,
     value: [Number, String, Boolean],
   },
   computed: {
     hasSubMenu() {
-      return this.$slots.default.some((slot) =>
-        slot.tag?.includes("WinuiMenu")
-      );
+      // @TODO: Refactor this to use slots.
+      const defaultSlot = this.$slots.default();
+      return defaultSlot.some(x => x.type?.name?.includes("WinMenu"));
     },
     computedValue: {
       get() {

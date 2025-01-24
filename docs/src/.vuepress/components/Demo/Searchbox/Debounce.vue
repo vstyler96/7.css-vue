@@ -1,6 +1,6 @@
 <template>
   <div>
-    <winui-searchbox instant @search="handleSearch" />
+    <win-searchbox instant @search="handleSearch" />
     <div>Search value: {{ searchValue }}</div>
   </div>
 </template>

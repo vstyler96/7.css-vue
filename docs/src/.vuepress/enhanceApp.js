@@ -1,4 +1,4 @@
-import Winui from "../../../lib/index.mjs";
+import Win from "../../../lib/index.mjs";
 import "../../../lib/style.css";
 
 /**
@@ -13,5 +13,5 @@ export default ({
   router, // the router instance for the app
   siteData, // site metadata
 }) => {
-  Vue.use(Winui);
+  Vue.use(Win);
 };

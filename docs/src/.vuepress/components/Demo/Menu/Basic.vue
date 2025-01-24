@@ -1,12 +1,12 @@
 <template>
-  <winui-menu>
-    <winui-menuitem><button>Back</button></winui-menuitem>
-    <winui-menuitem><button>Forward</button></winui-menuitem>
-    <winui-menuitem><button>Reload</button></winui-menuitem>
-    <winui-menuitem><button>Save as...</button></winui-menuitem>
-    <winui-menuitem><button>View page source</button></winui-menuitem>
-    <winui-menuitem><button>Inspect</button></winui-menuitem>
-  </winui-menu>
+  <win-menu>
+    <win-menuitem><button>Back</button></win-menuitem>
+    <win-menuitem><button>Forward</button></win-menuitem>
+    <win-menuitem><button>Reload</button></win-menuitem>
+    <win-menuitem><button>Save as...</button></win-menuitem>
+    <win-menuitem><button>View page source</button></win-menuitem>
+    <win-menuitem><button>Inspect</button></win-menuitem>
+  </win-menu>
 </template>
 
 <style lang="stylus" scoped>

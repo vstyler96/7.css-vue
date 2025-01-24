@@ -1,8 +1,8 @@
 <template>
   <div>
-    <winui-button @mouseover="handleMouseover" @mouseout="handleMouseout">
+    <win-button @mouseover="handleMouseover" @mouseout="handleMouseout">
       Hover me!
-    </winui-button>
+    </win-button>
     <span>{{ isHovered ? "Xin chào" : "Hello" }}</span>
   </div>
 </template>

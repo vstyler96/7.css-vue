@@ -1,3 +1,3 @@
 <template>
-  <winui-button disabled>You can't click me!</winui-button>
+  <win-button disabled>You can't click me!</win-button>
 </template>

@@ -5,7 +5,7 @@
 <Misc-Ad />
 
 ::: tip Alias: "Range"
-`<winui-slider>` and `<winui-range>` can be used interchangeably.
+`<win-slider>` and `<win-range>` can be used interchangeably.
 :::
 
 ## Usage

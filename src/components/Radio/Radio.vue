@@ -8,13 +8,15 @@
       :value="nativeValue"
       type="radio"
     />
-    <label :for="id"><slot /></label>
+    <slot>
+      <label :for="id" />
+    </slot>
   </div>
 </template>
 
 <script>
 export default {
-  name: "WinuiRadio",
+  name: "WinRadio",
   props: {
     id: { type: String, required: true },
     name: { type: String, required: true },
@@ -46,4 +48,6 @@ export default {
 };
 </script>
 
-<style scoped src="7.css/dist/gui/radiobutton.css"></style>
+<style scoped lang="scss">
+// @import"7.css/dist/gui/radiobutton.css";
+</style>

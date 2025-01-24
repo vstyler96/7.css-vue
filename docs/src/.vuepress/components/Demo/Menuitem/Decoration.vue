@@ -1,9 +1,9 @@
 <template>
-  <winui-menubar class="can-hover">
-    <winui-menuitem>
+  <win-menubar class="can-hover">
+    <win-menuitem>
       File
-      <winui-menu>
-        <winui-menuitem>
+      <win-menu>
+        <win-menuitem>
           <img
             src="https://img.icons8.com/color/18/opened-folder.png"
             alt="open"
@@ -12,17 +12,17 @@
             Open...
             <span>Ctrl+O</span>
           </button>
-        </winui-menuitem>
-        <winui-menuitem><button>Open Recent</button></winui-menuitem>
+        </win-menuitem>
+        <win-menuitem><button>Open Recent</button></win-menuitem>
         <hr />
-        <winui-menuitem>
+        <win-menuitem>
           <img src="https://img.icons8.com/color/18/save.png" alt="save" />
           <button>
             Save
             <span>Ctrl+S</span>
           </button>
-        </winui-menuitem>
-        <winui-menuitem>
+        </win-menuitem>
+        <win-menuitem>
           <img
             src="https://img.icons8.com/color/18/save-as.png"
             alt="save as"
@@ -31,14 +31,14 @@
             Save As...
             <span>Ctrl+Shift+S</span>
           </button>
-        </winui-menuitem>
+        </win-menuitem>
         <hr />
-        <winui-menuitem><button>Exit</button></winui-menuitem>
-      </winui-menu>
-    </winui-menuitem>
-    <winui-menuitem>Edit</winui-menuitem>
-    <winui-menuitem>View</winui-menuitem>
-    <winui-menuitem>Run</winui-menuitem>
-    <winui-menuitem>Help</winui-menuitem>
-  </winui-menubar>
+        <win-menuitem><button>Exit</button></win-menuitem>
+      </win-menu>
+    </win-menuitem>
+    <win-menuitem>Edit</win-menuitem>
+    <win-menuitem>View</win-menuitem>
+    <win-menuitem>Run</win-menuitem>
+    <win-menuitem>Help</win-menuitem>
+  </win-menubar>
 </template>

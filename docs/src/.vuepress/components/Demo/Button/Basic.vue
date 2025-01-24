@@ -1,5 +1,5 @@
 <template>
-  <winui-button @click="handleClick">Click me!</winui-button>
+  <win-button @click="handleClick">Click me!</win-button>
 </template>
 
 <script>

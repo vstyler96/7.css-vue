@@ -1,4 +1,4 @@
 import { Plugin } from "@/utils/component";
 import Listbox from "./Listbox.vue";
 
-export default Plugin('WinListbox', Listbox);
+export default Plugin('win-listbox', Listbox);

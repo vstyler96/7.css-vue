@@ -9,7 +9,7 @@ pageClass: homepage
   <Home-Button href="/components/">📚 Components</Home-Button>
 </p>
 <p class="footer">
-MIT Licensed. Made by <winui-link href="https://visnalize.com/" target="_blank" text="Visnalize" /> with ❤️
+MIT Licensed. Made by <win-link href="https://visnalize.com/" target="_blank" text="Visnalize" /> with ❤️
 <br />
-Icons provided by <winui-link href="https://icons8.com/" target="_blank" text="Icons8" />
+Icons provided by <win-link href="https://icons8.com/" target="_blank" text="Icons8" />
 </p>

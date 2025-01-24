@@ -1,6 +1,6 @@
 <template>
   <div>
-    <winui-listbox :items="items" v-model="animal" />
+    <win-listbox :items="items" v-model="animal" />
     <div>My spirit animal is: {{ animal }}</div>
   </div>
 </template>

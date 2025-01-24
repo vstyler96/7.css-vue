@@ -1,9 +1,9 @@
 <template>
   <div>
     <!-- #region snippet -->
-    <winui-progress progress="30" class="animate" />
-    <winui-progress progress="50" class="animate paused" />
-    <winui-progress progress="70" class="animate error" />
+    <win-progress progress="30" class="animate" />
+    <win-progress progress="50" class="animate paused" />
+    <win-progress progress="70" class="animate error" />
     <!-- #endregion snippet -->
   </div>
 </template>

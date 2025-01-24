@@ -1,3 +1,3 @@
 <template>
-  <winui-textbox placeholder="Enter text here" />
+  <win-textbox placeholder="Enter text here" />
 </template>

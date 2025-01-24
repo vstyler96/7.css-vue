@@ -1,3 +1,3 @@
 <template>
-  <winui-balloon class="is-top is-left">😎</winui-balloon>
+  <win-balloon class="is-top is-left">😎</win-balloon>
 </template>

@@ -6,6 +6,6 @@
 
 <script>
 export default {
-  name: "WinuiMenubar",
+  name: "WinMenubar",
 };
 </script>

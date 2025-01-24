@@ -32,4 +32,6 @@ const model = computed({
   set(value) { emit('update:model-value', value); },
 });
 </script>
-<style scoped src="7.css/dist/gui/checkbox.css"></style>
+<style scoped lang="scss">
+// @import"7.css/dist/gui/checkbox.css";
+</style>

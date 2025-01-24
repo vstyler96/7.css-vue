@@ -1,7 +1,7 @@
 <template>
-  <winui-collapse @toggle="handleToggle" :title="open ? 'Conceal' : 'Reveal a truth'">
+  <win-collapse @toggle="handleToggle" :title="open ? 'Conceal' : 'Reveal a truth'">
     <div>"Parasyte: The Maxim" is the best anime ever!</div>
-  </winui-collapse>
+  </win-collapse>
 </template>
 
 <script>

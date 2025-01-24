@@ -1,9 +1,9 @@
 <template>
   <div>
-    <winui-textbox type="password" placeholder="Password" required />
-    <winui-textbox type="email" placeholder="Email" />
-    <winui-textbox type="number" placeholder="Number" />
-    <winui-textbox type="textarea" value="Textarea" rows="5" />
+    <win-textbox type="password" placeholder="Password" required />
+    <win-textbox type="email" placeholder="Email" />
+    <win-textbox type="number" placeholder="Number" />
+    <win-textbox type="textarea" value="Textarea" rows="5" />
   </div>
 </template>
 

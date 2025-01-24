@@ -1,14 +1,14 @@
 <template>
   <textarea
     v-if="type === 'textarea'"
-    v-on="listeners"
+    v-bind="$attrs"
     :value="value"
     @input="$emit('input', $event.target.value)"
     class="winui-textbox"
   />
   <input
     v-else
-    v-on="listeners"
+    v-bind="$attrs"
     :type="type"
     :value="value"
     @input="$emit('input', $event.target.value)"
@@ -18,20 +18,23 @@
 
 <script>
 export default {
-  name: "WinuiTextbox",
+  name: "WinTextbox",
   props: {
     type: { type: String, default: "text" },
     value: [String, Number],
   },
   computed: {
-    listeners() {
-      // excluding the `input` listener for v-model
-      const listeners = this.$listeners;
-      delete listeners.input;
-      return listeners;
-    },
+    // @TODO: Implement listeners
+    // listeners() {
+    //   // excluding the `input` listener for v-model
+    //   const listeners = this.$listeners;
+    //   delete listeners.input;
+    //   return listeners;
+    // },
   },
 };
 </script>
 
-<style scoped src="7.css/dist/gui/textbox.css"></style>
+<style scoped lang="scss">
+// @import"7.css/dist/gui/textbox.css";
+</style>

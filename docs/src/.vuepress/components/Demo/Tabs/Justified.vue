@@ -1,5 +1,5 @@
 <template>
-  <winui-tabs :tabs="tabs" justified>
+  <win-tabs :tabs="tabs" justified>
     <template #tab1>
       <p>Content of the first tab</p>
     </template>
@@ -12,7 +12,7 @@
     <template #tab4>
       <p>Content of the fourth tab</p>
     </template>
-  </winui-tabs>
+  </win-tabs>
 </template>
 
 <script>

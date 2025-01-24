@@ -1,10 +1,10 @@
 <template>
   <div>
-    <winui-dropdown v-model="value">
+    <win-dropdown v-model="value">
       <option value="Dog">🐶 Dog</option>
       <option value="Cat">🐱 Cat</option>
       <option value="Mouse">🐭 Mouse</option>
-    </winui-dropdown>
+    </win-dropdown>
     <span>{{ value }} is my best friend!</span>
   </div>
 </template>
