@@ -2,7 +2,7 @@
   <div>
     <win-button class="default">default button</win-button>
     <win-button>Click me</win-button>
-    <win-link text="link" icon="https://abs.twimg.com/favicons/twitter.ico" />
+    <win-link text="link" icon="monitor" />
     <win-link text="button" @click="handleLinkClick" />
     <win-tabs :tabs="tabs">
       <template #apps> apps </template>
@@ -10,39 +10,66 @@
       <template #softs> softs </template>
     </win-tabs>
     <win-progress progress="50%" class="error" />
-    <win-groupbox label="Radio buttons">
-      <win-radio id="theme-light" value="light" name="theme" checked>
-        Light
-      </win-radio>
-      <win-radio id="theme-dark" value="dark" name="theme">Dark</win-radio>
-      <win-radio id="theme-auto" value="auto" name="theme" disabled>
-        Auto
-      </win-radio>
+    <win-groupbox
+      label="Radio buttons"
+    >
+      <win-radio
+        id="theme-light"
+        value="light"
+        name="theme"
+        label="Light"
+        checked
+      />
+      <win-radio
+        id="theme-dark"
+        value="dark"
+        name="theme"
+        label="Dark"
+      />
+      <win-radio
+        id="theme-auto"
+        value="auto"
+        name="theme"
+        label="Auto"
+        disabled
+      />
     </win-groupbox>
-    <win-checkbox id="check1" name="check" v-model="isChecked">
-      I am checked
-    </win-checkbox>
-    <win-checkbox id="check2" name="check">I am free</win-checkbox>
-    <win-checkbox id="check3" name="check" disabled>
-      I am disabled
-    </win-checkbox>
-    <win-balloon> ABC </win-balloon>
-    <win-dropdown :options="options" v-model="dropdownValue" />
+    <win-checkbox
+      id="check1"
+      v-model="isChecked"
+      name="check"
+      label="I am checked"
+    />
+    <win-checkbox
+      id="check2"
+      name="check"
+      label="I am free"
+    />
+    <win-checkbox
+      id="check3"
+      name="check"
+      disabled
+      label="I am disabled"
+    />
+    <win-balloon>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
+    </win-balloon>
+    <win-dropdown
+      v-model="dropdownValue"
+      :options="options"
+    />
     <win-treeview class="has-collapse-button">
-      <win-collapse open title="Javascript">
+      <win-collapse
+        title="Javascript"
+      >
         <ul>
           <li>Avoid at all costs</li>
           <li>
-            <win-collapse>
-              <template #title>
-                <span class="collapse-title">
-                  <win-icon
-                    src="https://img.icons8.com/color/16/000000/monitor--v1.png"
-                    size="16"
-                  />
-                  Unless
-                </span>
-              </template>
+            <win-collapse
+              title="Unless"
+              prepend-icon="monitor"
+            >
+
               <ul>
                 <li>Avoid</li>
                 <li>
@@ -67,7 +94,7 @@
       class="has-hover"
       :items="options"
       v-model="listboxValue"
-    ></win-listbox>
+    />
     <win-slider max="10" min="1" v-model="sliderValue" />
     <win-menubar class="can-hover">
       <win-menuitem>
@@ -121,11 +148,11 @@ export default {
         softs: "Software",
       },
       options: [
-        { label: "5 - Incredible!", value: "incredible" },
-        { label: "4 - Great!", value: "great" },
-        { label: "3 - Pretty good!", value: "good" },
-        { label: "2 - Not so great!", value: "not so" },
-        { label: "1 - Unfortunate!", value: "ew" },
+        { name: "5 - Incredible!", id: "incredible" },
+        { name: "4 - Great!", id: "great" },
+        { name: "3 - Pretty good!", id: "good" },
+        { name: "2 - Not so great!", id: "not so" },
+        { name: "1 - Unfortunate!", id: "ew" },
       ],
       listboxValue: "good",
       dropdownValue: "great",

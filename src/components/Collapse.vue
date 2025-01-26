@@ -5,10 +5,18 @@
     class="winui-collapse"
   >
     <slot name="title">
-      <summary>
-        {{ smartTitle }}
+      <summary class="collapse-title">
+        <win-icon
+          v-if="prependIcon"
+          :icon="prependIcon"
+          size="16"
+        />
+        <span>
+          {{ smartTitle }}
+        </span>
       </summary>
     </slot>
+
     <slot />
   </details>
 </template>
@@ -22,13 +30,13 @@ const id = `winui-collapse-${uniqueId()}`;
 const emit = defineEmits(["toggle"]);
 const props = defineProps({
   title: { type: String },
+  prependIcon: { type: String },
 });
 
 const el = ref(null);
 const smartTitle = computed(() => {
   if (props.title) return props.title;
 
-  // @TODO: test if el.value works as expected.
   return el.value.open ? "Hide" : "Show";
 });
 
@@ -47,7 +55,11 @@ onBeforeUnmount(() => {
   el.value = null;
 });
 </script>
-
 <style scoped lang="scss">
-// @import"7.css/dist/gui/collapse.css";
+.collapse-title {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  user-select: none;
+}
 </style>

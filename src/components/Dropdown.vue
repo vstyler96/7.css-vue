@@ -27,10 +27,9 @@
   </select>
 </template>
 <script setup>
-import { computed } from "vue";
+import { computed } from "@vue/reactivity";
 
 const emit = defineEmits(["update:model-value"]);
-
 const props = defineProps({
   modelValue: { type: [Number, String] },
   options: { type: Array },
@@ -48,6 +47,3 @@ const model = computed({
   },
 });
 </script>
-<style scoped lang="scss">
-// @import"7.css/dist/gui/dropdown.css";
-</style>
