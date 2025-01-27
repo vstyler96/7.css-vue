@@ -1,9 +1,0 @@
-<template>
-  <win-menubar>
-    <win-menuitem>File</win-menuitem>
-    <win-menuitem>Edit</win-menuitem>
-    <win-menuitem>View</win-menuitem>
-    <win-menuitem>Run</win-menuitem>
-    <win-menuitem>Help</win-menuitem>
-  </win-menubar>
-</template>
