@@ -1,33 +1,34 @@
-# win7-ui
+# 7.css-vue
 
-[![npm](https://img.shields.io/npm/v/win7-ui)](http://npm.im/win7-ui)
-[![npm](https://img.shields.io/npm/dt/win7-ui)](http://npm.im/win7-ui)
-[![npm bundle size](https://img.shields.io/bundlephobia/minzip/win7-ui)](https://bundlephobia.com/result?p=win7-ui)
+<!-- [![npm](https://img.shields.io/npm/v/win7-ui)](http://npm.im/win7-ui) -->
+<!-- [![npm](https://img.shields.io/npm/dt/win7-ui)](http://npm.im/win7-ui) -->
+<!-- [![npm bundle size](https://img.shields.io/bundlephobia/minzip/win7-ui)](https://bundlephobia.com/result?p=win7-ui) -->
 
-Vue2 component library for recreating Windows 7 UI.
+Vue 3 component library for recreating Windows 7 UI.
 
-## 🚀 Quick start
+<!-- ## 🚀 Quick start
 
 ```sh
 npm i win7-ui
 # or
 yarn add win7-ui
 ```
+-->
 
 ```js
 // main.js or index.js
-import Vue from "vue";
-import Win from "win7-ui";
-import "win7-ui/lib/style.css";
+import { createApp } from "vue";
+import Win from "{TBD}";
 ...
-Vue.use(Win);
 
-new Vue({
-  ...
-}).$mount("#app");
+const app = createApp(...);
+
+app.use(Win);
+
+app.mount('#app');
 ```
 
-```html
+<!-- ```html
 <template>
   <win-button @click="doSomething">Hello world!</win-button>
 </template>
@@ -55,4 +56,4 @@ _Refer to [Releases](https://github.com/Visnalize/win7-ui/releases)_
 
 ## 📺 Showcase
 
-- [__Win7 Simu__](https://win7simu.visnalize.com/)
+- [__Win7 Simu__](https://win7simu.visnalize.com/) -->
