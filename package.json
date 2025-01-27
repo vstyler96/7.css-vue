@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "Vue3 component library for recreating Windows 7 UI",
   "license": "MIT",
-  "homepage": "https://win7ui.kingbeencent.dev",
+  "homepage": "https://7css-vue.kingbeencent.dev",
   "main": "./lib/index.umd.js",
   "module": "./lib/index.mjs",
   "types": "./types/index.d.ts",
