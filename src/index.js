@@ -8,8 +8,8 @@ import Icon from "./components/Icon.vue";
 import Link from "./components/Link.vue";
 import Listbox from "./components/Listbox.vue";
 import Menu from "./components/Menu.vue";
-import MenuBar from "./components/MenuBar.vue";
-import MenuItem from "./components/MenuItem.vue";
+import Menubar from "./components/MenuBar.vue";
+import Menuitem from "./components/MenuItem.vue";
 import Progress from "./components/Progress.vue";
 import Radio from "./components/Radio.vue";
 import Searchbox from "./components/Searchbox.vue";
@@ -29,8 +29,8 @@ const components = {
   WinLink: Link,
   WinListbox: Listbox,
   WinMenu: Menu,
-  WinMenuBar: MenuBar,
-  WinMenuItem: MenuItem,
+  WinMenubar: Menubar,
+  WinMenuitem: Menuitem,
   WinProgress: Progress,
   WinRadio: Radio,
   WinSearchbox: Searchbox,

@@ -1,11 +1,8 @@
 <template>
-  <ul class="winui-menubar" role="menubar">
+  <ul
+    class="winui-menubar"
+    role="menubar"
+  >
     <slot />
   </ul>
 </template>
-
-<script>
-export default {
-  name: "WinMenubar",
-};
-</script>

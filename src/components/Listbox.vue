@@ -1,13 +1,16 @@
 <template>
-  <ul role="listbox" class="winui-listbox">
+  <ul
+    role="listbox"
+    class="winui-listbox"
+  >
     <li
       v-for="option in options"
-      role="option"
       :key="option[itemValue]"
-      :aria-selected="model === option[itemValue]"
-      @click="handleClick(option[itemValue])"
+      v-bind="bindAttr(option)"
+      role="option"
+      @click="onClick(option[itemValue])"
     >
-      {{ item[itemText] }}
+      {{ option[itemText] }}
     </li>
   </ul>
 </template>
@@ -17,7 +20,9 @@ import { computed } from '@vue/reactivity';
 const emit = defineEmits(['update:model-value']);
 const props = defineProps({
   modelValue: [Number, String],
-  items: { type: Array, required: true },
+  options: { type: Array, required: true },
+  itemValue: { type: String, default: 'id' },
+  itemText: { type: String, default: 'name' },
 });
 
 const model = computed({
@@ -28,29 +33,16 @@ const model = computed({
     emit("update:model-value", value);
   },
 });
-export default {
-  name: "WinListbox",
-  props: {
 
-  },
-  data() {
-    return { selected: this.value };
-  },
-  methods: {
-    handleClick(value) {
-      this.selected = value;
-      this.$emit("change", value);
-      this.$emit("input", value);
-    },
-  },
-};
-</script>
-<style lang="scss" scoped>
-// @import"7.css/dist/gui/listbox.css";
+function bindAttr(option) {
+  if (option[props.itemValue] === model.value) {
+    return { 'aria-selected': true };
+  }
 
-.winui-listbox {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+  return {};
 }
-</style>
+
+function onClick(option) {
+  model.value = option;
+}
+</script>

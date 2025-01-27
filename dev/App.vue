@@ -2,17 +2,43 @@
   <div>
     <win-button class="default">default button</win-button>
     <win-button>Click me</win-button>
-    <win-link text="link" icon="monitor" />
-    <win-link text="button" @click="handleLinkClick" />
+    <win-link
+      text="link"
+      prepend-icon="monitor"
+    />
+    <win-link
+      text="button"
+      @click="handleLinkClick"
+    />
     <win-tabs :tabs="tabs">
       <template #apps> apps </template>
       <template #games> games </template>
       <template #softs> softs </template>
     </win-tabs>
-    <win-progress progress="50%" class="error" />
-    <win-groupbox
-      label="Radio buttons"
-    >
+
+    <win-progress
+      progress="50%"
+      class="success"
+      animate
+    />
+    <win-progress
+      progress="50%"
+      class="paused"
+    />
+    <win-progress
+      progress="50%"
+      class="error"
+      animate
+    />
+    <win-progress
+      progress="50%"
+      class="classic"
+    />
+    <win-progress
+      progress="indeterminate"
+    />
+
+    <win-groupbox label="Radio buttons">
       <win-radio
         id="theme-light"
         value="light"
@@ -34,6 +60,7 @@
         disabled
       />
     </win-groupbox>
+
     <win-checkbox
       id="check1"
       v-model="isChecked"
@@ -91,47 +118,105 @@
       </win-collapse>
     </win-treeview>
     <win-listbox
-      class="has-hover"
-      :items="options"
       v-model="listboxValue"
+      class="has-hover"
+      :options="options"
     />
-    <win-slider max="10" min="1" v-model="sliderValue" />
+    <win-slider
+      v-model="sliderValue"
+      max="10"
+      min="1"
+    />
     <win-menubar class="can-hover">
       <win-menuitem>
         File
         <win-menu>
-          <win-menuitem><button>Open</button></win-menuitem>
-          <win-menuitem><button>Save</button></win-menuitem>
-          <win-menuitem><button>Exit</button></win-menuitem>
+          <win-menuitem>
+            <button>
+              Open
+            </button>
+          </win-menuitem>
+          <win-menuitem>
+            <button>
+              Save
+            </button>
+          </win-menuitem>
+          <win-menuitem>
+            <button>
+              Exit
+            </button>
+          </win-menuitem>
         </win-menu>
       </win-menuitem>
-      <win-menuitem>Edit</win-menuitem>
-      <win-menuitem>View</win-menuitem>
-      <win-menuitem>Help</win-menuitem>
-    </win-menubar>
-    <win-menu class="can-hover" style="width: 300px">
+      <win-menuitem>
+        Edit
+      </win-menuitem>
       <win-menuitem>
         View
-        <win-menu>
-          <win-menuitem :option="menuOption('lg')" v-model="menuOptionValue"
-            >Large icons</win-menuitem
-          >
-          <win-menuitem :option="menuOption('md')" v-model="menuOptionValue"
-            >Medium icons</win-menuitem
-          >
-          <win-menuitem :option="menuOption('sm')" v-model="menuOptionValue"
-            >Small icons</win-menuitem
-          >
-          <hr />
-          <win-menuitem :option="{ as: 'checkbox', id: 'arrange-icons' }"
-            >Auto arrange icons</win-menuitem
-          >
-        </win-menu>
+      </win-menuitem>
+      <win-menuitem>
+        Help
+      </win-menuitem>
+    </win-menubar>
+    <win-menu class="can-hover" style="width: 300px">
+      <win-menuitem label="View">
+        <template #menu>
+          <win-menu>
+            <win-menuitem>
+              <input
+                v-model="menuOptionValue"
+                id="icons-size-lg"
+                type="radio"
+                name="icon-size"
+                value="lg"
+              />
+              <label for="icons-size-lg">
+                Large icons
+              </label>
+            </win-menuitem>
+            <win-menuitem>
+              <input
+                v-model="menuOptionValue"
+                id="icons-size-md"
+                type="radio"
+                name="icon-size"
+                value="md"
+              />
+              <label for="icons-size-md">
+                Medium icons
+              </label>
+            </win-menuitem>
+            <win-menuitem>
+              <input
+                v-model="menuOptionValue"
+                id="icons-size-sm"
+                type="radio"
+                name="icon-size"
+                value="sm"
+              />
+              <label for="icons-size-sm">
+                Small icons
+              </label>
+            </win-menuitem>
+            <hr />
+            <win-menuitem>
+              <input
+                v-model="arrangeIcons"
+                id="arrange-icons"
+                type="checkbox"
+                name="arrange-icons"
+              />
+              <label for="arrange-icons">
+                Auto arrange icons
+              </label>
+            </win-menuitem>
+          </win-menu>
+        </template>
       </win-menuitem>
       <hr />
-      <win-menuitem><button>Sort by</button></win-menuitem>
-      <win-menuitem><button>Refresh</button></win-menuitem>
-      <win-menuitem><button>Display</button></win-menuitem>
+      <win-menuitem label="Sort by" />
+      <win-menuitem label="Refresh" />
+      <win-menuitem label="Display" />
     </win-menu>
     <win-searchbox placeholder="Search" @search="handleSearch" />
     <win-searchbox placeholder="Search" instant />
@@ -158,6 +243,7 @@ export default {
       dropdownValue: "great",
       sliderValue: 4,
       isChecked: true,
+      arrangeIcons: false,
       menuOption: (size) => ({
         as: "radio",
         id: "icon-size-" + size,

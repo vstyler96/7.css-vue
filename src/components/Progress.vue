@@ -1,8 +1,8 @@
 <template>
   <div
-    role="progressbar"
-    :class="['winui-progress', { marquee: indeterminate }]"
     v-bind="ariaValues"
+    role="progressbar"
+    :class="['winui-progress', { marquee: indeterminate, animate }]"
   >
     <div v-if="!indeterminate" :style="progressStyle" />
   </div>
@@ -12,6 +12,7 @@
 export default {
   name: "WinProgress",
   props: {
+    animate: { type: Boolean, default: false },
     transition: [Number, String],
     progress: {
       type: [Number, String],
@@ -49,8 +50,6 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-// @import'7.css/dist/gui/progressbar.css';
-
 .winui-progress > div {
   width: var(--progress);
   transition: width var(--transition) linear;

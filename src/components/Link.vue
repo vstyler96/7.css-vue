@@ -5,7 +5,7 @@
     :href="href"
   >
     <win-icon
-      v-if="icon"
+      v-if="prependIcon"
       :icon="prependIcon"
       size="16"
     />
@@ -19,7 +19,7 @@
     class="winui-link"
   >
     <win-icon
-      v-if="icon"
+      v-if="prependIcon"
       :icon="prependIcon"
       size="16"
     />
@@ -45,12 +45,11 @@ defineProps({
   font-size: inherit;
   display: inline-flex;
   align-items: center;
-  text-align: center;
   color: #06c;
   background: none;
   border: none;
   cursor: pointer;
-  padding: 0 4px;
+  padding: 0;
 
   &:hover {
     color: #39f;
