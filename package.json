@@ -7,7 +7,6 @@
   "homepage": "https://7css-vue.kingbeencent.dev",
   "main": "./lib/index.umd.js",
   "module": "./lib/index.mjs",
-  "types": "./types/index.d.ts",
   "exports": {
     ".": {
       "import": "./lib/index.mjs",
