@@ -46,5 +46,26 @@ const winVue = {
   },
 };
 
+export {
+  Balloon as WinBalloon,
+  Button as WinButton,
+  Checkbox as WinCheckbox,
+  Collapse as WinCollapse,
+  Dropdown as WinDropdown,
+  Groupbox as WinGroupbox,
+  Icon as WinIcon,
+  Link as WinLink,
+  Listbox as WinListbox,
+  Menu as WinMenu,
+  Menubar as WinMenubar,
+  Menuitem as WinMenuitem,
+  Progress as WinProgress,
+  Radio as WinRadio,
+  Searchbox as WinSearchbox,
+  Slider as WinSlider,
+  Tabs as WinTabs,
+  Textbox as WinTextbox,
+  Treeview as WinTreeview,
+};
 
 export default winVue;
