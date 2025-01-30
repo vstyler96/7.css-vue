@@ -1,24 +1,26 @@
 # 7.css-vue
 
-<!-- [![npm](https://img.shields.io/npm/v/win7-ui)](http://npm.im/win7-ui) -->
-<!-- [![npm](https://img.shields.io/npm/dt/win7-ui)](http://npm.im/win7-ui) -->
-<!-- [![npm bundle size](https://img.shields.io/bundlephobia/minzip/win7-ui)](https://bundlephobia.com/result?p=win7-ui) -->
+[![npm](https://img.shields.io/npm/v/7.css-vue)](http://npm.im/7.css-vue)
+[![npm](https://img.shields.io/npm/dt/7.css-vue)](http://npm.im/7.css-vue)
+[![npm bundle size](https://img.shields.io/bundlephobia/minzip/7.css-vue)](https://bundlephobia.com/result?p=7.css-vue)
 
 Vue 3 component library for recreating Windows 7 UI.
 
-<!-- ## 🚀 Quick start
+## 🚀 Quick start
 
 ```sh
-npm i win7-ui
+npm i 7.css-vue
 # or
-yarn add win7-ui
+yarn add 7.css-vue
+# or
+bun add 7.css-vue
 ```
--->
+
 
 ```js
 // main.js or index.js
 import { createApp } from "vue";
-import Win from "{TBD}";
+import Win from "7.css-vue";
 ...
 
 const app = createApp(...);
