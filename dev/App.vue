@@ -36,10 +36,44 @@
       </div>
     </div>
   </WinWindow>
+
+  <WinWindow has-space active>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <win-balloon
+            bottom
+            right
+            caption="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam"
+          />
+        </div>
+        <div class="col-12 col-md-6">
+          <win-balloon
+            bottom
+            left
+            caption="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <win-balloon
+            top
+            right
+            caption="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam"
+          />
+        </div>
+        <div class="col-12 col-md-6">
+          <win-balloon
+            top
+            left
+            caption="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam"
+          />
+        </div>
+      </div>
+    </div>
+  </WinWindow>
   <!-- <div>
-    <win-balloon>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-    </win-balloon>
     <win-dropdown
       v-model="dropdownValue"
       :options="options"
@@ -76,6 +110,7 @@
         </ul>
       </win-collapse>
     </win-treeview>
+
     <win-listbox
       v-model="listboxValue"
       class="has-hover"
