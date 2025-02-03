@@ -5,7 +5,6 @@
     type="range"
     class="winui-slider"
   >
-  <!-- @input="$emit('input', $event.target.value)" -->
 </template>
 <script setup>
 import { computed } from 'vue';

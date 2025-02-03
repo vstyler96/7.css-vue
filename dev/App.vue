@@ -15,71 +15,28 @@
     <!-- Tabs System -->
     <Tabs />
   </WinWindow>
+
+  <WinWindow has-space active>
+    <!-- Progressbars -->
+    <Progressbars />
+  </WinWindow>
+
+  <WinWindow has-space active>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <!-- Radios -->
+          <Radios />
+        </div>
+
+        <div class="col-12 col-md-6">
+          <!-- Checkboxes -->
+          <Checkboxes />
+        </div>
+      </div>
+    </div>
+  </WinWindow>
   <!-- <div>
-    <win-groupbox label="Progress bars">
-      <win-progress
-        progress="50%"
-        class="success"
-        animate
-      />
-      <win-progress
-        progress="50%"
-        class="paused"
-      />
-      <win-progress
-        progress="50%"
-        class="error"
-        animate
-      />
-      <win-progress
-        progress="50%"
-        class="classic"
-      />
-      <win-progress
-        progress="indeterminate"
-      />
-    </win-groupbox>
-
-    <win-groupbox label="Radio buttons">
-      <win-radio
-        id="theme-light"
-        value="light"
-        name="theme"
-        label="Light"
-        checked
-      />
-      <win-radio
-        id="theme-dark"
-        value="dark"
-        name="theme"
-        label="Dark"
-      />
-      <win-radio
-        id="theme-auto"
-        value="auto"
-        name="theme"
-        label="Auto"
-        disabled
-      />
-    </win-groupbox>
-
-    <win-checkbox
-      id="check1"
-      v-model="isChecked"
-      name="check"
-      label="I am checked"
-    />
-    <win-checkbox
-      id="check2"
-      name="check"
-      label="I am free"
-    />
-    <win-checkbox
-      id="check3"
-      name="check"
-      disabled
-      label="I am disabled"
-    />
     <win-balloon>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
     </win-balloon>
@@ -130,39 +87,22 @@
       min="1"
     />
     <win-menubar class="can-hover">
-      <win-menuitem>
-        File
-        <win-menu>
-          <win-menuitem>
-            <button>
-              Open
-            </button>
-          </win-menuitem>
-          <win-menuitem>
-            <button>
-              Save
-            </button>
-          </win-menuitem>
-          <win-menuitem>
-            <button>
-              Exit
-            </button>
-          </win-menuitem>
-        </win-menu>
+      <win-menuitem title="File">
+        <template #submenu>
+          <win-menu>
+            <win-menuitem title="Open" />
+            <win-menuitem title="Save" />
+            <win-menuitem title="Exit" />
+          </win-menu>
+        </template>
       </win-menuitem>
-      <win-menuitem>
-        Edit
-      </win-menuitem>
-      <win-menuitem>
-        View
-      </win-menuitem>
-      <win-menuitem>
-        Help
-      </win-menuitem>
+      <win-menuitem title="Edit" />
+      <win-menuitem title="View" />
+      <win-menuitem title="Help" />
     </win-menubar>
     <win-menu class="can-hover" style="width: 300px">
       <win-menuitem label="View">
-        <template #menu>
+        <template #submenu>
           <win-menu>
             <win-menuitem>
               <input
@@ -228,6 +168,9 @@
 import Buttons from './Showcase/Buttons.vue';
 import Links from './Showcase/Links.vue';
 import Tabs from './Showcase/Tabs.vue';
+import Progressbars from './Showcase/Progressbars.vue';
+import Radios from './Showcase/Radios.vue';
+import Checkboxes from './Showcase/Checkboxes.vue';
 
 // export default {
 //   data() {

@@ -4,7 +4,7 @@
     class="winui-menuitem"
     role="menuitem"
   >
-    <slot>
+    <slot name="title">
       <button v-if="!hasSubMenu">
         {{ title }}
       </button>
@@ -13,23 +13,28 @@
       </template>
     </slot>
 
-    <slot name="menu" />
+    <slot name="submenu">
+      <win-menu>
+        <win-menu-item
+          v-for="(child, index) in children"
+          :key="index"
+          :title="child.title"
+          :children="child.children"
+        />
+      </win-menu>
+    </slot>
   </li>
 </template>
 <script setup>
-import { useSlots } from 'vue-core';
-import { computed } from 'vue';
-
-defineProps({
-  title: { type: String, required: true },
-});
+import { computed, useSlots } from 'vue';
 
 const slots = useSlots();
-
-const hasSubMenu = computed(() => {
-  return slots.menu !== undefined;
+const props = defineProps({
+  title: { type: String, required: true },
+  children: { type: Array, default: () => [] },
 });
 
+const hasSubMenu = computed(() => slots.submenu !== null || props.children.length > 0);
 const bindAttr = computed(() => {
   if (hasSubMenu.value) {
     return {

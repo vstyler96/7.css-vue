@@ -1,5 +1,5 @@
 <template>
-  <win-groupbox label="Buttons">
+  <win-groupbox title="Buttons">
     <win-button class="default">
       default button
     </win-button>

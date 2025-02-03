@@ -1,5 +1,5 @@
 <template>
-  <win-groupbox label="Links">
+  <win-groupbox title="Links">
     <win-link
       text="link"
       href="#"

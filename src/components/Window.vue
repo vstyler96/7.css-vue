@@ -9,9 +9,21 @@
         {{ title }}
       </div>
       <div class="title-bar-controls">
-        <button aria-label="Minimize"></button>
-        <button aria-label="Maximize"></button>
-        <button aria-label="Close"></button>
+        <button
+          v-if="minimizable"
+          aria-label="Minimize"
+          @click="emit('minimize')"
+        />
+        <button
+          v-if="maximizable"
+          aria-label="Maximize"
+          @click="emit('maximize')"
+        />
+        <button
+          v-if="closable"
+          aria-label="Close"
+          @click="$emit('close')"
+        />
       </div>
     </div>
 
@@ -39,6 +51,7 @@
   </div>
 </template>
 <script setup>
+const emit = defineEmits(['minimize', 'maximize', 'close']);
 defineProps({
   active: { type: Boolean, default: false },
   title: { type: String, default: 'Window' },
@@ -49,5 +62,13 @@ defineProps({
   hasScrollbar: { type: Boolean, default: false },
   hasStatus: { type: Boolean, default: false },
   statusFields: { type: Array, default: () => [] },
+  minimizable: { type: Boolean, default: true },
+  maximizable: { type: Boolean, default: true },
+  closable: { type: Boolean, default: true },
 });
 </script>
+<style lang="scss" scope>
+.window {
+  margin: 16px 4px;
+}
+</style>

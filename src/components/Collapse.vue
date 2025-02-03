@@ -21,8 +21,7 @@
   </details>
 </template>
 <script setup>
-import { computed } from 'vue';
-import { ref, onMounted, onBeforeUnmount } from 'vue-core';
+import { computed, ref, onMounted, onBeforeUnmount } from 'vue';
 import { uniqueId } from 'lodash';
 
 const id = `winui-collapse-${uniqueId()}`;

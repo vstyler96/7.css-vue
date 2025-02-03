@@ -41,24 +41,6 @@ defineProps({
 </script>
 <style lang="scss" scoped>
 .winui-link {
-  font-family: Segoe UI, sans-serif;
-  font-weight: normal;
-  font-size: inherit;
-  display: inline-flex;
-  align-items: center;
-  color: #06c;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
   margin: 4px 8px;
-
-  &:hover {
-    color: #39f;
-  }
-
-  .winui-icon {
-    margin-right: 4px;
-  }
 }
 </style>
