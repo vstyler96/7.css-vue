@@ -8,6 +8,6 @@
 </template>
 <script setup>
 defineProps({
-  label: { type: String },
+  label: { type: String, default: 'Group' },
 });
 </script>

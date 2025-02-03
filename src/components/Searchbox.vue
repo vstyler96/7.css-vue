@@ -1,47 +1,48 @@
 <template>
   <input
     v-if="instant"
+    :id="id"
+    v-model="searchValue"
+    v-bind="$attrs"
     type="search"
     class="winui-searchbox"
     :placeholder="placeholder"
     @input="search"
-    v-model="searchValue"
-    v-bind="$attrs"
-  />
-  <div v-else class="searchbox win-searchbox">
+  >
+  <div
+    v-else
+    class="searchbox win-searchbox"
+  >
     <input
-      type="search"
       v-model="searchValue"
+      type="search"
       :placeholder="placeholder"
       @keyup.enter="search"
+    >
+    <button
+      aria-label="search"
+      @click="onSearch"
     />
-    <button aria-label="search" @click="search" />
   </div>
 </template>
+<script setup>
+import { ref } from 'vue';
+import { uniqueId } from 'lodash';
 
-<script>
-export default {
-  name: "WinSearchbox",
-  props: {
-    instant: Boolean,
-    placeholder: { type: String, default: "Search" },
-  },
-  data() {
-    return {
-      searchValue: "",
-    };
-  },
-  methods: {
-    search() {
-      this.$emit("search", this.searchValue);
-    },
-  },
-};
+const id = `searchbox-${uniqueId()}`;
+const emit = defineEmits(['search']);
+defineProps({
+  instant: { type: Boolean, default: false },
+  placeholder: { type: String, default: "Search" },
+});
+
+const searchValue = ref();
+
+function onSearch() {
+  emit("search", searchValue.value);
+}
 </script>
 <style lang="scss" scoped>
-// @import"7.css/dist/gui/button.css";
-// @import"7.css/dist/gui/searchbox.css";
-
 [type="search"] {
   min-width: auto;
 }

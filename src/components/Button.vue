@@ -6,3 +6,8 @@
     <slot />
   </button>
 </template>
+<style lang="scss" scoped>
+.winui-button {
+  margin: 4px 8px;
+}
+</style>

@@ -1,8 +1,9 @@
 <template>
   <a
-    v-if="href"
+    v-if="href || to"
     class="winui-link"
     :href="href"
+    :target="$attrs.target"
   >
     <win-icon
       v-if="prependIcon"
@@ -32,10 +33,10 @@
 import WinIcon from "./Icon.vue";
 
 defineProps({
-  prependIcon: { type: String },
-  href: { type: String },
-  text: { type: String },
-  to: { type: [String, Object] },
+  prependIcon: { type: String, default: null },
+  href: { type: String, default: null },
+  text: { type: String, required: true },
+  to: { type: [String, Object], default: null },
 });
 </script>
 <style lang="scss" scoped>
@@ -50,6 +51,7 @@ defineProps({
   border: none;
   cursor: pointer;
   padding: 0;
+  margin: 4px 8px;
 
   &:hover {
     color: #39f;

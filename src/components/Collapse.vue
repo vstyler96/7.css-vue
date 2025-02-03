@@ -21,16 +21,16 @@
   </details>
 </template>
 <script setup>
-import { computed } from '@vue/reactivity';
-import { ref, onMounted, onBeforeUnmount } from '@vue/runtime-core';
+import { computed } from 'vue';
+import { ref, onMounted, onBeforeUnmount } from 'vue-core';
 import { uniqueId } from 'lodash';
 
 const id = `winui-collapse-${uniqueId()}`;
 
 const emit = defineEmits(["toggle"]);
 const props = defineProps({
-  title: { type: String },
-  prependIcon: { type: String },
+  title: { type: String, default: null },
+  prependIcon: { type: String, default: null },
 });
 
 const el = ref(null);

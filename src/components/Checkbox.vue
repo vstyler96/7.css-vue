@@ -1,12 +1,12 @@
 <template>
   <div class="winui-checkbox">
     <input
-      v-model="model"
       :id="id"
+      v-model="model"
       :name="name"
       :disabled="disabled"
       type="checkbox"
-    />
+    >
     <label :for="id">
       <slot name="label">
         {{ label }}
@@ -16,14 +16,14 @@
 </template>
 <script setup>
 import { uniqueId } from 'lodash';
-import { computed } from '@vue/reactivity';
+import { computed } from 'vue';
 
 const emit = defineEmits(['update:model-value']);
 const props = defineProps({
   id: { type: String, default: () => `input-${uniqueId()}` },
-  name: {  type: String },
-  label: {  type: String },
-  modelValue: { type: [Number, String, Boolean] },
+  name: { type: String, required: true },
+  label: { type: String, default: null },
+  modelValue: { type: [Number, String, Boolean], default: null },
   disabled: { type: Boolean, default: false },
 });
 
@@ -32,6 +32,3 @@ const model = computed({
   set(value) { emit('update:model-value', value); },
 });
 </script>
-<style scoped lang="scss">
-// @import"7.css/dist/gui/checkbox.css";
-</style>

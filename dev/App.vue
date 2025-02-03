@@ -1,42 +1,44 @@
 <template>
-  <div>
-    <win-button class="default">default button</win-button>
-    <win-button>Click me</win-button>
-    <win-link
-      text="link"
-      prepend-icon="monitor"
-    />
-    <win-link
-      text="button"
-      @click="handleLinkClick"
-    />
-    <win-tabs :tabs="tabs">
-      <template #apps> apps </template>
-      <template #games> games </template>
-      <template #softs> softs </template>
-    </win-tabs>
+  <WinWindow
+    has-space
+    active
+    color="#AC0048"
+  >
+    <!-- Default buttons -->
+    <Buttons />
 
-    <win-progress
-      progress="50%"
-      class="success"
-      animate
-    />
-    <win-progress
-      progress="50%"
-      class="paused"
-    />
-    <win-progress
-      progress="50%"
-      class="error"
-      animate
-    />
-    <win-progress
-      progress="50%"
-      class="classic"
-    />
-    <win-progress
-      progress="indeterminate"
-    />
+    <!-- Links -->
+    <Links />
+  </WinWindow>
+
+  <WinWindow has-space active>
+    <!-- Tabs System -->
+    <Tabs />
+  </WinWindow>
+  <!-- <div>
+    <win-groupbox label="Progress bars">
+      <win-progress
+        progress="50%"
+        class="success"
+        animate
+      />
+      <win-progress
+        progress="50%"
+        class="paused"
+      />
+      <win-progress
+        progress="50%"
+        class="error"
+        animate
+      />
+      <win-progress
+        progress="50%"
+        class="classic"
+      />
+      <win-progress
+        progress="indeterminate"
+      />
+    </win-groupbox>
 
     <win-groupbox label="Radio buttons">
       <win-radio
@@ -220,61 +222,49 @@
     </win-menu>
     <win-searchbox placeholder="Search" @search="handleSearch" />
     <win-searchbox placeholder="Search" instant />
-  </div>
+  </div> -->
 </template>
+<script setup>
+import Buttons from './Showcase/Buttons.vue';
+import Links from './Showcase/Links.vue';
+import Tabs from './Showcase/Tabs.vue';
 
-<script>
-export default {
-  data() {
-    return {
-      tabs: {
-        apps: "Apps",
-        games: "Games",
-        softs: "Software",
-      },
-      options: [
-        { name: "5 - Incredible!", id: "incredible" },
-        { name: "4 - Great!", id: "great" },
-        { name: "3 - Pretty good!", id: "good" },
-        { name: "2 - Not so great!", id: "not so" },
-        { name: "1 - Unfortunate!", id: "ew" },
-      ],
-      listboxValue: "good",
-      dropdownValue: "great",
-      sliderValue: 4,
-      isChecked: true,
-      arrangeIcons: false,
-      menuOption: (size) => ({
-        as: "radio",
-        id: "icon-size-" + size,
-        name: "icon-size",
-        nativeValue: size,
-      }),
-      menuOptionValue: "md",
-    };
-  },
-  watch: {
-    menuOptionValue(value) {
-      console.log(value);
-    },
-    sliderValue(value) {
-      console.log(value);
-    },
-  },
-  methods: {
-    handleLinkClick() {
-      alert("ok");
-    },
-    handleSearch(value) {
-      console.log(value);
-    },
-  },
-};
+// export default {
+//   data() {
+//     return {
+//       options: [
+//         { name: "5 - Incredible!", id: "incredible" },
+//         { name: "4 - Great!", id: "great" },
+//         { name: "3 - Pretty good!", id: "good" },
+//         { name: "2 - Not so great!", id: "not so" },
+//         { name: "1 - Unfortunate!", id: "ew" },
+//       ],
+//       listboxValue: "good",
+//       dropdownValue: "great",
+//       sliderValue: 4,
+//       isChecked: true,
+//       arrangeIcons: false,
+//       menuOption: (size) => ({
+//         as: "radio",
+//         id: "icon-size-" + size,
+//         name: "icon-size",
+//         nativeValue: size,
+//       }),
+//       menuOptionValue: "md",
+//     };
+//   },
+//   watch: {
+//     menuOptionValue(value) {
+//       console.log(value);
+//     },
+//     sliderValue(value) {
+//       console.log(value);
+//     },
+//   },
+//   methods: {
+//     handleSearch(value) {
+//       console.log(value);
+//     },
+//   },
+// };
 </script>
-
-<style>
-.collapse-title img {
-  display: inline-block;
-  vertical-align: bottom;
-}
-</style>

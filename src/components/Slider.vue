@@ -1,32 +1,26 @@
 <template>
   <input
+    v-model="model"
+    v-bind="$attrs"
     type="range"
     class="winui-slider"
-    :value="value"
-    @input="$emit('input', $event.target.value)"
-    v-bind="$attrs"
-  />
+  >
+  <!-- @input="$emit('input', $event.target.value)" -->
 </template>
+<script setup>
+import { computed } from 'vue';
 
-<script>
-export default {
-  name: "WinSlider",
-  alias: "WinRange",
-  props: {
-    value: [String, Number],
+const emit = defineEmits(["update:model-value"]);
+const props = defineProps({
+  modelValue: { type: [String, Number], default: 0 },
+});
+
+const model = computed({
+  get() {
+    return props.modelValue;
   },
-  computed: {
-    // @TODO: Implement listeners
-    // listeners() {
-    //   // excluding the `input` listener for v-model
-    //   const listeners = this.$listeners;
-    //   delete listeners.input;
-    //   return listeners;
-    // },
+  set(value) {
+    emit("update:model-value", value);
   },
-};
+});
 </script>
-
-<style scoped lang="scss">
-// @import"7.css/dist/gui/slider.css";
-</style>

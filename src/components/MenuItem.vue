@@ -6,10 +6,10 @@
   >
     <slot>
       <button v-if="!hasSubMenu">
-        {{ label }}
+        {{ title }}
       </button>
       <template v-else>
-        {{ label }}
+        {{ title }}
       </template>
     </slot>
 
@@ -17,11 +17,11 @@
   </li>
 </template>
 <script setup>
-import { useSlots } from '@vue/runtime-core';
-import { computed } from '@vue/reactivity';
+import { useSlots } from 'vue-core';
+import { computed } from 'vue';
 
 defineProps({
-  label: { type: String },
+  title: { type: String, required: true },
 });
 
 const slots = useSlots();

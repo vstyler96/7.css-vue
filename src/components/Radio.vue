@@ -1,12 +1,12 @@
 <template>
   <div class="winui-radio">
     <input
-      v-model="model"
       :id="id"
+      v-model="model"
       :name="name"
       :disabled="disabled"
       type="radio"
-    />
+    >
     <slot>
       <label :for="id">
         {{ label }}
@@ -15,13 +15,13 @@
   </div>
 </template>
 <script setup>
-import { computed } from '@vue/reactivity';
+import { computed } from 'vue';
 
 const emit = defineEmits(["update:model-value"]);
 const props = defineProps({
   id: { type: String, required: true },
   name: { type: String, required: true },
-  modelValue: { type: [Number, String, Boolean] },
+  modelValue: { type: [Number, String, Boolean], default: null },
   disabled: { type: Boolean, default: false },
   label: { type: String, required: true },
 });
@@ -34,32 +34,4 @@ const model = computed({
     emit("update:model-value", value);
   },
 });
-
-// export default {
-//   name: "WinRadio",
-//   props: {
-
-//   },
-//   computed: {
-//     computedValue: {
-//       get() {
-//         return this.input;
-//       },
-//       set(value) {
-//         this.input = value;
-//         this.$emit("input", value);
-//       },
-//     },
-//   },
-//   data() {
-//     return {
-//       input: this.value,
-//     };
-//   },
-//   watch: {
-//     value(value) {
-//       this.input = value;
-//     },
-//   },
-// };
 </script>

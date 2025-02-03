@@ -17,6 +17,7 @@ import Slider from "./components/Slider.vue";
 import Tabs from "./components/Tabs.vue";
 import Textbox from "./components/Textbox.vue";
 import Treeview from "./components/Treeview.vue";
+import Window from "./components/Window.vue";
 
 const components = {
   WinBalloon: Balloon,
@@ -38,6 +39,7 @@ const components = {
   WinTabs: Tabs,
   WinTextbox: Textbox,
   WinTreeview: Treeview,
+  WinWindow: Window,
 };
 
 const winVue = {
@@ -66,6 +68,7 @@ export {
   Tabs as WinTabs,
   Textbox as WinTextbox,
   Treeview as WinTreeview,
+  Window as WinWindow,
 };
 
 export default winVue;

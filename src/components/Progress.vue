@@ -4,7 +4,10 @@
     role="progressbar"
     :class="['winui-progress', { marquee: indeterminate, animate }]"
   >
-    <div v-if="!indeterminate" :style="progressStyle" />
+    <div
+      v-if="!indeterminate"
+      :style="progressStyle"
+    />
   </div>
 </template>
 
@@ -13,7 +16,7 @@ export default {
   name: "WinProgress",
   props: {
     animate: { type: Boolean, default: false },
-    transition: [Number, String],
+    transition: { type: [Number, String], default: 300 },
     progress: {
       type: [Number, String],
       default: 0,

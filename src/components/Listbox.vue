@@ -15,7 +15,7 @@
   </ul>
 </template>
 <script setup>
-import { computed } from '@vue/reactivity';
+import { computed } from 'vue';
 
 const emit = defineEmits(['update:model-value']);
 const props = defineProps({
