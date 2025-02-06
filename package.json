@@ -33,21 +33,21 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
   "devDependencies": {
+    "7.css": "^0.17.0",
     "@vitejs/plugin-vue": "^5.2.1",
     "@vue/composition-api": "^1.7.2",
     "@vue/reactivity": "^3.5.13",
     "@vue/runtime-core": "^3.5.13",
-    "7.css": "^0.17.0",
     "eslint": "^8.57.1",
     "eslint-plugin-vue": "^9.32.0",
-    "sass": "^1.83.4",
     "vite": "^6.0.11",
     "vite-plugin-eslint": "^1.8.1",
     "vue-eslint-parser": "^9.4.3"
   },
   "dependencies": {
-    "bootstrap": "^5.3.3",
-    "lodash": "^4.17.21",
+    "@tailwindcss/vite": "^4.0.3",
+    "sass": "^1.84.0",
+    "tailwindcss": "^4.0.3",
     "vue": "^3.5.13"
   }
 }

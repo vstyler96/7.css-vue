@@ -6,7 +6,6 @@
       value="light"
       name="theme"
       label="Light"
-      checked
     />
     <win-radio
       v-model="theme"

@@ -4,7 +4,7 @@
     class="winui-menuitem"
     role="menuitem"
   >
-    <slot name="title">
+    <slot>
       <button v-if="!hasSubMenu">
         {{ title }}
       </button>
@@ -13,30 +13,31 @@
       </template>
     </slot>
 
-    <slot name="submenu">
-      <win-menu>
-        <win-menu-item
-          v-for="(child, index) in children"
-          :key="index"
-          :title="child.title"
-          :children="child.children"
-        />
-      </win-menu>
-    </slot>
+    <win-menu v-if="children?.length > 0">
+      <win-menu-item
+        v-for="(child, index) in children"
+        :key="index"
+        :title="child.title"
+        :children="child.children"
+      />
+    </win-menu>
+    <slot v-else name="submenu" />
   </li>
 </template>
 <script setup>
 import { computed, useSlots } from 'vue';
+import WinMenuItem from './MenuItem.vue';
 
 const slots = useSlots();
 const props = defineProps({
-  title: { type: String, required: true },
+  title: { type: String, default: null },
   children: { type: Array, default: () => [] },
+  barParent: { type: Boolean, default: false },
 });
 
-const hasSubMenu = computed(() => slots.submenu !== null || props.children.length > 0);
+const hasSubMenu = computed(() => !!slots.submenu || props.children.length > 0);
 const bindAttr = computed(() => {
-  if (hasSubMenu.value) {
+  if (hasSubMenu.value || props.barParent) {
     return {
       'aria-haspopup': true,
     };
@@ -48,5 +49,6 @@ const bindAttr = computed(() => {
 <style scoped>
 .winui-menuitem {
   user-select: none;
+  cursor: pointer;
 }
 </style>

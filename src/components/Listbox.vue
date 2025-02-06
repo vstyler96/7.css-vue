@@ -19,7 +19,7 @@ import { computed } from 'vue';
 
 const emit = defineEmits(['update:model-value']);
 const props = defineProps({
-  modelValue: [Number, String],
+  modelValue: { type: [Number, String], required: true },
   options: { type: Array, required: true },
   itemValue: { type: String, default: 'id' },
   itemText: { type: String, default: 'name' },
@@ -46,3 +46,8 @@ function onClick(option) {
   model.value = option;
 }
 </script>
+<style lang="scss" scoped>
+.winui-listbox {
+  user-select: none;
+}
+</style>

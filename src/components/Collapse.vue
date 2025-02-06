@@ -1,57 +1,64 @@
 <template>
   <details
     :id="id"
-    ref="collapse"
     class="winui-collapse"
+    :open="model"
+    @toggle="model = !model"
   >
-    <slot name="title">
-      <summary class="collapse-title">
+    <summary class="collapse-title">
+      <slot name="title">
         <win-icon
           v-if="prependIcon"
           :icon="prependIcon"
           size="16"
         />
         <span>
-          {{ smartTitle }}
+          {{ title }}
         </span>
-      </summary>
-    </slot>
+      </slot>
+    </summary>
 
-    <slot />
+    <slot>
+      <ul v-if="children?.length > 0">
+        <li
+          v-for="child in children"
+          :key="child.id"
+        >
+          <win-collapse
+            v-if="child.children"
+            :title="child.title"
+            :prepend-icon="child.prependIcon"
+            :children="child.children"
+          />
+          <template v-else>
+            {{ child.title }}
+          </template>
+        </li>
+      </ul>
+    </slot>
   </details>
 </template>
 <script setup>
-import { computed, ref, onMounted, onBeforeUnmount } from 'vue';
-import { uniqueId } from 'lodash';
+import { computed } from 'vue';
+import { uniqueId } from '../helpers.js';
 
 const id = `winui-collapse-${uniqueId()}`;
 
-const emit = defineEmits(["toggle"]);
+const emit = defineEmits(['update:open']);
 const props = defineProps({
-  title: { type: String, default: null },
+  open: { type: Boolean, default: false },
+  title: { type: String, required: true },
   prependIcon: { type: String, default: null },
+  children: { type: Array, default: () => [] },
 });
 
-const el = ref(null);
-const smartTitle = computed(() => {
-  if (props.title) return props.title;
-
-  return el.value.open ? "Hide" : "Show";
-});
-
-function handleToggle() {
-  // @TODO: test if el.value works as expected.
-  emit("toggle", el.value.open);
-}
-
-onMounted(() => {
-  el.value = document.getElementById(id);
-  el.value.addEventListener("toggle", handleToggle);
-});
-
-onBeforeUnmount(() => {
-  el.value.removeEventListener("toggle", handleToggle);
-  el.value = null;
+const model = computed({
+  get() {
+    return props.open;
+  },
+  set(value) {
+    emit('update:open', value);
+  },
 });
 </script>
 <style scoped lang="scss">

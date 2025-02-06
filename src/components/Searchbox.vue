@@ -27,7 +27,7 @@
 </template>
 <script setup>
 import { ref } from 'vue';
-import { uniqueId } from 'lodash';
+import { uniqueId } from '../helpers.js';
 
 const id = `searchbox-${uniqueId()}`;
 const emit = defineEmits(['search']);

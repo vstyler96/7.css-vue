@@ -71,4 +71,8 @@ defineProps({
 .window {
   margin: 16px 4px;
 }
+
+.title-bar-text {
+  user-select: none;
+}
 </style>
