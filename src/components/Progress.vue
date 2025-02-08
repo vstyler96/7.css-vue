@@ -2,52 +2,44 @@
   <div
     v-bind="ariaValues"
     role="progressbar"
-    :class="['winui-progress', { marquee: indeterminate, animate }]"
+    :class="['winui-progress', { [variant]: true, marquee: indeterminate, animate: !inert }]"
   >
-    <div v-if="!indeterminate" :style="progressStyle" />
+    <div
+      v-if="!indeterminate"
+      :style="{
+        '--progress': isNaN(progress) ? progress : progress + '%',
+        '--transition': transition / 1000 + 's',
+      }"
+    />
   </div>
 </template>
+<script setup>
+import { computed } from 'vue';
 
-<script>
-export default {
-  name: "WinProgress",
-  props: {
-    animate: { type: Boolean, default: false },
-    transition: [Number, String],
-    progress: {
-      type: [Number, String],
-      default: 0,
-      validator(value) {
-        if (isNaN(value)) return value === "indeterminate" || value?.endsWith("%");
-
-        return (value >= 0 && value <= 100);
-      },
+const props = defineProps({
+  variant: { type: String, default: "success" },
+  inert: { type: Boolean, default: false },
+  transition: { type: [Number, String], default: 300 },
+  indeterminate: { type: Boolean, default: false },
+  progress: {
+    type: [Number, String],
+    default: 0,
+    validator(value) {
+      if (isNaN(value)) return value?.endsWith("%");
+      return (value >= 0 && value <= 100);
     },
   },
-  computed: {
-    ariaValues() {
-      if (this.indeterminate) return {};
+});
 
-      return {
-        "aria-valuemin": 0,
-        "aria-valuemax": 100,
-        "aria-valuenow":
-          typeof this.progress === "string"
-            ? Number(this.progress.slice(0, -1))
-            : this.progress,
-      };
-    },
-    indeterminate() {
-      return this.progress === "indeterminate";
-    },
-    progressStyle() {
-      return {
-        "--progress": this.progress + "%",
-        "--transition": this.transition / 1000 + "s",
-      };
-    },
-  },
-};
+const ariaValues = computed(() => {
+  if (props.indeterminate) return {};
+
+  return {
+    "aria-valuemin": 0,
+    "aria-valuemax": 100,
+    "aria-valuenow": isNaN(props.progress) ? Number(props.progress.slice(0, -1)) : this.progress,
+  };
+});
 </script>
 <style lang="scss" scoped>
 .winui-progress > div {

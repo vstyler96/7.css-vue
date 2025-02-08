@@ -1,58 +1,49 @@
 <template>
   <div class="winui-tabs">
-    <menu role="tablist" :class="{ justified }">
+    <menu
+      role="tablist"
+      :class="{ justified }"
+    >
       <win-button
-        v-for="(name, tab) in tabs"
+        v-for="(title, tab) in tabs"
         :key="tab"
         :aria-selected="activeTab === tab"
         role="tab"
-        @click="change(tab)"
+        @click="activeTab = tab"
       >
-        {{ name }}
+        {{ title }}
       </win-button>
     </menu>
     <article
-      v-for="(_, tab) in tabs"
+      v-for="(title, tab) in tabs"
       :key="tab"
       :hidden="activeTab !== tab"
       role="tabpanel"
     >
-      <slot :name="tab" :hidden="activeTab !== tab" />
+      <slot
+        v-bind="{ title, tab }"
+        :name="tab"
+        :hidden="activeTab !== tab"
+      />
     </article>
   </div>
 </template>
+<script setup>
+import { computed } from 'vue';
 
-<script>
-export default {
-  name: "WinTabs",
-  props: {
-    tabs: { type: Object, required: true },
-    justified: Boolean,
+const emit = defineEmits(['update:model-value']);
+const props = defineProps({
+  modelValue: { type: String, required: true },
+  tabs: { type: Object, required: true },
+  justified: { type: Boolean, default: false },
+});
+
+const activeTab = computed({
+  get() {
+    return props.modelValue;
   },
-  data() {
-    return { activeTab: Object.keys(this.tabs)[0] };
+  set(value) {
+    emit('update:model-value', value);
   },
-  methods: {
-    change(tab) {
-      this.activeTab = tab;
-      this.$emit("change", this.activeTab);
-    },
-  },
-};
+});
 </script>
-<style lang="scss" scoped>
-// @import"7.css/dist/gui/tabs.css";
-
-[role="tabpanel"] {
-  height: 100%;
-  font-size: 85%;
-  margin-bottom: 0;
-  box-sizing: border-box;
-  overflow: hidden;
-
-  &:not([hidden]) {
-    display: flex;
-    flex-direction: column;
-  }
-}
-</style>

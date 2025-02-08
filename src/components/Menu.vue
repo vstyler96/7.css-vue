@@ -6,6 +6,7 @@
     <slot />
   </ul>
 </template>
+<!-- TODO: FIX THE HR ON THE MENU. -->
 <!-- <style lang="scss" scoped>
 :deep(.winui-menu) hr {
   border: 0;

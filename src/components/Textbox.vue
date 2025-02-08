@@ -1,40 +1,43 @@
 <template>
   <textarea
     v-if="type === 'textarea'"
+    v-model="model"
     v-bind="$attrs"
-    :value="value"
-    @input="$emit('input', $event.target.value)"
+    :readonly="readonly"
     class="winui-textbox"
   />
   <input
     v-else
+    v-model="model"
     v-bind="$attrs"
+    :readonly="readonly"
     :type="type"
-    :value="value"
-    @input="$emit('input', $event.target.value)"
     class="winui-textbox"
-  />
+  >
 </template>
+<script setup>
+import { computed } from "vue";
 
-<script>
-export default {
-  name: "WinTextbox",
-  props: {
-    type: { type: String, default: "text" },
-    value: [String, Number],
+const emit = defineEmits(["update:model-value"]);
+const props = defineProps({
+  modelValue: { type: String, required: true },
+  type: { type: String, default: "text" },
+  readonly: { type: Boolean, default: false },
+});
+
+const model = computed({
+  get() {
+    return props.modelValue;
   },
-  computed: {
-    // @TODO: Implement listeners
-    // listeners() {
-    //   // excluding the `input` listener for v-model
-    //   const listeners = this.$listeners;
-    //   delete listeners.input;
-    //   return listeners;
-    // },
+  set(value) {
+    emit("update:model-value", value);
   },
-};
+});
 </script>
-
-<style scoped lang="scss">
-// @import"7.css/dist/gui/textbox.css";
+<style>
+.winui-textbox:read-only {
+  background-color: #f1f1f1;
+  cursor: not-allowed;
+  color: #444;
+}
 </style>

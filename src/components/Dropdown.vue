@@ -27,13 +27,13 @@
   </select>
 </template>
 <script setup>
-import { computed } from "@vue/reactivity";
+import { computed } from "vue";
 
 const emit = defineEmits(["update:model-value"]);
 const props = defineProps({
-  modelValue: { type: [Number, String] },
-  options: { type: Array },
-  placeholder: { type: String },
+  modelValue: { type: [Number, String], default: null },
+  options: { type: Array, default: () => [] },
+  placeholder: { type: String, default: null },
   itemValue: { type: String, default: "id" },
   itemTitle: { type: String, default: "name" },
 });
