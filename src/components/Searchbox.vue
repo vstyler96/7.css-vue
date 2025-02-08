@@ -7,7 +7,7 @@
     type="search"
     class="winui-searchbox"
     :placeholder="placeholder"
-    @input="search"
+    @keyup.enter="onSearch"
   >
   <div
     v-else
@@ -17,7 +17,6 @@
       v-model="searchValue"
       type="search"
       :placeholder="placeholder"
-      @keyup.enter="search"
     >
     <button
       aria-label="search"
@@ -30,7 +29,7 @@ import { ref } from 'vue';
 import { uniqueId } from '../helpers.js';
 
 const id = `searchbox-${uniqueId()}`;
-const emit = defineEmits(['search']);
+const emit = defineEmits(['update:search', 'search']);
 defineProps({
   instant: { type: Boolean, default: false },
   placeholder: { type: String, default: "Search" },
