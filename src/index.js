@@ -2,6 +2,7 @@ import Balloon from "./components/Balloon.vue";
 import Button from "./components/Button.vue";
 import Checkbox from "./components/Checkbox.vue";
 import Collapse from "./components/Collapse.vue";
+import Dialog from "./components/Dialog.vue";
 import Dropdown from "./components/Dropdown.vue";
 import Groupbox from "./components/Groupbox.vue";
 import Icon from "./components/Icon.vue";
@@ -24,6 +25,7 @@ const components = {
   WinButton: Button,
   WinCheckbox: Checkbox,
   WinCollapse: Collapse,
+  WinDialog: Dialog,
   WinDropdown: Dropdown,
   WinGroupbox: Groupbox,
   WinIcon: Icon,
@@ -53,6 +55,7 @@ export {
   Button as WinButton,
   Checkbox as WinCheckbox,
   Collapse as WinCollapse,
+  Dialog as WinDialog,
   Dropdown as WinDropdown,
   Groupbox as WinGroupbox,
   Icon as WinIcon,

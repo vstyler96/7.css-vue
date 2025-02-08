@@ -23,14 +23,22 @@
     </div>
   </div>
 
-  <WinWindow has-space active>
+  <WinWindow
+    has-space
+    active
+    color="pink"
+  >
     <!-- Progressbars -->
     <Progressbars />
   </WinWindow>
 
   <div class="grid grid-cols-2 gap-3">
     <div>
-      <WinWindow has-space active>
+      <WinWindow
+        has-space
+        active
+        color="green"
+      >
         <div class="grid grid-cols-2 gap-3">
           <!-- Radios -->
           <Radios />
@@ -41,7 +49,11 @@
       </WinWindow>
     </div>
     <div>
-      <WinWindow has-space active>
+      <WinWindow
+        has-space
+        active
+        color="yellow"
+      >
         <div class="grid grid-cols-2 gap-3 py-3">
           <win-balloon
             bottom
@@ -71,7 +83,11 @@
   </div>
 
   <div class="grid grid-cols-1 gap-3">
-    <WinWindow has-space active>
+    <WinWindow
+      has-space
+      active
+      color="purple"
+    >
       <div class="grid grid-cols-3 gap-3">
         <div>
           <!-- Dropdowns -->
@@ -143,7 +159,11 @@
 
   <div class="grid grid-cols-2 gap-3">
     <div>
-      <WinWindow has-espace active>
+      <WinWindow
+        has-espace
+        active
+        color="orange"
+      >
         <div class="grid grid-cols-3 gap-3">
           <div>
             <win-slider
@@ -269,8 +289,12 @@
       </WinWindow>
     </div>
     <div>
-      <WinWindow has-space active>
-        <div class="grid grid-cols-2 gap-3">
+      <WinWindow
+        has-space
+        active
+        color="teal"
+      >
+        <div class="grid grid-cols-2 gap-3 py-8">
           <div>
             <win-searchbox
               v-model:search="search"
@@ -287,6 +311,23 @@
             />
             Your instant search is: {{ instantSearch }}
           </div>
+        </div>
+        <div class="grid grid-cols-2 gap-3 py-8">
+          <win-button
+            text="Show Dialog"
+            @click="showDialog = true"
+          />
+          <WinDialog
+            v-model="showDialog"
+            title="This is a Dialog"
+            permanent
+            cancelable
+            width="400px"
+            @cancel="onCancel"
+            @accept="onAccept"
+          >
+            <WinProgress indeterminate />
+          </WinDialog>
         </div>
       </WinWindow>
     </div>
@@ -307,6 +348,7 @@ const listboxValue = ref("good");
 const sliderValue = ref(4);
 const menuRadioOption = ref('lg');
 const arrangeIcons = ref(false);
+const showDialog = ref(false);
 
 const search = ref(null);
 const instantSearch = ref(null);

@@ -3,9 +3,16 @@
     v-bind="$attrs"
     class="winui-button"
   >
-    <slot />
+    <slot>
+      {{ text }}
+    </slot>
   </button>
 </template>
+<script setup>
+defineProps({
+  text: { type: String, default: 'Button' },
+});
+</script>
 <style lang="scss" scoped>
 .winui-button:not([role="tab"]) {
   margin: 4px 8px;
