@@ -36,8 +36,9 @@ defineOptions({ name: 'WinLink' });
 defineProps({
   prependIcon: { type: String, default: null },
   href: { type: String, default: null },
-  text: { type: String, required: true },
+  text: { type: String, default: null },
   to: { type: [String, Object], default: null },
+  target: { type: String, default: null },
 });
 </script>
 <style lang="scss" scoped>
