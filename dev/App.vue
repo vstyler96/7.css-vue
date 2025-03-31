@@ -1,4 +1,12 @@
 <template>
+  <WinWindow
+    active
+    draggable
+    title="Windows 7 draggable window"
+  >
+    This is a draggable window XD
+  </WinWindow>
+
   <div class="grid grid-cols-2 gap-3">
     <div>
       <WinWindow
@@ -393,43 +401,4 @@ function onCancel() {
 function onAccept() {
   console.log('Accept');
 }
-
-// export default {
-//   data() {
-//     return {
-//       options: [
-//         { name: "5 - Incredible!", id: "incredible" },
-//         { name: "4 - Great!", id: "great" },
-//         { name: "3 - Pretty good!", id: "good" },
-//         { name: "2 - Not so great!", id: "not so" },
-//         { name: "1 - Unfortunate!", id: "ew" },
-//       ],
-//       listboxValue: "good",
-//       dropdownValue: "great",
-//       sliderValue: 4,
-//       isChecked: true,
-//       arrangeIcons: false,
-//       menuOption: (size) => ({
-//         as: "radio",
-//         id: "icon-size-" + size,
-//         name: "icon-size",
-//         nativeValue: size,
-//       }),
-//       menuOptionValue: "md",
-//     };
-//   },
-//   watch: {
-//     menuOptionValue(value) {
-//       console.log(value);
-//     },
-//     sliderValue(value) {
-//       console.log(value);
-//     },
-//   },
-//   methods: {
-//     handleSearch(value) {
-//       console.log(value);
-//     },
-//   },
-// };
 </script>
