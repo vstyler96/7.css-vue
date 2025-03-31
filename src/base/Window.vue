@@ -1,6 +1,6 @@
 <template>
   <div
-    class="window"
+    class="window glass"
     :class="{ active }"
     :style="{ width, height, '--window-background-color': color }"
   >
@@ -52,6 +52,8 @@
 </template>
 <script setup>
 const emit = defineEmits(['minimize', 'maximize', 'close']);
+
+defineOptions({ name: 'WinWindow' });
 defineProps({
   active: { type: Boolean, default: false },
   title: { type: String, default: 'Window' },

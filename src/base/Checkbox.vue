@@ -20,6 +20,7 @@
 <script setup>
 import { computed } from 'vue';
 
+defineOptions({ name: 'WinCheckbox' });
 const emit = defineEmits(['update:model-value']);
 const props = defineProps({
   disabled: { type: Boolean, default: false },

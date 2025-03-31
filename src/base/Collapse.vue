@@ -24,7 +24,7 @@
           v-for="child in children"
           :key="child.id"
         >
-          <win-collapse
+          <WinCollapse
             v-if="child.children"
             :title="child.title"
             :prepend-icon="child.prependIcon"
@@ -44,6 +44,7 @@ import { uniqueId } from '../helpers.js';
 
 const id = `winui-collapse-${uniqueId()}`;
 
+defineOptions({ name: 'WinCollapse' });
 const emit = defineEmits(['update:open']);
 const props = defineProps({
   open: { type: Boolean, default: false },

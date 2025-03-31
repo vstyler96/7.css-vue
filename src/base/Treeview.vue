@@ -3,3 +3,6 @@
     <slot />
   </ul>
 </template>
+<script setup>
+defineOptions({ name: 'WinTreeview' });
+</script>

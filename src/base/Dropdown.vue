@@ -29,6 +29,7 @@
 <script setup>
 import { computed } from "vue";
 
+defineOptions({ name: 'WinDropdown' });
 const emit = defineEmits(["update:model-value"]);
 const props = defineProps({
   modelValue: { type: [Number, String], default: null },

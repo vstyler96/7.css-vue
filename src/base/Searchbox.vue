@@ -29,6 +29,8 @@ import { ref } from 'vue';
 import { uniqueId } from '../helpers.js';
 
 const id = `searchbox-${uniqueId()}`;
+
+defineOptions({ name: 'WinSearchbox' });
 const emit = defineEmits(['update:search', 'search']);
 defineProps({
   instant: { type: Boolean, default: false },

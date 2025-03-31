@@ -10,6 +10,7 @@
   </div>
 </template>
 <script setup>
+defineOptions({ name: 'WinBalloon' });
 defineProps({
   top: { type: Boolean, default: false },
   bottom: { type: Boolean, default: false },

@@ -30,8 +30,9 @@
   </button>
 </template>
 <script setup>
-import WinIcon from "./Icon.vue";
+import WinIcon from './Icon.vue';
 
+defineOptions({ name: 'WinLink' });
 defineProps({
   prependIcon: { type: String, default: null },
   href: { type: String, default: null },

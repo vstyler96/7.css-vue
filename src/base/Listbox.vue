@@ -17,6 +17,7 @@
 <script setup>
 import { computed } from 'vue';
 
+defineOptions({ name: 'WinListbox' });
 const emit = defineEmits(['update:model-value']);
 const props = defineProps({
   modelValue: { type: [Number, String], required: true },

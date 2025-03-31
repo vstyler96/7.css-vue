@@ -6,3 +6,6 @@
     <slot />
   </ul>
 </template>
+<script setup>
+defineOptions({ name: 'WinMenuBar' });
+</script>

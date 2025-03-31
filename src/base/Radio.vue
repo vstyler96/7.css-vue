@@ -18,6 +18,7 @@
 <script setup>
 import { computed } from 'vue';
 
+defineOptions({ name: 'WinRadio' });
 const emit = defineEmits(["update:model-value"]);
 const props = defineProps({
   name: { type: String, required: true },

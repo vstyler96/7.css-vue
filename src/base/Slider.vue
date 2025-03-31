@@ -9,6 +9,7 @@
 <script setup>
 import { computed } from 'vue';
 
+defineOptions({ name: 'WinSlider' });
 const emit = defineEmits(["update:model-value"]);
 const props = defineProps({
   modelValue: { type: [String, Number], default: 0 },

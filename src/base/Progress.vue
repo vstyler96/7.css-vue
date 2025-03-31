@@ -16,6 +16,7 @@
 <script setup>
 import { computed } from 'vue';
 
+defineOptions({ name: 'WinProgress' });
 const props = defineProps({
   variant: { type: String, default: "success" },
   inert: { type: Boolean, default: false },

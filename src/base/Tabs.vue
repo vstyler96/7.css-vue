@@ -31,6 +31,7 @@
 <script setup>
 import { computed } from 'vue';
 
+defineOptions({ name: 'WinTabs' });
 const emit = defineEmits(['update:model-value']);
 const props = defineProps({
   modelValue: { type: String, required: true },

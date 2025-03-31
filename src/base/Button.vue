@@ -9,6 +9,7 @@
   </button>
 </template>
 <script setup>
+defineOptions({ name: 'WinButton' });
 defineProps({
   text: { type: String, default: 'Button' },
 });

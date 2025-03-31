@@ -176,11 +176,11 @@
           </div>
 
           <div>
-            <win-menu class="can-hover" style="width: 300px">
-              <win-menuitem title="View">
+            <WinMenu class="can-hover">
+              <WinMenuItem title="View">
                 <template #submenu>
-                  <win-menu>
-                    <win-menuitem @click="menuRadioOption = 'lg'">
+                  <WinMenu>
+                    <WinMenuItem @click="menuRadioOption = 'lg'">
                       <input
                         id="icon-size-lg"
                         type="radio"
@@ -191,8 +191,8 @@
                       <label for="icon-size-lg">
                         Large icons
                       </label>
-                    </win-menuitem>
-                    <win-menuitem @click="menuRadioOption = 'md'">
+                    </WinMenuItem>
+                    <WinMenuItem @click="menuRadioOption = 'md'">
                       <input
                         id="icon-size-md"
                         type="radio"
@@ -203,8 +203,8 @@
                       <label for="icon-sizemd">
                         Medium icons
                       </label>
-                    </win-menuitem>
-                    <win-menuitem @click="menuRadioOption = 'sm'">
+                    </WinMenuItem>
+                    <WinMenuItem @click="menuRadioOption = 'sm'">
                       <input
                         id="icon-size-sm"
                         type="radio"
@@ -215,11 +215,11 @@
                       <label for="icon-size-sm">
                         Small icons
                       </label>
-                    </win-menuitem>
+                    </WinMenuItem>
 
                     <hr>
 
-                    <win-menuitem @click="arrangeIcons = !arrangeIcons">
+                    <WinMenuItem @click="arrangeIcons = !arrangeIcons">
                       <input
                         :model-value="arrangeIcons"
                         type="checkbox"
@@ -231,17 +231,17 @@
                       <label for="arrange-icons">
                         Auto arrange icons
                       </label>
-                    </win-menuitem>
-                  </win-menu>
+                    </WinMenuItem>
+                  </WinMenu>
                 </template>
-              </win-menuitem>
+              </WinMenuItem>
 
               <hr>
 
-              <win-menuitem title="Sort by" />
-              <win-menuitem title="Refresh" />
-              <win-menuitem title="Display" />
-            </win-menu>
+              <WinMenuItem title="Sort by" />
+              <WinMenuItem title="Refresh" />
+              <WinMenuItem title="Display" />
+            </WinMenu>
 
             <p class="pt-4">
               You have a icons size of: {{ menuRadioOption }}
@@ -252,38 +252,38 @@
           </div>
 
           <div>
-            <win-menubar class="can-hover">
-              <win-menuitem title="File">
+            <WinMenuBar class="can-hover">
+              <WinMenuItem title="File">
                 <template #submenu>
-                  <win-menu>
-                    <win-menuitem
+                  <WinMenu>
+                    <WinMenuItem
                       title="Open"
                       @click="onOpen"
                     />
-                    <win-menuitem
+                    <WinMenuItem
                       title="Save"
                       @click="onSave"
                     />
-                    <win-menuitem
+                    <WinMenuItem
                       title="Exit"
                       @click="onExit"
                     />
-                  </win-menu>
+                  </WinMenu>
                 </template>
-              </win-menuitem>
-              <win-menuitem
+              </WinMenuItem>
+              <WinMenuItem
                 title="Edit"
                 @click="onEdit"
               />
-              <win-menuitem
+              <WinMenuItem
                 title="View"
                 @click="onView"
               />
-              <win-menuitem
+              <WinMenuItem
                 title="Help"
                 @click="onHelp"
               />
-            </win-menubar>
+            </WinMenuBar>
           </div>
         </div>
       </WinWindow>
@@ -322,7 +322,6 @@
             title="This is a Dialog"
             permanent
             cancelable
-            width="400px"
             @cancel="onCancel"
             @accept="onAccept"
           >
@@ -386,6 +385,13 @@ function onSearch(value) {
 
 function onInstantSearch(value) {
   instantSearch.value = value;
+}
+
+function onCancel() {
+  console.log('Cancel');
+}
+function onAccept() {
+  console.log('Accept');
 }
 
 // export default {

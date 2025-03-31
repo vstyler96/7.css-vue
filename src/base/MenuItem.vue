@@ -17,21 +17,23 @@
       v-if="$slots.submenu || children?.length > 0"
       name="submenu"
     >
-      <win-menu v-if="children?.length > 0">
-        <win-menu-item
+      <WinMenu v-if="children?.length > 0">
+        <WinMenuItem
           v-for="(child, index) in children"
           :key="index"
           :title="child.title"
           :children="child.children"
         />
-      </win-menu>
+      </WinMenu>
     </slot>
   </li>
 </template>
 <script setup>
 import { computed, useSlots } from 'vue';
+import WinMenu from './Menu.vue';
 import WinMenuItem from './MenuItem.vue';
 
+defineOptions({ name: 'WinMenuItem' });
 const slots = useSlots();
 defineProps({
   title: { type: String, default: null },

@@ -2,8 +2,8 @@
   <transition>
     <div
       v-if="show"
-      class="window active"
-      style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);"
+      class="window glass active"
+      style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000;"
       :style="{ width, height, '--window-background-color': color }"
     >
       <div class="title-bar">
@@ -52,31 +52,34 @@
       </div>
     </div>
   </transition>
+  <div
+    v-if="show"
+    class="w-full h-full bg-black/20 backdrop-blur-xs fixed top-0 left-0"
+  />
 </template>
 <script setup>
-import { WinButton } from '@/index';
+import WinButton from './Button.vue';
 import { computed } from 'vue';
 
+defineOptions({ name: 'WinDialog' });
 const emit = defineEmits(['accept', 'cancel', 'update:model-value']);
 const props = defineProps({
   modelValue: { type: Boolean, default: false },
   title: { type: String, default: 'Window' },
   message: { type: String, default: null },
-  width: { type: String, default: 'auto' },
+  width: { type: String, default: '400px' },
   height: { type: String, default: 'auto' },
   color: { type: String, default: '#4580c4' },
   hasScrollbar: { type: Boolean, default: false },
   hasStatus: { type: Boolean, default: false },
   statusFields: { type: Array, default: () => [] },
+  permanent: { type: Boolean, default: false },
+  cancelable: { type: Boolean, default: true },
 });
 
 const show = computed({
-  get() {
-    return props.modelValue;
-  },
-  set(value) {
-    emit('update:model-value', value);
-  },
+  get() { return props.modelValue; },
+  set(value) { emit('update:model-value', value); },
 });
 
 function onAccept() {
