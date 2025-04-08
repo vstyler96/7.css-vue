@@ -1,6 +1,7 @@
-export let uniqueId = function () {
+export let uniqueId = (function () {
   let num = 0;
   return function (prefix) {
-    return `${String(prefix || '')}-${++num}`;
+    if (!prefix) return `${++num}`;
+    return `${String(prefix)}-${++num}`;
   }
-};
+})();

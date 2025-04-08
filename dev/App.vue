@@ -3,8 +3,24 @@
     active
     draggable
     title="Windows 7 draggable window"
+    :default-x="20"
+    :default-y="200"
   >
     This is a draggable window XD
+    <br>
+    Hello world!
+  </WinWindow>
+
+  <WinWindow
+    active
+    draggable
+    title="Windows 7 draggable window"
+    :default-x="200"
+    :default-y="200"
+  >
+    This is a draggable window XD x2
+    <br>
+    Hello world!
   </WinWindow>
 
   <div class="grid grid-cols-2 gap-3">

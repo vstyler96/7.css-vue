@@ -1,48 +1,65 @@
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 
-export default function (props, target) {
+export default function (parentTargetId, props, maximized, minimized) {
+  const offsetX = ref(props.defaultX);
+  const offsetY = ref(props.defaultY);
+  let tempX = 0, tempY = 0;
+
+  const parentTarget = ref(null);
   const dragging = ref(false);
 
-  const offsetX = ref(props.offsetX);
-  const offsetY = ref(props.offsetY);
+  function onDragStop() {
+    if (maximized?.value || minimized?.value) return;
+    document.removeEventListener('mouseup', onDragStop);
+    document.removeEventListener('mousemove', onDragMove);
+    dragging.value = false;
+  }
 
-  let initialX = props.offsetX;
-  let initialY = props.offsetY;
-
-  function onMouseDown(e) {
-    if (!props.draggable) return;
+  function onDragMove(e) {
+    if (maximized?.value || minimized?.value) return;
     e.preventDefault();
+
+    const x = tempX - e.clientX;
+    const y = tempY - e.clientY;
+
+    tempX = e.clientX;
+    tempY = e.clientY;
+
+    offsetY.value = (offsetY.value - y);
+    offsetX.value = (offsetX.value - x);
+  }
+
+  function onDragStart(e) {
+    if (maximized?.value || minimized?.value) return;
+
+    e.preventDefault();
+
+    tempX = e.clientX;
+    tempY = e.clientY;
 
     dragging.value = true;
 
-    initialX = (target.value || e.target).offsetLeft - e.clientX;
-    initialY = (target.value || e.target).offsetTop - e.clientY;
-
-    e.target.onmousemove = onMouseMove;
-    e.target.onmouseup = onMouseUp;
+    document.addEventListener('mousemove', onDragMove);
+    document.addEventListener('mouseup', onDragStop);
   }
 
-  function onMouseMove(e) {
-    if (!props.draggable || !dragging.value) return;
-    e.preventDefault();
-
-    offsetX.value = (e.clientX + initialX);
-    offsetY.value = (e.clientY + initialY);
-  }
-
-  function onMouseUp(e) {
+  onMounted(() => {
     if (!props.draggable) return;
 
-    dragging.value = false;
+    const header = document.getElementById(`${parentTargetId}-header`);
+    parentTarget.value = document.getElementById(parentTargetId);
 
-    e.target.onmouseup = null;
-    e.target.onmousemove = null;
-  }
+    if (!header) {
+      throw new Error(`Element with id "${parentTargetId}" was not found`);
+    }
+
+    header.onmousedown = onDragStart;
+  });
 
   return {
+    parentTarget,
     dragging,
     offsetX,
     offsetY,
-    onMouseDown,
   };
 }

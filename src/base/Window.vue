@@ -1,8 +1,8 @@
 <template>
   <div
-    ref="targetWindow"
+    :id="id"
     class="window glass"
-    :class="{ active, draggable, dragging, maximized }"
+    :class="{ active, draggable, dragging, maximized, minimized }"
     :style="{
       width, height,
       '--window-background-color': color,
@@ -11,9 +11,8 @@
     }"
   >
     <div
-      ref="windowTitleBar"
+      :id="`${id}-header`"
       class="title-bar"
-      @mousedown="onMouseDown"
     >
       <div class="title-bar-text">
         {{ title }}
@@ -22,7 +21,7 @@
         <button
           v-if="minimizable"
           aria-label="Minimize"
-          @click="emit('minimize')"
+          @click="onMinimize"
         />
         <button
           v-if="maximizable"
@@ -39,7 +38,7 @@
 
     <div
       class="window-body"
-      :class="{ 'has-space': hasSpace, 'has-scrollbar': hasScrollbar }"
+      :class="{ 'has-space': hasSpace, 'has-scrollbar': hasScrollbar}"
     >
       <slot />
     </div>
@@ -62,8 +61,10 @@
 </template>
 <script setup>
 import useDraggable from '../composables/draggable.js';
-import { ref, useTemplateRef, watch } from 'vue';
+import { reactive, ref } from 'vue';
+import { uniqueId } from '../helpers.js';
 
+const id = `window-${uniqueId()}`;
 const emit = defineEmits(['minimize', 'maximize', 'close']);
 
 defineOptions({ name: 'WinWindow' });
@@ -81,38 +82,39 @@ const props = defineProps({
   maximizable: { type: Boolean, default: true },
   closable: { type: Boolean, default: true },
   draggable: { type: Boolean, default: false },
-  offsetX: { type: Number, default: 0 },
-  offsetY: { type: Number, default: 0 },
+  defaultX: { type: [Number, String], default: 0 },
+  defaultY: { type: [Number, String], default: 0 },
 });
 
-const targetWindow = useTemplateRef('targetWindow');
 const maximized = ref(false);
+const minimized = ref(false);
 
-const previousX = ref(0);
-const previousY = ref(0);
+const backupOffset = reactive({
+  x: props.defaultX,
+  y: props.defaultY,
+});
 
 const {
   dragging,
   offsetX,
   offsetY,
-  onMouseDown,
-} = useDraggable(props, targetWindow);
+} = useDraggable(id, props, maximized, minimized);
 
 function onMaximize() {
   try {
     if (maximized.value) {
-      offsetX.value = previousX.value;
-      offsetY.value = previousY.value;
+      offsetX.value = backupOffset.x;
+      offsetY.value = backupOffset.y;
 
-      previousX.value = 0;
-      previousY.value = 0;
+      backupOffset.x = props.defaultX;
+      backupOffset.y = props.defaultY;
 
       maximized.value = false;
       return;
     }
 
-    previousX.value = offsetX.value;
-    previousY.value = offsetY.value;
+    backupOffset.x = offsetX.value;
+    backupOffset.y = offsetY.value;
 
     offsetX.value = 0;
     offsetY.value = 0;
@@ -123,37 +125,50 @@ function onMaximize() {
   }
 }
 
-watch(offsetX, (updated, old) => {
-  if (updated === old) return;
+function onMinimize() {
+  try {
+    if (minimized.value) {
+      offsetY.value = backupOffset.y;
 
-  if (maximized.value) {
-    // maximized.value = false;
+      backupOffset.y = props.defaultY;
+
+      minimized.value = false;
+      return;
+    }
+
+    backupOffset.y = offsetY.value;
+    offsetY.value = window.innerHeight - 35;
+
+    minimized.value = true;
+  } finally {
+    emit('minimize');
   }
-});
-
-watch(offsetY, (updated, old) => {
-  if (updated === old) return;
-
-  if (maximized.value) {
-    // maximized.value = false;
-  }
-});
+}
 </script>
 <style lang="scss" scope>
 .window {
   margin: 16px 4px;
 
+  .title-bar {
+    align-items: flex-start !important;
+  }
+
   &.maximized {
-    height: 100vh !important;
-    width: calc(100vw - 15px) !important;
-    top: 0;
-    left: 0;
+    .window-body {
+      height: calc(100vh - 35px) !important;
+      width: calc(100vw - 35px) !important;
+    }
+  }
+
+  &.minimized {
+    .window-body {
+      height: 1px;
+      overflow: hidden;
+    }
   }
 
   &.draggable {
     position: fixed !important;
-    top: 0;
-    left: 0;
     z-index: 900;
     margin: 0;
 
