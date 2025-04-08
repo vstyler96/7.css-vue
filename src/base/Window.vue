@@ -4,7 +4,6 @@
     class="window glass"
     :class="{ active, draggable, dragging, maximized, minimized }"
     :style="{
-      width, height,
       '--window-background-color': color,
       top: `${offsetY}px`,
       left: `${offsetX}px`,
@@ -20,7 +19,7 @@
       <div class="title-bar-controls">
         <button
           v-if="minimizable"
-          aria-label="Minimize"
+          :aria-label="minimized ? 'Restore' : 'Minimize'"
           @click="onMinimize"
         />
         <button
@@ -37,8 +36,9 @@
     </div>
 
     <div
-      class="window-body"
-      :class="{ 'has-space': hasSpace, 'has-scrollbar': hasScrollbar}"
+      class="window-body has-space"
+      :class="{ 'has-scrollbar': hasScrollbar }"
+      :style="{ width }"
     >
       <slot />
     </div>
@@ -74,13 +74,12 @@ const props = defineProps({
   width: { type: String, default: 'auto' },
   height: { type: String, default: 'auto' },
   color: { type: String, default: '#4580c4' },
-  hasSpace: { type: Boolean, default: false },
   hasScrollbar: { type: Boolean, default: false },
   hasStatus: { type: Boolean, default: false },
   statusFields: { type: Array, default: () => [] },
-  minimizable: { type: Boolean, default: true },
-  maximizable: { type: Boolean, default: true },
-  closable: { type: Boolean, default: true },
+  minimizable: { type: Boolean, default: false },
+  maximizable: { type: Boolean, default: false },
+  closable: { type: Boolean, default: false },
   draggable: { type: Boolean, default: false },
   defaultX: { type: [Number, String], default: 0 },
   defaultY: { type: [Number, String], default: 0 },

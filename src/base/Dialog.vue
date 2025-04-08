@@ -1,45 +1,35 @@
 <template>
   <transition>
-    <div
+    <WinWindow
       v-if="show"
-      class="window glass active"
-      style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000;"
-      :style="{ width, height, '--window-background-color': color }"
+      active
+      :draggable="draggable"
+      :title="title"
+      :default-x="defaultX"
+      :default-y="defaultY"
+      :width="width"
+      :color="color"
+      style="position: fixed; z-index: 1000 !important;"
     >
-      <div class="title-bar">
-        <div class="title-bar-text">
-          {{ title }}
-        </div>
-      </div>
+      <slot>
+        <p>
+          {{ message }}
+        </p>
+      </slot>
+      <section class="field-row" style="padding-top: 1em; justify-content: flex-end">
+        <WinButton
+          text="Cancel"
+          @click="onCancel"
+        />
 
-      <div
-        class="window-body has-space"
-        :class="{ 'has-scrollbar': hasScrollbar }"
-      >
-        <slot>
-          <p>
-            {{ message }}
-          </p>
-        </slot>
+        <WinButton
+          text="Accept"
+          class="default"
+          @click="onAccept"
+        />
+      </section>
 
-        <section class="field-row" style="justify-content: flex-end">
-          <WinButton
-            text="Cancel"
-            @click="onCancel"
-          />
-
-          <WinButton
-            text="Accept"
-            class="default"
-            @click="onAccept"
-          />
-        </section>
-      </div>
-
-      <div
-        v-if="(hasStatus && statusFields.length) || $slots.status"
-        class="status-bar"
-      >
+      <template #status-bar>
         <slot name="status">
           <p
             v-for="statusField in statusFields"
@@ -49,8 +39,8 @@
             {{ statusField }}
           </p>
         </slot>
-      </div>
-    </div>
+      </template>
+    </WinWindow>
   </transition>
   <div
     v-if="show"
@@ -59,6 +49,7 @@
 </template>
 <script setup>
 import WinButton from './Button.vue';
+import WinWindow from './Window.vue';
 import { computed } from 'vue';
 
 defineOptions({ name: 'WinDialog' });
@@ -70,11 +61,13 @@ const props = defineProps({
   width: { type: String, default: '400px' },
   height: { type: String, default: 'auto' },
   color: { type: String, default: '#4580c4' },
-  hasScrollbar: { type: Boolean, default: false },
+  defaultX: { type: [Number, String], default: () => (window.innerWidth / 2 - 250) },
+  defaultY: { type: [Number, String], default: () => (window.innerHeight / 2 - 100) },
   hasStatus: { type: Boolean, default: false },
   statusFields: { type: Array, default: () => [] },
   permanent: { type: Boolean, default: false },
   cancelable: { type: Boolean, default: true },
+  draggable: { type: Boolean, default: false },
 });
 
 const show = computed({
