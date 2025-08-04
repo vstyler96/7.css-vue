@@ -1,0 +1,4 @@
+/* 7.css-vue - Main CSS Entry Point */
+@import "7.css/dist/7.css";
+
+/* Component-specific styles will be automatically included during build */

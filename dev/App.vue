@@ -107,79 +107,90 @@
       </div>
     </div>
 
-    <div class="grid grid-cols-1 gap-3">
-      <WinWindow
-        has-space
-        active
-        color="purple"
-      >
-        <div class="grid grid-cols-3 gap-3">
-          <div>
-            <!-- Dropdowns -->
-            <Dropdowns />
-          </div>
+    <div class="grid grid-cols-2 gap-3">
+      <div>
+        <WinWindow
+          has-space
+          active
+          color="purple"
+        >
+          <Navbar />
+        </WinWindow>
+      </div>
+      <div>
+        <WinWindow
+          has-space
+          active
+          color="purple"
+        >
+          <div class="grid grid-cols-3 gap-3">
+            <div>
+              <!-- Dropdowns -->
+              <Dropdowns />
+            </div>
 
-          <!-- TreeView -->
-          <win-treeview class="has-collapse-button">
-            <win-collapse
-              title="Javascript"
-              open
-              :children="[
-                {
-                  title: 'Avoid at all cost',
-                  prpendIcon: 'monitor',
-                  children: [
-                    { title: 'Avoid' },
-                    {
-                      title: 'At',
-                      prependIcon: 'monitor',
-                      children: [
-                        { title: 'Avoid' },
-                        { title: 'At' },
-                        { title: 'All' },
-                        { title: 'Cost' },
-                      ],
-                    },
-                    { title: 'All' },
-                    { title: 'Cost' },
-                  ],
-                }
-              ]"
-            />
-          </win-treeview>
-          <!-- <li>
-            <win-collapse
-              title="Unless"
-              prepend-icon="monitor"
-            >
-              <ul>
-                <li>Avoid</li>
-                <li>
-                  <win-collapse title="At">
-                    <ul>
-                      <li>Avoid</li>
-                      <li>At</li>
-                      <li>All</li>
-                      <li>Cost</li>
-                    </ul>
-                  </win-collapse>
-                </li>
-                <li>All</li>
-                <li>Cost</li>
-              </ul>
-            </win-collapse>
-          </li> -->
+            <!-- TreeView -->
+            <win-treeview class="has-collapse-button">
+              <win-collapse
+                title="Javascript"
+                open
+                :children="[
+                  {
+                    title: 'Avoid at all cost',
+                    prpendIcon: 'monitor',
+                    children: [
+                      { title: 'Avoid' },
+                      {
+                        title: 'At',
+                        prependIcon: 'monitor',
+                        children: [
+                          { title: 'Avoid' },
+                          { title: 'At' },
+                          { title: 'All' },
+                          { title: 'Cost' },
+                        ],
+                      },
+                      { title: 'All' },
+                      { title: 'Cost' },
+                    ],
+                  }
+                ]"
+              />
+            </win-treeview>
+            <!-- <li>
+              <win-collapse
+                title="Unless"
+                prepend-icon="monitor"
+              >
+                <ul>
+                  <li>Avoid</li>
+                  <li>
+                    <win-collapse title="At">
+                      <ul>
+                        <li>Avoid</li>
+                        <li>At</li>
+                        <li>All</li>
+                        <li>Cost</li>
+                      </ul>
+                    </win-collapse>
+                  </li>
+                  <li>All</li>
+                  <li>Cost</li>
+                </ul>
+              </win-collapse>
+            </li> -->
 
-          <div>
-            <win-listbox
-              v-model="listboxValue"
-              class="has-hover"
-              :options="options"
-            />
-            You selected the option: {{ listboxValue }}
+            <div>
+              <win-listbox
+                v-model="listboxValue"
+                class="has-hover"
+                :options="options"
+              />
+              You selected the option: {{ listboxValue }}
+            </div>
           </div>
-        </div>
-      </WinWindow>
+        </WinWindow>
+      </div>
     </div>
 
     <div class="grid grid-cols-2 gap-3">
@@ -369,6 +380,7 @@ import Progressbars from './Showcase/Progressbars.vue';
 import Radios from './Showcase/Radios.vue';
 import Checkboxes from './Showcase/Checkboxes.vue';
 import Dropdowns from './Showcase/Dropdowns.vue';
+import Navbar from './Showcase/Navbar.vue';
 
 const listboxValue = ref("good");
 const sliderValue = ref(4);

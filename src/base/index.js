@@ -11,6 +11,8 @@ import WinListbox from "./Listbox.vue";
 import WinMenu from "./Menu.vue";
 import WinMenubar from "./MenuBar.vue";
 import WinMenuitem from "./MenuItem.vue";
+import WinNavbar from "./Navbar.vue";
+import WinNavbarItem from "./NavbarItem.vue";
 import WinProgress from "./Progress.vue";
 import WinRadio from "./Radio.vue";
 import WinSearchbox from "./Searchbox.vue";
@@ -34,6 +36,8 @@ export {
   WinMenu,
   WinMenubar,
   WinMenuitem,
+  WinNavbar,
+  WinNavbarItem,
   WinProgress,
   WinRadio,
   WinSearchbox,

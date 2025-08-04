@@ -1,4 +1,5 @@
 import * as components from "./base/index.js";
+import "./style.css";
 
 const winVue = {
   install(app) {

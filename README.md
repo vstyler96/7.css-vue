@@ -20,7 +20,9 @@ bun add 7.css-vue 7.css
 // main.js or index.js
 import { createApp } from "vue";
 import Win from "7.css-vue";
-...
+
+// Import the bundled CSS (includes 7.css + component styles)
+import "7.css-vue/dist/7.css-vue.css";
 
 const app = createApp(...);
 
