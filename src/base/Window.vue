@@ -2,12 +2,14 @@
   <div
     :id="id"
     class="window glass"
-    :class="{ active, draggable, dragging, maximized, minimized }"
-    :style="{
-      '--window-background-color': color,
-      top: `${offsetY}px`,
-      left: `${offsetX}px`,
+    :class="{
+      active,
+      draggable,
+      dragging,
+      maximized,
+      minimized
     }"
+    :style="windowStyle"
   >
     <div
       :id="`${id}-header`"
@@ -20,12 +22,12 @@
         <button
           v-if="minimizable"
           :aria-label="minimized ? 'Restore' : 'Minimize'"
-          @click="onMinimize"
+          @click="toggleMinimize"
         />
         <button
           v-if="maximizable"
           :aria-label="maximized ? 'Restore' : 'Maximize'"
-          @click="onMaximize"
+          @click="toggleMaximize"
         />
         <button
           v-if="closable"
@@ -44,30 +46,36 @@
     </div>
 
     <div
-      v-if="(hasStatus && statusFields.length) || $slots.status"
+      v-if="showStatusBar"
       class="status-bar"
     >
       <slot name="status">
         <p
-          v-for="statusField in statusFields"
-          :key="statusField"
+          v-for="field in statusFields"
+          :key="field"
           class="status-bar-field"
         >
-          {{ statusField }}
+          {{ field }}
         </p>
       </slot>
     </div>
   </div>
 </template>
+
 <script setup>
 import useDraggable from '../composables/draggable.js';
-import { reactive, ref } from 'vue';
-import { uniqueId } from '../helpers.js';
+import { computed, ref, useSlots } from 'vue';
+import { uniqueId, getWindowDimensions } from '../helpers.js';
+
+// Constants
+const TITLE_BAR_HEIGHT = 35;
+const Z_INDEX_WINDOW = 900;
 
 const id = `window-${uniqueId()}`;
 const emit = defineEmits(['minimize', 'maximize', 'close']);
 
 defineOptions({ name: 'WinWindow' });
+
 const props = defineProps({
   active: { type: Boolean, default: false },
   title: { type: String, default: 'Window' },
@@ -87,11 +95,7 @@ const props = defineProps({
 
 const maximized = ref(false);
 const minimized = ref(false);
-
-const backupOffset = reactive({
-  x: props.defaultX,
-  y: props.defaultY,
-});
+const originalPosition = ref({ x: props.defaultX, y: props.defaultY });
 
 const {
   dragging,
@@ -99,63 +103,63 @@ const {
   offsetY,
 } = useDraggable(id, props, maximized, minimized);
 
-function onMaximize() {
-  try {
-    if (maximized.value) {
-      offsetX.value = backupOffset.x;
-      offsetY.value = backupOffset.y;
+const slots = useSlots();
 
-      backupOffset.x = props.defaultX;
-      backupOffset.y = props.defaultY;
+const showStatusBar = computed(() =>
+  (props.hasStatus && props.statusFields.length > 0) || !!slots.status
+);
 
-      maximized.value = false;
-      return;
-    }
+const windowStyle = computed(() => ({
+  '--window-background-color': props.color,
+  top: `${offsetY.value}px`,
+  left: `${offsetX.value}px`,
+}));
 
-    backupOffset.x = offsetX.value;
-    backupOffset.y = offsetY.value;
-
+function toggleMaximize() {
+  if (maximized.value) {
+    // Restore window
+    offsetX.value = originalPosition.value.x;
+    offsetY.value = originalPosition.value.y;
+    maximized.value = false;
+  } else {
+    // Maximize window
+    originalPosition.value = { x: offsetX.value, y: offsetY.value };
     offsetX.value = 0;
     offsetY.value = 0;
-
     maximized.value = true;
-  } finally {
-    emit('maximize');
   }
+  emit('maximize', maximized.value);
 }
 
-function onMinimize() {
-  try {
-    if (minimized.value) {
-      offsetY.value = backupOffset.y;
+function toggleMinimize() {
+  if (minimized.value) {
+    // Restore window
+    offsetY.value = originalPosition.value.y;
+    minimized.value = false;
+  } else {
+    // Minimize window
+    originalPosition.value.y = offsetY.value;
 
-      backupOffset.y = props.defaultY;
-
-      minimized.value = false;
-      return;
-    }
-
-    backupOffset.y = offsetY.value;
-    offsetY.value = window.innerHeight - 35;
-
+    const { height } = getWindowDimensions();
+    offsetY.value = height - TITLE_BAR_HEIGHT;
     minimized.value = true;
-  } finally {
-    emit('minimize');
   }
+  emit('minimize', minimized.value);
 }
 </script>
-<style lang="scss" scope>
+
+<style lang="scss" scoped>
 .window {
   margin: 16px 4px;
 
   .title-bar {
-    align-items: flex-start !important;
+    align-items: flex-start;
   }
 
   &.maximized {
     .window-body {
-      height: calc(100vh - 35px) !important;
-      width: calc(100vw - 35px) !important;
+      height: calc(100vh - v-bind('TITLE_BAR_HEIGHT + "px"'));
+      width: calc(100vw - v-bind('TITLE_BAR_HEIGHT + "px"'));
     }
   }
 
@@ -167,15 +171,16 @@ function onMinimize() {
   }
 
   &.draggable {
-    position: fixed !important;
-    z-index: 900;
+    position: fixed;
+    z-index: v-bind('Z_INDEX_WINDOW');
     margin: 0;
 
     .title-bar {
       user-select: none;
+      cursor: grab;
 
-      &.dragging:hover {
-        cursor: crosshair !important;
+      &.dragging {
+        cursor: grabbing;
       }
     }
   }

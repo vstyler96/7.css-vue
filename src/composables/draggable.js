@@ -1,65 +1,157 @@
-import { onMounted, ref } from 'vue';
+import { onMounted, onUnmounted, ref, nextTick } from 'vue';
+import { getWindowDimensions, clamp } from '../helpers.js';
 
-export default function (parentTargetId, props, maximized, minimized) {
+export default function useDraggable(targetId, props, maximized, minimized) {
   const offsetX = ref(props.defaultX);
   const offsetY = ref(props.defaultY);
-  let tempX = 0, tempY = 0;
-
-  const parentTarget = ref(null);
   const dragging = ref(false);
 
-  function onDragStop() {
-    if (maximized?.value || minimized?.value) return;
-    document.removeEventListener('mouseup', onDragStop);
-    document.removeEventListener('mousemove', onDragMove);
+  let startX = 0;
+  let startY = 0;
+  let element = null;
+  let header = null;
+
+  // Cleanup functions
+  const cleanupListeners = [];
+
+  function addEventListeners() {
+    const onMouseMove = (e) => handleDragMove(e);
+    const onMouseUp = () => handleDragStop();
+
+    document.addEventListener('mousemove', onMouseMove, { passive: false });
+    document.addEventListener('mouseup', onMouseUp);
+
+    cleanupListeners.push(() => {
+      document.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mouseup', onMouseUp);
+    });
+  }
+
+  function removeEventListeners() {
+    cleanupListeners.forEach(cleanup => cleanup());
+    cleanupListeners.length = 0;
+  }
+
+    function getBoundaries() {
+    const { width, height } = getWindowDimensions();
+
+    const elementRect = element?.getBoundingClientRect();
+    const elementWidth = elementRect?.width || 300;
+    const elementHeight = elementRect?.height || 200;
+
+    return {
+      minX: 0,
+      minY: 0,
+      maxX: width - elementWidth,
+      maxY: height - elementHeight,
+    };
+  }
+
+  function constrainPosition(x, y) {
+    const { minX, minY, maxX, maxY } = getBoundaries();
+    return {
+      x: clamp(x, minX, maxX),
+      y: clamp(y, minY, maxY),
+    };
+  }
+
+  function handleDragStop() {
+    if (!dragging.value) return;
+
+    removeEventListeners();
     dragging.value = false;
+
+    if (header) {
+      header.style.cursor = 'grab';
+    }
   }
 
-  function onDragMove(e) {
-    if (maximized?.value || minimized?.value) return;
-    e.preventDefault();
-
-    const x = tempX - e.clientX;
-    const y = tempY - e.clientY;
-
-    tempX = e.clientX;
-    tempY = e.clientY;
-
-    offsetY.value = (offsetY.value - y);
-    offsetX.value = (offsetX.value - x);
-  }
-
-  function onDragStart(e) {
-    if (maximized?.value || minimized?.value) return;
-
-    e.preventDefault();
-
-    tempX = e.clientX;
-    tempY = e.clientY;
-
-    dragging.value = true;
-
-    document.addEventListener('mousemove', onDragMove);
-    document.addEventListener('mouseup', onDragStop);
-  }
-
-  onMounted(() => {
-    if (!props.draggable) return;
-
-    const header = document.getElementById(`${parentTargetId}-header`);
-    parentTarget.value = document.getElementById(parentTargetId);
-
-    if (!header) {
-      throw new Error(`Element with id "${parentTargetId}" was not found`);
+  function handleDragMove(e) {
+    if (!dragging.value || maximized?.value || minimized?.value) {
+      return;
     }
 
-    header.onmousedown = onDragStart;
-  });
+    e.preventDefault();
+
+    const deltaX = startX - e.clientX;
+    const deltaY = startY - e.clientY;
+
+    startX = e.clientX;
+    startY = e.clientY;
+
+    const newX = offsetX.value - deltaX;
+    const newY = offsetY.value - deltaY;
+
+    const constrained = constrainPosition(newX, newY);
+    offsetX.value = constrained.x;
+    offsetY.value = constrained.y;
+  }
+
+  function handleDragStart(e) {
+    if (maximized?.value || minimized?.value) {
+      return;
+    }
+
+    e.preventDefault();
+
+    startX = e.clientX;
+    startY = e.clientY;
+    dragging.value = true;
+
+    if (header) {
+      header.style.cursor = 'grabbing';
+    }
+
+    addEventListeners();
+  }
+
+  async function initialize() {
+    if (!props.draggable) return;
+
+    await nextTick();
+
+    try {
+      element = document.getElementById(targetId);
+      header = document.getElementById(`${targetId}-header`);
+
+      if (!element) {
+        console.warn(`[Draggable] Element with id "${targetId}" not found`);
+        return;
+      }
+
+      if (!header) {
+        console.warn(`[Draggable] Header element with id "${targetId}-header" not found`);
+        return;
+      }
+
+      header.addEventListener('mousedown', handleDragStart);
+
+      // Store cleanup for header listener
+      cleanupListeners.push(() => {
+        if (header) {
+          header.removeEventListener('mousedown', handleDragStart);
+        }
+      });
+
+    } catch (error) {
+      console.error('[Draggable] Initialization failed:', error);
+    }
+  }
+
+  function cleanup() {
+    removeEventListeners();
+    if (header) {
+      header.removeEventListener('mousedown', handleDragStart);
+    }
+  }
+
+  onMounted(initialize);
+  onUnmounted(cleanup);
 
   return {
-    parentTarget,
     dragging,
     offsetX,
     offsetY,
+    cleanup,
   };
 }

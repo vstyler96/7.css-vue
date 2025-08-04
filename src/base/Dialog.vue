@@ -1,78 +1,103 @@
 <template>
-  <transition>
-    <WinWindow
-      v-if="show"
-      active
-      :draggable="draggable"
-      :title="title"
-      :default-x="defaultX"
-      :default-y="defaultY"
-      :width="width"
-      :color="color"
-      style="position: fixed; z-index: 1000 !important;"
-    >
-      <slot>
-        <p>
-          {{ message }}
-        </p>
-      </slot>
-      <section class="field-row" style="padding-top: 1em; justify-content: flex-end">
-        <WinButton
-          text="Cancel"
-          @click="onCancel"
-        />
+  <Teleport to="body">
+    <div v-if="show" class="dialog-overlay">
+      <!-- Backdrop -->
+      <div
+        class="dialog-backdrop"
+        @click="onBackdropClick"
+      />
 
-        <WinButton
-          text="Accept"
-          class="default"
-          @click="onAccept"
-        />
-      </section>
+      <!-- Dialog window -->
+      <transition
+        name="dialog"
+        appear
+      >
+        <WinWindow
+          v-if="show"
+          active
+          :draggable="draggable"
+          :title="title"
+          :default-x="centerX"
+          :default-y="centerY"
+          :width="width"
+          :color="color"
+          :has-status="hasStatus"
+          :status-fields="statusFields"
+          class="dialog-window"
+          @close="onClose"
+        >
+          <slot>
+            <p v-if="message">
+              {{ message }}
+            </p>
+          </slot>
 
-      <template #status-bar>
-        <slot name="status">
-          <p
-            v-for="statusField in statusFields"
-            :key="statusField"
-            class="status-bar-field"
-          >
-            {{ statusField }}
-          </p>
-        </slot>
-      </template>
-    </WinWindow>
-  </transition>
-  <div
-    v-if="show"
-    class="w-full h-full bg-black/20 backdrop-blur-xs fixed top-0 left-0"
-  />
+          <section v-if="showActions" class="dialog-actions">
+            <WinButton
+              v-if="cancelable"
+              text="Cancel"
+              @click="onCancel"
+            />
+            <WinButton
+              text="OK"
+              class="default"
+              @click="onAccept"
+            />
+          </section>
+
+          <template v-if="hasStatus" #status>
+            <slot name="status" />
+          </template>
+        </WinWindow>
+      </transition>
+    </div>
+  </Teleport>
 </template>
+
 <script setup>
 import WinButton from './Button.vue';
 import WinWindow from './Window.vue';
 import { computed } from 'vue';
+import { getWindowDimensions } from '../helpers.js';
+
+// Constants
+const DEFAULT_DIALOG_WIDTH = 400;
+const DEFAULT_DIALOG_HEIGHT = 200;
+const Z_INDEX_DIALOG = 1000;
 
 defineOptions({ name: 'WinDialog' });
-const emit = defineEmits(['accept', 'cancel', 'update:model-value']);
+
+const emit = defineEmits(['accept', 'cancel', 'close', 'update:model-value']);
+
 const props = defineProps({
   modelValue: { type: Boolean, default: false },
-  title: { type: String, default: 'Window' },
-  message: { type: String, default: null },
+  title: { type: String, default: 'Dialog' },
+  message: { type: String, default: '' },
   width: { type: String, default: '400px' },
   height: { type: String, default: 'auto' },
   color: { type: String, default: '#4580c4' },
-  defaultX: { type: [Number, String], default: () => (window.innerWidth / 2 - 250) },
-  defaultY: { type: [Number, String], default: () => (window.innerHeight / 2 - 100) },
   hasStatus: { type: Boolean, default: false },
   statusFields: { type: Array, default: () => [] },
   permanent: { type: Boolean, default: false },
   cancelable: { type: Boolean, default: true },
   draggable: { type: Boolean, default: false },
+  closeOnBackdrop: { type: Boolean, default: true },
+  showActions: { type: Boolean, default: true },
 });
 
 const show = computed({
   get() { return props.modelValue; },
   set(value) { emit('update:model-value', value); },
+});
+
+const centerX = computed(() => {
+  const { width } = getWindowDimensions();
+  return Math.max(0, (width - DEFAULT_DIALOG_WIDTH) / 2);
+});
+
+const centerY = computed(() => {
+  const { height } = getWindowDimensions();
+  return Math.max(0, (height - DEFAULT_DIALOG_HEIGHT) / 2);
 });
 
 function onAccept() {
@@ -84,24 +109,71 @@ function onCancel() {
   show.value = false;
   emit('cancel');
 }
+
+function onClose() {
+  if (!props.permanent) {
+    show.value = false;
+    emit('close');
+  }
+}
+
+function onBackdropClick() {
+  if (props.closeOnBackdrop && !props.permanent) {
+    onClose();
+  }
+}
 </script>
-<style lang="scss" scope>
-/* we will explain what these classes do next! */
-.v-enter-active,
-.v-leave-active {
-  transition: opacity 0.5s ease;
+
+<style lang="scss" scoped>
+.dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: v-bind('Z_INDEX_DIALOG');
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.v-enter-from,
-.v-leave-to {
+.dialog-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(2px);
+}
+
+.dialog-window {
+  position: relative;
+  z-index: 1;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding-top: 1em;
+}
+
+/* Dialog transitions */
+.dialog-enter-active,
+.dialog-leave-active {
+  transition: all 0.3s ease;
+}
+
+.dialog-enter-from,
+.dialog-leave-to {
   opacity: 0;
+  transform: scale(0.95) translateY(-10px);
 }
 
-.window {
-  margin: 16px 4px;
-}
-
-.title-bar-text {
-  user-select: none;
+.dialog-enter-to,
+.dialog-leave-from {
+  opacity: 1;
+  transform: scale(1) translateY(0);
 }
 </style>
