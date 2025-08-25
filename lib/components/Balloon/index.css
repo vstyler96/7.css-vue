@@ -1,0 +1,20 @@
+/* WinBalloon Component Styles */
+.winui-balloon {
+  /* Add balloon-specific styles here */
+}
+
+.winui-balloon.is-bottom {
+  /* Bottom positioning styles */
+}
+
+.winui-balloon.is-top {
+  /* Top positioning styles */
+}
+
+.winui-balloon.is-left {
+  /* Left positioning styles */
+}
+
+.winui-balloon.is-right {
+  /* Right positioning styles */
+}

@@ -1,0 +1,7 @@
+{
+  "extends": "./tsconfig.app.json",
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.lib.tsbuildinfo"
+  },
+  "include": ["lib/**/*.ts", "lib/**/*.tsx", "lib/**/*.vue", "lib/**/*.d.ts"]
+}

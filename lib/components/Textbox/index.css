@@ -1,0 +1,6 @@
+/* WinTextbox Component Styles */
+.winui-textbox:read-only {
+  background-color: #f1f1f1;
+  cursor: not-allowed;
+  color: #444;
+}

@@ -1,0 +1,8 @@
+/* WinSearchbox Component Styles */
+[type="search"] {
+  min-width: auto;
+}
+
+[aria-label="search"] {
+  border: 1px solid #8e8f8f;
+}

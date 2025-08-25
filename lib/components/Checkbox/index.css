@@ -1,0 +1,11 @@
+/* WinCheckbox Component Styles */
+.winui-checkbox {
+  margin: 6px 0;
+  user-select: none;
+}
+
+.winui-checkbox label,
+.winui-checkbox::before,
+.winui-checkbox::after {
+  cursor: pointer !important;
+}

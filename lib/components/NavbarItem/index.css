@@ -1,0 +1,61 @@
+/* WinNavbarItem Component Styles */
+.winui-navbar-item {
+  cursor: pointer;
+  display: flex;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 23px;
+  height: 24px;
+  padding: 0 12px;
+  border-radius: 2px;
+  background: transparent;
+  border: none;
+  color: #fff;
+  margin-left: 2px;
+  margin-right: 2px;
+  font-family: "Segoe UI", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.1s linear;
+  text-decoration: none;
+}
+
+.winui-navbar-item:hover {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.25),
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(255, 255, 255, 0.25) 50%,
+    rgba(255, 255, 255, 0.1)
+  );
+  text-decoration: none;
+  outline: solid thin rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+  color: #fff;
+}
+
+.winui-navbar-item:active {
+  outline: solid thin rgba(0, 0, 0, 0.75);
+  box-shadow:
+    inset 0 0 8px #00575b,
+    inset 0 0 0 1px rgba(255, 255, 255, 0.75);
+  background: rgba(234, 234, 234, 0.3);
+}
+
+.winui-navbar-item:active > span {
+  transform: translate(1px, 1px);
+}
+
+.winui-navbar-item.active {
+  outline: solid thin rgba(0, 0, 0, 0.75);
+  box-shadow:
+    inset 0 0 8px #00575b,
+    inset 0 0 0 1px rgba(255, 255, 255, 0.75);
+  background: rgba(234, 234, 234, 0.3);
+}

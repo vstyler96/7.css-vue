@@ -1,0 +1,33 @@
+/* WinWindow Component Styles */
+.window {
+  margin: 16px 4px;
+}
+
+.window .title-bar {
+  align-items: flex-start;
+}
+
+.window.maximized .window-body {
+  height: calc(100vh - var(--title-bar-height));
+  width: calc(100vw - var(--title-bar-height));
+}
+
+.window.minimized .window-body {
+  height: 1px;
+  overflow: hidden;
+}
+
+.window.draggable {
+  position: fixed;
+  z-index: var(--z-index-window);
+  margin: 0;
+}
+
+.window.draggable .title-bar {
+  user-select: none;
+  cursor: grab;
+}
+
+.window.draggable .title-bar.dragging {
+  cursor: grabbing;
+}

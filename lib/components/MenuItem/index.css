@@ -1,0 +1,5 @@
+/* WinMenuItem Component Styles */
+.winui-menuitem {
+  user-select: none;
+  cursor: pointer;
+}

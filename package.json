@@ -1,62 +1,60 @@
 {
-  "type": "module",
   "name": "7.css-vue",
-  "version": "1.1.1",
+  "private": true,
+  "version": "1.2.0",
+  "type": "module",
   "description": "Vue3 component library for recreating Windows 7 UI",
-  "license": "MIT",
-  "homepage": "https://github.com/vstyler96/7.css-vue",
-  "main": "./dist/index.umd.js",
-  "module": "./dist/index.es.js",
-  "exports": {
-    ".": {
-      "import": "./dist/index.es.js",
-      "require": "./dist/index.umd.js"
-    },
-    "./style.css": "./dist/7.css-vue.css"
-  },
   "keywords": [
     "windows7",
     "vue",
     "vuejs",
     "js",
+    "library",
     "components",
     "vue3",
     "frutiger",
     "7.css",
     "aero"
   ],
-  "files": ["dist"],
-  "repository": {
-    "url": "https://github.com/vstyler96/7.css-vue"
+  "homepage": "https://github.com/vstyler96/7.css-vue",
+  "main": "dist/7.css-vue.js",
+  "types": "dist/main.d.ts",
+  "style": "dist/main.css",
+  "exports": {
+    ".": {
+      "import": "./dist/7.css-vue.js",
+      "types": "./dist/main.d.ts"
+    },
+    "./style": "./dist/main.css",
+    "./dist/*": "./dist/*"
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "build:lib": "vite build",
-    "preview": "vite preview",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
-  },
-  "peerDependencies": {
-    "7.css": "^0.17.0"
-  },
-  "devDependencies": {
-    "7.css": "^0.17.0",
-    "@vitejs/plugin-vue": "^5.2.4",
-    "@vue/composition-api": "^1.7.2",
-    "@vue/reactivity": "^3.5.18",
-    "@vue/runtime-core": "^3.5.18",
-    "eslint": "^8.57.1",
-    "eslint-plugin-vue": "^9.33.0",
-    "vite": "^6.3.5",
-    "vite-plugin-eslint": "^1.8.1",
-    "vue-eslint-parser": "^9.4.3",
-    "@rollup/plugin-node-resolve": "^15.3.1",
-    "@rollup/plugin-commonjs": "^25.0.8"
+    "build": "tsc -b ./tsconfig.lib.json && vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
-    "@tailwindcss/vite": "^4.1.11",
-    "sass": "^1.89.2",
-    "tailwindcss": "^4.1.11",
+    "vue": "^3.5.18"
+  },
+  "devDependencies": {
+    "@nabla/vite-plugin-eslint": "^2.0.6",
+    "@types/css-modules": "^1.0.5",
+    "@types/node": "^24.3.0",
+    "@vitejs/plugin-vue": "^6.0.1",
+    "@vitejs/plugin-vue-jsx": "^5.0.1",
+    "@vue/tsconfig": "^0.7.0",
+    "typescript": "~5.8.3",
+    "vite": "^7.1.2",
+    "vite-plugin-dts": "^4.5.4",
+    "vite-plugin-lib-inject-css": "^2.2.2",
+    "vue-eslint-parser": "^10.2.0",
+    "vue-tsc": "^3.0.5"
+  },
+  "peerDependencies": {
+    "7.css": "^0.17.0",
     "vue": "^3.5.18"
   }
 }

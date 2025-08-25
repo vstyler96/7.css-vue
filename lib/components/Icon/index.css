@@ -1,0 +1,4 @@
+/* WinIcon Component Styles */
+.winui-icon svg path {
+  fill: currentColor;
+}

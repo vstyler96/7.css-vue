@@ -1,0 +1,4 @@
+/* WinButton Component Styles */
+.winui-button:not([role="tab"]) {
+  margin: 4px 8px;
+}
