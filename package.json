@@ -26,6 +26,9 @@
       "types": "./dist/main.d.ts"
     },
     "./style": "./dist/main.css",
+    "./dist/main.css": "./dist/main.css",
+    "./main.css": "./dist/main.css",
+    "./css": "./dist/main.css",
     "./dist/*": "./dist/*"
   },
   "files": [
