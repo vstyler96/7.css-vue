@@ -1,6 +1,6 @@
 {
   "name": "7.css-vue",
-  "private": true,
+  "private": false,
   "version": "1.2.0",
   "type": "module",
   "description": "Vue3 component library for recreating Windows 7 UI",
