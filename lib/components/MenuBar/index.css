@@ -1,4 +1,29 @@
 /* WinMenuBar Component Styles */
+/* Base styles are provided by 7.css */
+/* These are additional enhancements for Vue component behavior */
+
 .winui-menubar {
-  /* Add menubar-specific styles here */
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Submenu positioning for menubar items */
+.winui-menubar > .winui-menuitem > .winui-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  display: none;
+}
+
+/* Show submenu on focus/active */
+.winui-menubar > .winui-menuitem:focus-within > .winui-menu,
+.winui-menubar > .winui-menuitem:focus > .winui-menu {
+  display: block;
+}
+
+/* Show submenu on hover when can-hover is enabled */
+.winui-menubar.can-hover > .winui-menuitem:hover > .winui-menu {
+  display: block;
 }

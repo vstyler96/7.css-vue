@@ -1,4 +1,43 @@
 /* WinLink Component Styles */
 .winui-link {
   margin: 4px 8px;
+  text-decoration: none;
+  color: #0066cc;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  font: inherit;
+  padding: 0;
+}
+
+.winui-link:hover {
+  text-decoration: underline;
+  color: #0044aa;
+}
+
+.winui-link:visited {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+.winui-link:active {
+  color: #003388;
+  text-decoration: none;
+}
+
+.winui-link:focus {
+  outline: 1px dotted;
+  outline-offset: 2px;
+}
+
+/* Button variant (when no href) */
+button.winui-link {
+  color: #0066cc;
+}
+
+button.winui-link:hover {
+  text-decoration: underline;
 }

@@ -59,3 +59,12 @@
     inset 0 0 0 1px rgba(255, 255, 255, 0.75);
   background: rgba(234, 234, 234, 0.3);
 }
+
+.winui-navbar-item:visited {
+  color: #fff;
+  text-decoration: none;
+}
+
+.winui-navbar-item:focus {
+  text-decoration: none;
+}
