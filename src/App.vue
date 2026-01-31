@@ -34,7 +34,10 @@
       <!-- Dialog -->
       <fieldset class="component-section">
         <legend>Dialog</legend>
-        <Button @click="dialogOpen = true">Show Dialog</Button>
+        <div class="component-row">
+          <Button @click="dialogOpen = true">Show Dialog</Button>
+          <Button @click="persistentDialogOpen = true">Open Persistent Dialog</Button>
+        </div>
         <Dialog
           v-model="dialogOpen"
           title="Sample Dialog"
@@ -43,6 +46,19 @@
           @accept="console.log('Accepted')"
           @cancel="console.log('Cancelled')"
         />
+        <Dialog
+          v-model="persistentDialogOpen"
+          title="Persistent Dialog"
+          persistent
+          closable
+          draggable
+          @close="persistentDialogOpen = false"
+          @cancel="persistentDialogOpen = false"
+          @accept="persistentDialogOpen = false"
+        >
+          <p>This dialog cannot be closed by clicking outside or pressing ESC.</p>
+          <p>Use the close button (X) or the buttons below to close it.</p>
+        </Dialog>
       </fieldset>
 
       <!-- Window -->
@@ -70,6 +86,33 @@
             <p>This window has minimize, maximize, and close buttons.</p>
           </Window>
         </div>
+
+        <p style="margin-top: 16px;">Draggable Window (click button to show):</p>
+        <Button @click="draggableWindowOpen = true">Open Draggable Window</Button>
+
+        <Window
+          v-if="draggableWindowOpen"
+          title="Draggable Window"
+          width="350px"
+          draggable
+          closable
+          snap-to-edges
+          :snap-threshold="15"
+          :default-x="100"
+          :default-y="100"
+          active
+          @close="draggableWindowOpen = false"
+          @dragStart="(pos) => console.log('Drag started:', pos)"
+          @dragEnd="(pos) => console.log('Drag ended:', pos)"
+        >
+          <p>Drag me by the title bar!</p>
+          <ul style="margin: 8px 0; padding-left: 20px;">
+            <li>Touch & mouse support</li>
+            <li>Snap to edges</li>
+            <li>Constrained to viewport</li>
+            <li>Click to bring to front</li>
+          </ul>
+        </Window>
       </fieldset>
 
       <!-- Textbox -->
@@ -426,7 +469,9 @@ const textboxValue = ref("Hello World");
 const textareaValue = ref("This is a textarea");
 const searchValue = ref("");
 const dialogOpen = ref(false);
+const persistentDialogOpen = ref(false);
 const collapseOpen = ref(false);
+const draggableWindowOpen = ref(false);
 const activeTab = ref("tab1");
 const progressValue = ref(65);
 

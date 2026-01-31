@@ -7,27 +7,30 @@
   align-items: flex-start;
 }
 
-.window.maximized .window-body {
-  height: calc(100vh - var(--title-bar-height));
-  width: calc(100vw - var(--title-bar-height));
-}
-
-.window.minimized .window-body {
-  height: 1px;
-  overflow: hidden;
-}
-
 .window.draggable {
   position: fixed;
-  z-index: var(--z-index-window);
   margin: 0;
+  touch-action: none; /* Prevent browser touch gestures while dragging */
 }
 
 .window.draggable .title-bar {
   user-select: none;
   cursor: grab;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
 }
 
-.window.draggable .title-bar.dragging {
+.window.dragging .title-bar {
   cursor: grabbing;
+}
+
+.window.dragging {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Prevent text selection during drag */
+.window.dragging * {
+  user-select: none;
+  -webkit-user-select: none;
 }

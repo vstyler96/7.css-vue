@@ -1,4 +1,4 @@
-import { defineComponent, computed, Teleport, Transition } from 'vue';
+import { defineComponent, computed, Teleport, Transition, watch, onUnmounted, ref } from 'vue';
 import WinWindow from '../Window/index.tsx';
 import { getWindowDimensions } from '../../utils/helpers';
 import './index.css';
@@ -13,9 +13,12 @@ type DialogProps = {
   hasStatus?: boolean;
   statusFields?: Array<string>;
   permanent?: boolean;
+  persistent?: boolean;
   cancelable?: boolean;
+  closable?: boolean;
   draggable?: boolean;
   closeOnBackdrop?: boolean;
+  closeOnEscape?: boolean;
   showActions?: boolean;
 };
 
@@ -36,9 +39,12 @@ export default defineComponent({
     hasStatus: { type: Boolean, default: false },
     statusFields: { type: Array, default: () => [] },
     permanent: { type: Boolean, default: false },
+    persistent: { type: Boolean, default: false },
     cancelable: { type: Boolean, default: true },
+    closable: { type: Boolean, default: false },
     draggable: { type: Boolean, default: false },
     closeOnBackdrop: { type: Boolean, default: true },
+    closeOnEscape: { type: Boolean, default: true },
     showActions: { type: Boolean, default: true },
   },
   emits: ['accept', 'cancel', 'close', 'update:model-value'],
@@ -50,6 +56,42 @@ export default defineComponent({
       set(value) {
         emit('update:model-value', value);
       },
+    });
+
+    // Track if dialog should be rendered (stays true during leave animation)
+    const isRendered = ref(props.modelValue);
+
+    // When show becomes true, render immediately
+    // When show becomes false, isRendered stays true until animation completes
+    watch(show, (isOpen) => {
+      if (isOpen) {
+        isRendered.value = true;
+      }
+    });
+
+    function onAfterLeave() {
+      isRendered.value = false;
+    }
+
+    // ESC key handler
+    function handleKeydown(e: KeyboardEvent) {
+      if (e.key === 'Escape' && props.closeOnEscape && !props.permanent && !props.persistent) {
+        show.value = false;
+        emit('close');
+      }
+    }
+
+    // Add/remove keyboard listener when dialog opens/closes
+    watch(show, (isOpen) => {
+      if (isOpen) {
+        document.addEventListener('keydown', handleKeydown);
+      } else {
+        document.removeEventListener('keydown', handleKeydown);
+      }
+    }, { immediate: true });
+
+    onUnmounted(() => {
+      document.removeEventListener('keydown', handleKeydown);
     });
 
     const centerX = computed(() => {
@@ -67,48 +109,66 @@ export default defineComponent({
     }));
 
     function onAccept() {
-      show.value = false;
+      // For persistent dialogs, only emit the event - let user handle closing
+      if (!props.persistent) {
+        show.value = false;
+      }
       emit('accept');
     }
 
     function onCancel() {
-      show.value = false;
+      // For persistent dialogs, only emit the event - let user handle closing
+      if (!props.persistent) {
+        show.value = false;
+      }
       emit('cancel');
     }
 
     function onClose() {
       if (!props.permanent) {
-        show.value = false;
+        // For persistent dialogs, only emit the event - let user handle closing
+        if (!props.persistent) {
+          show.value = false;
+        }
         emit('close');
       }
     }
 
     function onBackdropClick() {
-      if (props.closeOnBackdrop && !props.permanent) {
+      if (props.closeOnBackdrop && !props.permanent && !props.persistent) {
         onClose();
       }
     }
 
     return () => (
       <Teleport to="body">
-        {show.value && (
+        {isRendered.value && (
           <div
-            class="dialog-overlay"
+            class={['dialog-overlay', { 'dialog-closing': !show.value }]}
             style={overlayStyle.value}
           >
-            <div
-              class="dialog-backdrop"
-              onClick={onBackdropClick}
-            />
+            <Transition
+              name="dialog-backdrop"
+              appear
+            >
+              {show.value && (
+                <div
+                  class="dialog-backdrop"
+                  onClick={onBackdropClick}
+                />
+              )}
+            </Transition>
 
             <Transition
               name="dialog"
               appear
+              onAfterLeave={onAfterLeave}
             >
               {show.value && (
                 <WinWindow
                   active
                   draggable={props.draggable}
+                  closable={props.closable}
                   title={props.title}
                   defaultX={centerX.value}
                   defaultY={centerY.value}

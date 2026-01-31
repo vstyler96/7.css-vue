@@ -1,28 +1,11 @@
-import { defineComponent, computed, useSlots } from 'vue';
+import { defineComponent, computed, useSlots, ref } from 'vue';
 import useDraggable from '../../composables/draggable';
 import { uniqueId } from '../../utils/helpers';
 import './index.css';
 
-type WindowProps = {
-  active?: boolean;
-  title?: string;
-  width?: string;
-  height?: string;
-  color?: string;
-  hasScrollbar?: boolean;
-  hasStatus?: boolean;
-  statusFields?: Array<string>;
-  minimizable?: boolean;
-  maximizable?: boolean;
-  closable?: boolean;
-  draggable?: boolean;
-  defaultX?: number | string;
-  defaultY?: number | string;
-};
-
 // Constants
 const TITLE_BAR_HEIGHT = 35;
-const Z_INDEX_WINDOW = 900;
+const BASE_Z_INDEX = 900;
 
 export default defineComponent({
   name: 'WinWindow',
@@ -41,18 +24,43 @@ export default defineComponent({
     draggable: { type: Boolean, default: false },
     defaultX: { type: [Number, String], default: 0 },
     defaultY: { type: [Number, String], default: 0 },
+    snapToEdges: { type: Boolean, default: false },
+    snapThreshold: { type: Number, default: 20 },
+    constrainToViewport: { type: Boolean, default: true },
   },
-  emits: ['minimize', 'maximize', 'close'],
-  setup(props: WindowProps, { slots, emit }) {
+  emits: ['minimize', 'maximize', 'close', 'dragStart', 'dragEnd', 'positionChange', 'focus'],
+  setup(props, { slots, emit, expose }) {
     const id = `window-${uniqueId()}`;
-
-    const {
-      dragging,
-      offsetX,
-      offsetY,
-    } = useDraggable(id, props);
+    const windowRef = ref<HTMLElement | null>(null);
+    const headerRef = ref<HTMLElement | null>(null);
 
     const slotInstances = useSlots();
+
+    const {
+      x,
+      y,
+      dragging,
+      zIndex,
+      setPosition,
+      center,
+      focus,
+    } = useDraggable(
+      windowRef,
+      headerRef,
+      {
+        enabled: props.draggable,
+        defaultX: props.defaultX,
+        defaultY: props.defaultY,
+        snapToEdges: props.snapToEdges,
+        snapThreshold: props.snapThreshold,
+        constrainToContainer: props.constrainToViewport,
+      },
+      {
+        onDragStart: (posX, posY) => emit('dragStart', { x: posX, y: posY }),
+        onDragEnd: (posX, posY) => emit('dragEnd', { x: posX, y: posY }),
+        onPositionChange: (posX, posY) => emit('positionChange', { x: posX, y: posY }),
+      }
+    );
 
     const showStatusBar = computed(() =>
       (props.hasStatus && props.statusFields && props.statusFields.length > 0) || !!slotInstances.status
@@ -61,14 +69,30 @@ export default defineComponent({
     const windowStyle = computed(() => ({
       '--window-background-color': props.color,
       '--title-bar-height': `${TITLE_BAR_HEIGHT}px`,
-      '--z-index-window': Z_INDEX_WINDOW,
-      top: `${offsetY.value}px`,
-      left: `${offsetX.value}px`,
+      top: props.draggable ? `${y.value}px` : undefined,
+      left: props.draggable ? `${x.value}px` : undefined,
+      zIndex: props.draggable ? zIndex.value : BASE_Z_INDEX,
     }));
+
+    function handleWindowClick() {
+      if (props.draggable) {
+        focus();
+        emit('focus');
+      }
+    }
+
+    // Expose methods for external control
+    expose({
+      setPosition,
+      center,
+      focus,
+      getPosition: () => ({ x: x.value, y: y.value }),
+    });
 
     return () => (
       <div
         id={id}
+        ref={windowRef}
         class={[
           'window',
           'glass',
@@ -79,9 +103,10 @@ export default defineComponent({
           }
         ]}
         style={windowStyle.value}
+        onClick={handleWindowClick}
       >
         <div
-          id={`${id}-header`}
+          ref={headerRef}
           class="title-bar"
         >
           <div class="title-bar-text">
@@ -91,19 +116,19 @@ export default defineComponent({
             {props.minimizable && (
               <button
                 aria-label="Minimize"
-                onClick={() => emit('minimize')}
+                onClick={(e) => { e.stopPropagation(); emit('minimize'); }}
               />
             )}
             {props.maximizable && (
               <button
                 aria-label="Maximize"
-                onClick={() => emit('maximize')}
+                onClick={(e) => { e.stopPropagation(); emit('maximize'); }}
               />
             )}
             {props.closable && (
               <button
                 aria-label="Close"
-                onClick={() => emit('close')}
+                onClick={(e) => { e.stopPropagation(); emit('close'); }}
               />
             )}
           </div>
