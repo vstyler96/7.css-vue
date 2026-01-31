@@ -15,8 +15,8 @@ hljs.registerLanguage('typescript', typescript);
 
 type CodePreviewProps = {
   code: string;
-  language?: string;
-  title?: string;
+  language: string;
+  title: string;
 };
 
 export default defineComponent({
