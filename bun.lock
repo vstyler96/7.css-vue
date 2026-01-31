@@ -5,21 +5,22 @@
     "": {
       "name": "seven-vue-other",
       "dependencies": {
-        "vue": "^3.5.18",
+        "vue": "^3.5.27",
       },
       "devDependencies": {
         "@nabla/vite-plugin-eslint": "^2.0.6",
         "@types/css-modules": "^1.0.5",
-        "@types/node": "^24.3.0",
-        "@vitejs/plugin-vue": "^6.0.1",
-        "@vitejs/plugin-vue-jsx": "^5.0.1",
+        "@types/node": "^24.10.9",
+        "@vitejs/plugin-vue": "^6.0.3",
+        "@vitejs/plugin-vue-jsx": "^5.1.3",
         "@vue/tsconfig": "^0.7.0",
+        "highlight.js": "^11.11.1",
         "typescript": "~5.8.3",
-        "vite": "^7.1.2",
+        "vite": "^7.3.1",
         "vite-plugin-dts": "^4.5.4",
         "vite-plugin-lib-inject-css": "^2.2.2",
         "vue-eslint-parser": "^10.2.0",
-        "vue-tsc": "^3.0.5",
+        "vue-tsc": "^3.2.4",
       },
       "peerDependencies": {
         "7.css": "^0.17.0",
@@ -423,6 +424,8 @@
     "hasown": ["hasown@2.0.2", "", { "dependencies": { "function-bind": "^1.1.2" } }, "sha512-0hJU9SCPvmMzIBdZFqNPXWa6dqh7WdH0cII9y+CyS8rG3nL48Bclra9HmKhVVUHyPWNH5Y7xDwAB7bfgSjkUMQ=="],
 
     "he": ["he@1.2.0", "", { "bin": { "he": "bin/he" } }, "sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw=="],
+
+    "highlight.js": ["highlight.js@11.11.1", "", {}, "sha512-Xwwo44whKBVCYoliBQwaPvtd/2tYFkRQtXDWj1nackaV2JPXx3L0+Jvd8/qCJ2p+ML0/XVkJ2q+Mr+UVdpJK5w=="],
 
     "ignore": ["ignore@5.3.2", "", {}, "sha512-hsBTNUqQTDwkWtcdYI2i06Y/nUBEsNEDJKjWdigLvegy8kDuJAS8uRlpkkcQpyEXL0Z/pjDy5HBmMjRCJ2gq+g=="],
 

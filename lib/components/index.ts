@@ -1,6 +1,7 @@
 export { default as Balloon } from "./Balloon/index.tsx";
 export { default as Button } from "./Button/index.tsx";
 export { default as Checkbox } from "./Checkbox/index.tsx";
+export { default as CodePreview } from "./CodePreview/index.tsx";
 export { default as Collapse } from "./Collapse/index.tsx";
 export { default as Dialog } from "./Dialog/index.tsx";
 export { default as Dropdown } from "./Dropdown/index.tsx";

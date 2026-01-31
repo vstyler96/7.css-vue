@@ -1,0 +1,31 @@
+/* CodePreview Component Styles */
+.code-preview {
+  margin-top: 12px;
+}
+
+.code-preview-pre {
+  margin: 0;
+  padding: 12px;
+  background: #f8f8f8;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  overflow-x: auto;
+  font-family: Consolas, Monaco, 'Courier New', monospace;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.code-preview-pre code {
+  background: transparent;
+  padding: 0;
+  white-space: pre;
+  word-break: normal;
+  word-wrap: normal;
+}
+
+/* Ensure proper display in dark mode or themed environments */
+.code-preview .hljs {
+  display: block;
+  overflow-x: auto;
+  background: transparent;
+}

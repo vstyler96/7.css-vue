@@ -19,6 +19,7 @@
             {{ item.text }}
           </NavbarItem>
         </Navbar>
+        <CodePreview :code="codeExamples.navbar" />
       </fieldset>
 
       <!-- Button -->
@@ -29,6 +30,7 @@
           <Button text="Link Button" href="#" />
           <Button @click="dialogOpen = true">Open Dialog</Button>
         </div>
+        <CodePreview :code="codeExamples.button" />
       </fieldset>
 
       <!-- Dialog -->
@@ -59,6 +61,7 @@
           <p>This dialog cannot be closed by clicking outside or pressing ESC.</p>
           <p>Use the close button (X) or the buttons below to close it.</p>
         </Dialog>
+        <CodePreview :code="codeExamples.dialog" />
       </fieldset>
 
       <!-- Window -->
@@ -113,6 +116,7 @@
             <li>Click to bring to front</li>
           </ul>
         </Window>
+        <CodePreview :code="codeExamples.window" />
       </fieldset>
 
       <!-- Textbox -->
@@ -132,6 +136,7 @@
             <Textbox v-model="textboxValue" readonly />
           </div>
         </Groupbox>
+        <CodePreview :code="codeExamples.textbox" />
       </fieldset>
 
       <!-- Checkbox -->
@@ -167,6 +172,7 @@
           />
           <p>Selected: {{ checkboxArrayValue.join(", ") || "None" }}</p>
         </Groupbox>
+        <CodePreview :code="codeExamples.checkbox" />
       </fieldset>
 
       <!-- Radio -->
@@ -193,6 +199,7 @@
           />
           <p>Selected: {{ radioValue }}</p>
         </Groupbox>
+        <CodePreview :code="codeExamples.radio" />
       </fieldset>
 
       <!-- Dropdown -->
@@ -204,6 +211,7 @@
           placeholder="Select a fruit..."
         />
         <p>Selected: {{ dropdownValue ?? "None" }}</p>
+        <CodePreview :code="codeExamples.dropdown" />
       </fieldset>
 
       <!-- Listbox -->
@@ -211,6 +219,7 @@
         <legend>Listbox</legend>
         <Listbox v-model="listboxValue" :options="listboxOptions" />
         <p>Selected ID: {{ listboxValue }}</p>
+        <CodePreview :code="codeExamples.listbox" />
       </fieldset>
 
       <!-- Slider -->
@@ -218,6 +227,7 @@
         <legend>Slider</legend>
         <Slider v-model="sliderValue" min="0" max="100" />
         <p>Value: {{ sliderValue }}</p>
+        <CodePreview :code="codeExamples.slider" />
       </fieldset>
 
       <!-- Progress -->
@@ -233,6 +243,7 @@
             <Progress indeterminate />
           </div>
         </div>
+        <CodePreview :code="codeExamples.progress" />
       </fieldset>
 
       <!-- Searchbox -->
@@ -243,6 +254,7 @@
           <Searchbox instant placeholder="Instant search..." />
         </div>
         <p v-if="searchValue">Last search: {{ searchValue }}</p>
+        <CodePreview :code="codeExamples.searchbox" />
       </fieldset>
 
       <!-- Tabs -->
@@ -259,6 +271,7 @@
             <p>About this application. Version 1.0.0</p>
           </template>
         </Tabs>
+        <CodePreview :code="codeExamples.tabs" />
       </fieldset>
 
       <!-- Collapse -->
@@ -272,6 +285,7 @@
         <Collapse title="Another section">
           <p>Custom content inside the collapse.</p>
         </Collapse>
+        <CodePreview :code="codeExamples.collapse" />
       </fieldset>
 
       <!-- Groupbox -->
@@ -281,6 +295,7 @@
           <p>This content is wrapped in a groupbox (fieldset).</p>
           <Button text="Save Settings" />
         </Groupbox>
+        <CodePreview :code="codeExamples.groupbox" />
       </fieldset>
 
       <!-- Link -->
@@ -295,6 +310,7 @@
             text="External Link"
           />
         </div>
+        <CodePreview :code="codeExamples.link" />
       </fieldset>
 
       <!-- Icon -->
@@ -305,6 +321,7 @@
           <Icon icon="monitor" size="32" />
           <Icon icon="monitor" size="48" />
         </div>
+        <CodePreview :code="codeExamples.icon" />
       </fieldset>
 
       <!-- Balloon (Tooltip) -->
@@ -316,6 +333,7 @@
           <Balloon caption="Left tooltip" left />
           <Balloon caption="Right tooltip" right />
         </div>
+        <CodePreview :code="codeExamples.balloon" />
       </fieldset>
 
       <!-- Menu & MenuBar -->
@@ -391,6 +409,7 @@
           Icon size: {{ menuIconSize }} | Auto arrange: {{ menuAutoArrange }} |
           Align grid: {{ menuAlignGrid }}
         </p>
+        <CodePreview :code="codeExamples.menu" />
       </fieldset>
 
       <!-- Treeview -->
@@ -426,6 +445,7 @@
           </li>
           <li>Downloads</li>
         </Treeview>
+        <CodePreview :code="codeExamples.treeview" />
       </fieldset>
     </Window>
   </div>
@@ -436,6 +456,7 @@ import {
   Balloon,
   Button,
   Checkbox,
+  CodePreview,
   Collapse,
   Dialog,
   Dropdown,
@@ -535,6 +556,192 @@ function onSearch(value: string) {
 function showAlert(message: string) {
   window.alert(message);
 }
+
+// Code examples for CodePreview
+const codeExamples = {
+  navbar: `<Navbar>
+  <NavbarItem href="#" active>Home</NavbarItem>
+  <NavbarItem href="#">Products</NavbarItem>
+  <NavbarItem href="#">Services</NavbarItem>
+  <NavbarItem href="#">Contact</NavbarItem>
+</Navbar>`,
+
+  button: `<Button text="Default Button" />
+<Button text="Link Button" href="#" />
+<Button @click="handleClick">Click Me</Button>`,
+
+  dialog: `<Dialog
+  v-model="dialogOpen"
+  title="Sample Dialog"
+  message="This is a dialog message."
+  draggable
+  @accept="onAccept"
+  @cancel="onCancel"
+/>
+
+<!-- Persistent Dialog -->
+<Dialog
+  v-model="persistentDialogOpen"
+  title="Persistent Dialog"
+  persistent
+  closable
+  @close="persistentDialogOpen = false"
+  @accept="persistentDialogOpen = false"
+/>`,
+
+  window: `<Window title="Basic Window" active>
+  <p>Window content here.</p>
+</Window>
+
+<!-- Window with controls -->
+<Window
+  title="Window with Controls"
+  minimizable
+  maximizable
+  closable
+  :has-status="true"
+  :status-fields="['Ready', 'Items: 5']"
+  @minimize="onMinimize"
+  @maximize="onMaximize"
+  @close="onClose"
+>
+  <p>Content here.</p>
+</Window>
+
+<!-- Draggable Window -->
+<Window
+  title="Draggable Window"
+  draggable
+  closable
+  snap-to-edges
+  :default-x="100"
+  :default-y="100"
+/>`,
+
+  textbox: `<Textbox v-model="value" placeholder="Enter text..." />
+<Textbox v-model="value" type="textarea" />
+<Textbox v-model="value" readonly />`,
+
+  checkbox: `<Checkbox
+  v-model="checked"
+  name="my-checkbox"
+  label="Accept terms"
+/>
+
+<!-- Multiple checkboxes -->
+<Checkbox v-model="selected" name="a" label="Option A" value="a" />
+<Checkbox v-model="selected" name="b" label="Option B" value="b" />`,
+
+  radio: `<Radio
+  v-model="selected"
+  name="radio-group"
+  value="option1"
+  label="Option 1"
+/>
+<Radio
+  v-model="selected"
+  name="radio-group"
+  value="option2"
+  label="Option 2"
+/>`,
+
+  dropdown: `<Dropdown
+  v-model="selected"
+  :options="[
+    { id: 'apple', name: 'Apple' },
+    { id: 'banana', name: 'Banana' },
+  ]"
+  placeholder="Select a fruit..."
+/>`,
+
+  listbox: `<Listbox
+  v-model="selected"
+  :options="[
+    { id: 1, name: 'Item One' },
+    { id: 2, name: 'Item Two' },
+  ]"
+/>`,
+
+  slider: `<Slider v-model="value" min="0" max="100" />`,
+
+  progress: `<Progress :progress="65" />
+<Progress indeterminate />`,
+
+  searchbox: `<Searchbox placeholder="Search..." @search="onSearch" />
+<Searchbox instant placeholder="Instant search..." />`,
+
+  tabs: `<Tabs v-model="activeTab" :tabs="{ tab1: 'General', tab2: 'Advanced' }">
+  <template #tab1>
+    <p>General tab content.</p>
+  </template>
+  <template #tab2>
+    <p>Advanced tab content.</p>
+  </template>
+</Tabs>`,
+
+  collapse: `<Collapse
+  v-model:open="isOpen"
+  title="Click to expand"
+  :children="[{ id: 1, title: 'Item 1' }]"
+/>
+
+<Collapse title="Custom content">
+  <p>Any content here.</p>
+</Collapse>`,
+
+  groupbox: `<Groupbox title="Settings">
+  <p>Content wrapped in a fieldset.</p>
+  <Button text="Save" />
+</Groupbox>`,
+
+  link: `<Link href="#" text="Regular Link" />
+<Link text="Button Link" />
+<Link href="https://github.com" target="_blank" text="External" />`,
+
+  icon: `<Icon icon="monitor" size="24" />
+<Icon icon="monitor" size="32" />
+<Icon icon="monitor" size="48" />`,
+
+  balloon: `<Balloon caption="Top tooltip" top />
+<Balloon caption="Bottom tooltip" bottom />
+<Balloon caption="Left tooltip" left />
+<Balloon caption="Right tooltip" right />`,
+
+  menu: `<MenuBar can-hover>
+  <MenuItem>File
+    <Menu>
+      <MenuItem><button>New</button></MenuItem>
+      <MenuItem><button>Open</button></MenuItem>
+      <hr />
+      <MenuItem><button>Exit</button></MenuItem>
+    </Menu>
+  </MenuItem>
+  <MenuItem>Edit</MenuItem>
+</MenuBar>
+
+<!-- Standalone Menu -->
+<Menu can-hover>
+  <MenuItem><button>Option 1</button></MenuItem>
+  <MenuItem>With submenu
+    <Menu>
+      <MenuItem><button>Sub Option</button></MenuItem>
+    </Menu>
+  </MenuItem>
+</Menu>`,
+
+  treeview: `<Treeview>
+  <li>
+    <details open>
+      <summary>Documents</summary>
+      <ul>
+        <li>Work Files</li>
+        <li>Personal</li>
+      </ul>
+    </details>
+  </li>
+  <li>Downloads</li>
+</Treeview>`,
+};
 </script>
 <style scoped>
 .showcase {

@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
 import '7.css'
+import 'highlight.js/styles/vs.css'
 import './style.css'
 import App from './App.vue'
 
