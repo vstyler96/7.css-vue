@@ -37,7 +37,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b ./tsconfig.lib.json && vite build",
-    "preview": "vite preview"
+    "build:demo": "vite build --config vite.config.demo.ts",
+    "preview": "vite preview",
+    "preview:demo": "vite preview --outDir demo"
   },
   "dependencies": {
     "vue": "^3.5.27"
