@@ -34,12 +34,11 @@ app.mount('#app');
 ```
 
 ## 🚚 Roadmap
-1. [ ] Add RouterLink support
-2. [ ] Add custom Icons (WIP...),
-3. [ ] Improve Typescript implementation
-4. [ ] Clean-up code
-5. [ ] Migrate component styles to Tailwind, and package the final code. 
+1. [x] Improve Typescript implementation.
+2. [x] Clean-up code.
+3. [ ] Add RouterLink support.
+4. [ ] Add custom Icons (Icons in progress).
 
 ## 📚 Documentation
 
-_Refer to the [official site](https://win7.kingbeencent.dev/)_ (Coming soon)
+_Refer to the [official site](https://win7.kingbeencent.dev/)_ (Now online!!)
