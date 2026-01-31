@@ -1,11 +1,9 @@
-import { onMounted, onUnmounted, ref, nextTick, type Ref } from 'vue';
+import { onMounted, onUnmounted, ref, nextTick } from 'vue';
 import { getWindowDimensions, clamp } from '../utils/helpers';
 
 export default function useDraggable(
   targetId: string,
-  props: { draggable?: boolean; defaultX?: number | string; defaultY?: number | string },
-  maximized?: Ref<boolean>,
-  minimized?: Ref<boolean>
+  props: { draggable?: boolean; defaultX?: number | string; defaultY?: number | string }
 ) {
   const offsetX = ref(Number(props.defaultX) || 0);
   const offsetY = ref(Number(props.defaultY) || 0);
@@ -72,7 +70,7 @@ export default function useDraggable(
   }
 
   function handleDragMove(e: MouseEvent) {
-    if (!dragging.value || maximized?.value || minimized?.value) {
+    if (!dragging.value) {
       return;
     }
 
@@ -93,10 +91,6 @@ export default function useDraggable(
   }
 
   function handleDragStart(e: MouseEvent) {
-    if (maximized?.value || minimized?.value) {
-      return;
-    }
-
     e.preventDefault();
 
     startX = e.clientX;

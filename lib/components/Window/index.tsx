@@ -1,6 +1,6 @@
-import { defineComponent, computed, ref, useSlots } from 'vue';
+import { defineComponent, computed, useSlots } from 'vue';
 import useDraggable from '../../composables/draggable';
-import { uniqueId, getWindowDimensions } from '../../utils/helpers';
+import { uniqueId } from '../../utils/helpers';
 import './index.css';
 
 type WindowProps = {
@@ -45,15 +45,12 @@ export default defineComponent({
   emits: ['minimize', 'maximize', 'close'],
   setup(props: WindowProps, { slots, emit }) {
     const id = `window-${uniqueId()}`;
-    const maximized = ref(false);
-    const minimized = ref(false);
-    const originalPosition = ref({ x: Number(props.defaultX), y: Number(props.defaultY) });
 
     const {
       dragging,
       offsetX,
       offsetY,
-    } = useDraggable(id, props, maximized, minimized);
+    } = useDraggable(id, props);
 
     const slotInstances = useSlots();
 
@@ -69,38 +66,6 @@ export default defineComponent({
       left: `${offsetX.value}px`,
     }));
 
-    function toggleMaximize() {
-      if (maximized.value) {
-        // Restore window
-        offsetX.value = originalPosition.value.x;
-        offsetY.value = originalPosition.value.y;
-        maximized.value = false;
-      } else {
-        // Maximize window
-        originalPosition.value = { x: offsetX.value, y: offsetY.value };
-        offsetX.value = 0;
-        offsetY.value = 0;
-        maximized.value = true;
-      }
-      emit('maximize', maximized.value);
-    }
-
-    function toggleMinimize() {
-      if (minimized.value) {
-        // Restore window
-        offsetY.value = originalPosition.value.y;
-        minimized.value = false;
-      } else {
-        // Minimize window
-        originalPosition.value.y = offsetY.value;
-
-        const { height } = getWindowDimensions();
-        offsetY.value = height - TITLE_BAR_HEIGHT;
-        minimized.value = true;
-      }
-      emit('minimize', minimized.value);
-    }
-
     return () => (
       <div
         id={id}
@@ -111,8 +76,6 @@ export default defineComponent({
             'active': props.active,
             'draggable': props.draggable,
             'dragging': dragging.value,
-            'maximized': maximized.value,
-            'minimized': minimized.value
           }
         ]}
         style={windowStyle.value}
@@ -127,14 +90,14 @@ export default defineComponent({
           <div class="title-bar-controls">
             {props.minimizable && (
               <button
-                aria-label={minimized.value ? 'Restore' : 'Minimize'}
-                onClick={toggleMinimize}
+                aria-label="Minimize"
+                onClick={() => emit('minimize')}
               />
             )}
             {props.maximizable && (
               <button
-                aria-label={maximized.value ? 'Restore' : 'Maximize'}
-                onClick={toggleMaximize}
+                aria-label="Maximize"
+                onClick={() => emit('maximize')}
               />
             )}
             {props.closable && (

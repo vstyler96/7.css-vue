@@ -1,104 +1,3 @@
-<script setup lang="ts">
-import { ref } from "vue";
-import {
-  Balloon,
-  Button,
-  Checkbox,
-  Collapse,
-  Dialog,
-  Dropdown,
-  Groupbox,
-  Icon,
-  Link,
-  Listbox,
-  Menu,
-  MenuBar,
-  MenuItem,
-  Navbar,
-  NavbarItem,
-  Progress,
-  Radio,
-  Searchbox,
-  Slider,
-  Tabs,
-  Textbox,
-  Treeview,
-  Window,
-} from "../lib/components";
-
-// State for interactive components
-const checkboxValue = ref(false);
-const checkboxArrayValue = ref<string[]>([]);
-const radioValue = ref("option1");
-const dropdownValue = ref<string | undefined>(undefined);
-const listboxValue = ref(1);
-const sliderValue = ref(50);
-const textboxValue = ref("Hello World");
-const textareaValue = ref("This is a textarea");
-const searchValue = ref("");
-const dialogOpen = ref(false);
-const collapseOpen = ref(false);
-const activeTab = ref("tab1");
-const progressValue = ref(65);
-
-// Sample data
-const dropdownOptions = [
-  { id: "apple", name: "Apple" },
-  { id: "banana", name: "Banana" },
-  { id: "cherry", name: "Cherry" },
-  { id: "date", name: "Date" },
-];
-
-const listboxOptions = [
-  { id: 1, name: "Item One" },
-  { id: 2, name: "Item Two" },
-  { id: 3, name: "Item Three" },
-  { id: 4, name: "Item Four" },
-];
-
-const tabsList = {
-  tab1: "General",
-  tab2: "Advanced",
-  tab3: "About",
-};
-
-const navItems = [
-  { text: "Home", href: "#", active: true },
-  { text: "Products", href: "#" },
-  { text: "Services", href: "#" },
-  { text: "Contact", href: "#" },
-];
-
-const collapseChildren = [
-  { id: 1, title: "Sub Item 1" },
-  { id: 2, title: "Sub Item 2" },
-  { id: 3, title: "Sub Item 3" },
-];
-
-// Menu checkbox/radio state
-const menuIconSize = ref("md");
-const menuAutoArrange = ref(false);
-const menuAlignGrid = ref(true);
-
-// Helper functions for menu options
-const radioOption = (size: string) => ({
-  as: "radio" as const,
-  id: `icon-size-${size}`,
-  name: "icon-size",
-  nativeValue: size,
-});
-
-const checkOption = (id: string) => ({
-  as: "checkbox" as const,
-  id: `${id}-option`,
-});
-
-function onSearch(value: string) {
-  searchValue.value = value;
-  console.log("Search:", value);
-}
-</script>
-
 <template>
   <div class="showcase">
     <header class="showcase-header">
@@ -106,12 +5,7 @@ function onSearch(value: string) {
       <p>A showcase of all available components</p>
     </header>
 
-    <Window
-      title="Component Showcase"
-      active
-      has-scrollbar
-      closable
-    >
+    <Window title="Component Showcase" active has-scrollbar closable>
       <!-- Navbar -->
       <fieldset class="component-section">
         <legend>Navbar</legend>
@@ -169,6 +63,9 @@ function onSearch(value: string) {
             closable
             :has-status="true"
             :status-fields="['Ready', 'Items: 5']"
+            @minimize="showAlert('Minimize clicked!')"
+            @maximize="showAlert('Maximize clicked!')"
+            @close="showAlert('Close clicked!')"
           >
             <p>This window has minimize, maximize, and close buttons.</p>
           </Window>
@@ -378,62 +275,79 @@ function onSearch(value: string) {
         </div>
       </fieldset>
 
-    <!-- Menu & MenuBar -->
-    <fieldset class="component-section">
-<legend>Menu & MenuBar</legend>
-      <p>MenuBar with dropdown menus (hover to open):</p>
-      <MenuBar can-hover>
-        <MenuItem>File
-          <Menu>
-            <MenuItem><button>New</button></MenuItem>
-            <MenuItem><button>Open</button></MenuItem>
-            <MenuItem><button>Save</button></MenuItem>
-            <hr />
-            <MenuItem><button>Exit</button></MenuItem>
-          </Menu>
-        </MenuItem>
-        <MenuItem>Edit
-          <Menu>
-            <MenuItem><button>Undo</button></MenuItem>
-            <MenuItem><button>Redo</button></MenuItem>
-            <hr />
-            <MenuItem><button>Cut</button></MenuItem>
-            <MenuItem><button>Copy</button></MenuItem>
-            <MenuItem><button>Paste</button></MenuItem>
-          </Menu>
-        </MenuItem>
-        <MenuItem>View</MenuItem>
-        <MenuItem>Help
-          <Menu>
-            <MenuItem><button>About</button></MenuItem>
-          </Menu>
-        </MenuItem>
-      </MenuBar>
+      <!-- Menu & MenuBar -->
+      <fieldset class="component-section">
+        <legend>Menu & MenuBar</legend>
+        <p>MenuBar with dropdown menus (hover to open):</p>
+        <MenuBar can-hover>
+          <MenuItem
+            >File
+            <Menu>
+              <MenuItem><button>New</button></MenuItem>
+              <MenuItem><button>Open</button></MenuItem>
+              <MenuItem><button>Save</button></MenuItem>
+              <hr />
+              <MenuItem><button>Exit</button></MenuItem>
+            </Menu>
+          </MenuItem>
+          <MenuItem
+            >Edit
+            <Menu>
+              <MenuItem><button>Undo</button></MenuItem>
+              <MenuItem><button>Redo</button></MenuItem>
+              <hr />
+              <MenuItem><button>Cut</button></MenuItem>
+              <MenuItem><button>Copy</button></MenuItem>
+              <MenuItem><button>Paste</button></MenuItem>
+            </Menu>
+          </MenuItem>
+          <MenuItem>View</MenuItem>
+          <MenuItem
+            >Help
+            <Menu>
+              <MenuItem><button>About</button></MenuItem>
+            </Menu>
+          </MenuItem>
+        </MenuBar>
 
-      <p style="margin-top: 16px;">Standalone Menu:</p>
-      <Menu can-hover class="demo-menu">
-        <MenuItem><button>Option 1</button></MenuItem>
-        <MenuItem><button>Option 2</button></MenuItem>
-        <MenuItem>Option 3 (with submenu)
-          <Menu>
-            <MenuItem><button>Sub Option 3.1</button></MenuItem>
-            <MenuItem><button>Sub Option 3.2</button></MenuItem>
-          </Menu>
-        </MenuItem>
-        <hr />
-        <MenuItem><button>Option 4</button></MenuItem>
-      </Menu>
+        <p style="margin-top: 16px">Standalone Menu:</p>
+        <Menu can-hover class="demo-menu">
+          <MenuItem><button>Option 1</button></MenuItem>
+          <MenuItem><button>Option 2</button></MenuItem>
+          <MenuItem
+            >Option 3 (with submenu)
+            <Menu>
+              <MenuItem><button>Sub Option 3.1</button></MenuItem>
+              <MenuItem><button>Sub Option 3.2</button></MenuItem>
+            </Menu>
+          </MenuItem>
+          <hr />
+          <MenuItem><button>Option 4</button></MenuItem>
+        </Menu>
 
-      <p style="margin-top: 16px;">Menu with Checkbox/Radio options:</p>
-      <Menu class="demo-menu">
-        <MenuItem :option="radioOption('lg')" v-model="menuIconSize">Large icons</MenuItem>
-        <MenuItem :option="radioOption('md')" v-model="menuIconSize">Medium icons</MenuItem>
-        <MenuItem :option="radioOption('sm')" v-model="menuIconSize">Small icons</MenuItem>
-        <hr />
-        <MenuItem :option="checkOption('arrange')" v-model="menuAutoArrange">Auto arrange icons</MenuItem>
-        <MenuItem :option="checkOption('align')" v-model="menuAlignGrid">Align icons to grid</MenuItem>
-      </Menu>
-      <p>Icon size: {{ menuIconSize }} | Auto arrange: {{ menuAutoArrange }} | Align grid: {{ menuAlignGrid }}</p>
+        <p style="margin-top: 16px">Menu with Checkbox/Radio options:</p>
+        <Menu class="demo-menu">
+          <MenuItem :option="radioOption('lg')" v-model="menuIconSize"
+            >Large icons</MenuItem
+          >
+          <MenuItem :option="radioOption('md')" v-model="menuIconSize"
+            >Medium icons</MenuItem
+          >
+          <MenuItem :option="radioOption('sm')" v-model="menuIconSize"
+            >Small icons</MenuItem
+          >
+          <hr />
+          <MenuItem :option="checkOption('arrange')" v-model="menuAutoArrange"
+            >Auto arrange icons</MenuItem
+          >
+          <MenuItem :option="checkOption('align')" v-model="menuAlignGrid"
+            >Align icons to grid</MenuItem
+          >
+        </Menu>
+        <p>
+          Icon size: {{ menuIconSize }} | Auto arrange: {{ menuAutoArrange }} |
+          Align grid: {{ menuAlignGrid }}
+        </p>
       </fieldset>
 
       <!-- Treeview -->
@@ -473,7 +387,110 @@ function onSearch(value: string) {
     </Window>
   </div>
 </template>
+<script setup lang="ts">
+import { ref } from "vue";
+import {
+  Balloon,
+  Button,
+  Checkbox,
+  Collapse,
+  Dialog,
+  Dropdown,
+  Groupbox,
+  Icon,
+  Link,
+  Listbox,
+  Menu,
+  MenuBar,
+  MenuItem,
+  Navbar,
+  NavbarItem,
+  Progress,
+  Radio,
+  Searchbox,
+  Slider,
+  Tabs,
+  Textbox,
+  Treeview,
+  Window,
+} from "../lib/components";
 
+// State for interactive components
+const checkboxValue = ref(false);
+const checkboxArrayValue = ref<string[]>([]);
+const radioValue = ref("option1");
+const dropdownValue = ref<string | undefined>(undefined);
+const listboxValue = ref(1);
+const sliderValue = ref(50);
+const textboxValue = ref("Hello World");
+const textareaValue = ref("This is a textarea");
+const searchValue = ref("");
+const dialogOpen = ref(false);
+const collapseOpen = ref(false);
+const activeTab = ref("tab1");
+const progressValue = ref(65);
+
+// Sample data
+const dropdownOptions = [
+  { id: "apple", name: "Apple" },
+  { id: "banana", name: "Banana" },
+  { id: "cherry", name: "Cherry" },
+  { id: "date", name: "Date" },
+];
+
+const listboxOptions = [
+  { id: 1, name: "Item One" },
+  { id: 2, name: "Item Two" },
+  { id: 3, name: "Item Three" },
+  { id: 4, name: "Item Four" },
+];
+
+const tabsList = {
+  tab1: "General",
+  tab2: "Advanced",
+  tab3: "About",
+};
+
+const navItems = [
+  { text: "Home", href: "#", active: true },
+  { text: "Products", href: "#" },
+  { text: "Services", href: "#" },
+  { text: "Contact", href: "#" },
+];
+
+const collapseChildren = [
+  { id: 1, title: "Sub Item 1" },
+  { id: 2, title: "Sub Item 2" },
+  { id: 3, title: "Sub Item 3" },
+];
+
+// Menu checkbox/radio state
+const menuIconSize = ref("md");
+const menuAutoArrange = ref(false);
+const menuAlignGrid = ref(true);
+
+// Helper functions for menu options
+const radioOption = (size: string) => ({
+  as: "radio" as const,
+  id: `icon-size-${size}`,
+  name: "icon-size",
+  nativeValue: size,
+});
+
+const checkOption = (id: string) => ({
+  as: "checkbox" as const,
+  id: `${id}-option`,
+});
+
+function onSearch(value: string) {
+  searchValue.value = value;
+  console.log("Search:", value);
+}
+
+function showAlert(message: string) {
+  window.alert(message);
+}
+</script>
 <style scoped>
 .showcase {
   max-width: 900px;
